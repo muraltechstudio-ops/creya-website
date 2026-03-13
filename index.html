@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Permanent+Marker&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Permanent+Marker&family=Bebas+Neue&family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -49,10 +49,11 @@
             line-height: 1.6;
         }
 
-        /* GRID SUPPRIMÉ VISUELLEMENT */
-        .bg-grid {
-            display: none;
+        html[lang="ar"] body {
+            font-family: 'Cairo', 'Inter', sans-serif;
         }
+
+        .bg-grid { display: none; }
 
         .bg-orb {
             position: fixed;
@@ -209,12 +210,45 @@
             border: 1px solid var(--border-glass);
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .lang-switcher {
+            display: flex;
+            align-items: center;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 100px;
+            padding: 4px;
+        }
+
+        .lang-btn {
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            padding: 8px 14px;
+            border-radius: 100px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, var(--accent3), var(--accent));
+            color: white;
+        }
+
         .nav-cart {
             background: var(--bg-card); border: 1px solid var(--border-glass);
             color: var(--text-primary); padding: 10px 20px; border-radius: 100px;
             cursor: pointer; font-size: 0.9rem; font-weight: 500;
             transition: var(--transition); display: flex; align-items: center;
-            gap: 8px; font-family: 'Inter', sans-serif;
+            gap: 8px; font-family: inherit;
         }
         .nav-cart:hover { border-color: var(--accent3); box-shadow: 0 0 20px rgba(225,112,85,0.2); }
         .cart-badge {
@@ -250,6 +284,17 @@
             font-weight: 800; line-height: 1.1;
             margin-bottom: 24px; letter-spacing: -2px;
         }
+
+        html[lang="ar"] .hero h1,
+        html[lang="ar"] .section-header h2,
+        html[lang="ar"] .about-text h2,
+        html[lang="ar"] .cta-box h2,
+        html[lang="ar"] .checkout-panel h2,
+        html[lang="ar"] .modal h3 {
+            font-family: 'Cairo', sans-serif;
+            letter-spacing: 0;
+        }
+
         .gradient-text {
             background: linear-gradient(135deg, var(--accent4), var(--accent3), var(--accent));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -267,7 +312,7 @@
             font-size: 0.95rem; font-weight: 600; cursor: pointer;
             transition: var(--transition); text-decoration: none;
             display: inline-flex; align-items: center; gap: 8px;
-            position: relative; overflow: hidden; font-family: 'Inter', sans-serif;
+            position: relative; overflow: hidden; font-family: inherit;
         }
         .btn-primary::before {
             content: ''; position: absolute; top: 0; left: -100%;
@@ -283,7 +328,7 @@
             color: var(--text-primary); border: 1px solid var(--border-glass);
             border-radius: 100px; font-size: 0.95rem; font-weight: 500;
             cursor: pointer; transition: var(--transition); text-decoration: none;
-            backdrop-filter: blur(10px); font-family: 'Inter', sans-serif;
+            backdrop-filter: blur(10px); font-family: inherit;
         }
         .btn-secondary:hover { border-color: var(--accent); background: var(--bg-glass); }
 
@@ -388,7 +433,7 @@
             padding: 8px 22px; background: transparent;
             border: 1px solid var(--border-glass); color: var(--text-secondary);
             border-radius: 100px; cursor: pointer; font-size: 0.85rem;
-            font-weight: 500; transition: var(--transition); font-family: 'Inter', sans-serif;
+            font-weight: 500; transition: var(--transition); font-family: inherit;
         }
         .filter-btn:hover, .filter-btn.active {
             background: linear-gradient(135deg, var(--accent3), var(--accent));
@@ -422,7 +467,7 @@
             background: linear-gradient(135deg, var(--accent3), var(--accent));
             color: white; border: none; border-radius: var(--radius-sm);
             font-weight: 600; cursor: pointer; font-size: 0.9rem;
-            transition: var(--transition); font-family: 'Inter', sans-serif;
+            transition: var(--transition); font-family: inherit;
         }
         .artwork-quick-add:hover { opacity: 0.9; transform: scale(1.02); }
         .artwork-info { padding: 20px; }
@@ -430,7 +475,7 @@
         .artwork-meta { display: flex; justify-content: space-between; align-items: center; }
         .artwork-category { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
         .artwork-price { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--accent4); }
-        .artwork-sizes { display: flex; gap: 6px; margin-top: 12px; }
+        .artwork-sizes { display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap; }
         .size-tag {
             padding: 4px 10px; font-size: 0.7rem; border: 1px solid var(--border-glass);
             border-radius: 6px; color: var(--text-muted); cursor: pointer; transition: var(--transition);
@@ -518,9 +563,7 @@
             border-radius: 8px;
         }
 
-        .about-real-image:hover {
-            transform: scale(1.02);
-        }
+        .about-real-image:hover { transform: scale(1.02); }
 
         .about-fallback {
             position: absolute;
@@ -536,9 +579,7 @@
             padding: 30px;
         }
 
-        .about-fallback .big {
-            font-size: 3rem;
-        }
+        .about-fallback .big { font-size: 3rem; }
 
         .about-text h2 {
             font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem;
@@ -571,10 +612,11 @@
             width: 100%; padding: 22px 28px;
             background: transparent; border: none;
             color: var(--text-primary); font-size: 1rem; font-weight: 600;
-            font-family: 'Inter', sans-serif; cursor: pointer;
+            font-family: inherit; cursor: pointer;
             display: flex; align-items: center; justify-content: space-between;
             gap: 16px; text-align: left; transition: var(--transition);
         }
+        html[dir="rtl"] .faq-question { text-align: right; }
         .faq-question:hover { color: var(--accent4); }
         .faq-arrow {
             font-size: 1.2rem; transition: transform 0.3s ease;
@@ -629,6 +671,7 @@
             display: flex; align-items: center; gap: 16px; transition: var(--transition);
         }
         .contact-card:hover { border-color: var(--accent3); transform: translateX(5px); }
+        html[dir="rtl"] .contact-card:hover { transform: translateX(-5px); }
         .contact-card .card-icon {
             width: 50px; height: 50px;
             background: linear-gradient(135deg, var(--accent3), var(--accent));
@@ -670,13 +713,14 @@
         .form-group input, .form-group select, .form-group textarea {
             width: 100%; padding: 14px 18px; background: var(--bg-secondary);
             border: 1px solid var(--border-glass); border-radius: var(--radius-sm);
-            color: var(--text-primary); font-size: 0.95rem; font-family: 'Inter', sans-serif;
+            color: var(--text-primary); font-size: 0.95rem; font-family: inherit;
             transition: var(--transition); outline: none;
         }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             border-color: var(--accent3); box-shadow: 0 0 20px rgba(225,112,85,0.15);
         }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
         .cart-items { max-height: 400px; overflow-y: auto; }
         .cart-item {
             display: flex; gap: 16px; padding: 16px 0;
@@ -701,7 +745,7 @@
             color: white; border: none; border-radius: var(--radius-sm);
             font-size: 1rem; font-weight: 700; cursor: pointer;
             transition: var(--transition); margin-top: 20px;
-            position: relative; overflow: hidden; font-family: 'Inter', sans-serif;
+            position: relative; overflow: hidden; font-family: inherit;
         }
         .btn-checkout:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(225,112,85,0.3); }
 
@@ -730,6 +774,13 @@
         }
         .toast.show { transform: translateX(0); }
 
+        html[dir="rtl"] .toast {
+            right: auto;
+            left: 30px;
+            transform: translateX(-120%);
+        }
+        html[dir="rtl"] .toast.show { transform: translateX(0); }
+
         .modal-overlay {
             position: fixed; inset: 0; background: rgba(0,0,0,0.8);
             backdrop-filter: blur(10px); z-index: 2000;
@@ -746,13 +797,14 @@
             background: none; border: none; color: var(--text-muted);
             font-size: 1.5rem; cursor: pointer;
         }
+        html[dir="rtl"] .modal-close { right: auto; left: 16px; }
 
         .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
         @media (max-width: 900px) {
             .navbar { padding: 6px 16px; }
-            .nav-logo svg { width: 200px !important; height: auto !important; }
+            .nav-logo svg { width: 180px !important; height: auto !important; }
             .nav-links {
                 display: none; position: absolute; top: 100%; left: 0; width: 100%;
                 background: rgba(10,10,15,0.95); backdrop-filter: blur(20px);
@@ -775,6 +827,9 @@
             .reassurance-item { width: 100%; }
             .testimonials-grid { grid-template-columns: 1fr; }
             .cta-box { padding: 40px 24px; }
+            .nav-right { gap: 8px; }
+            .lang-btn { padding: 7px 10px; font-size: 0.8rem; }
+            .nav-cart { padding: 9px 14px; }
         }
     </style>
 </head>
@@ -815,16 +870,23 @@
         </button>
 
         <ul class="nav-links" id="navLinks">
-            <li><a href="#" class="active" onclick="showPage('home')">Accueil</a></li>
-            <li><a href="#collection" onclick="showPage('home')">Collection</a></li>
-            <li><a href="#apropos" onclick="showPage('home')">À propos</a></li>
-            <li><a href="#faq" onclick="showPage('home')">FAQ</a></li>
-            <li><a href="#contact" onclick="showPage('home')">Contact</a></li>
+            <li><a href="#" class="active" onclick="showPage('home')" data-i18n="nav_home">Accueil</a></li>
+            <li><a href="#collection" onclick="showPage('home')" data-i18n="nav_collection">Collection</a></li>
+            <li><a href="#apropos" onclick="showPage('home')" data-i18n="nav_about">À propos</a></li>
+            <li><a href="#faq" onclick="showPage('home')" data-i18n="nav_faq">FAQ</a></li>
+            <li><a href="#contact" onclick="showPage('home')" data-i18n="nav_contact">Contact</a></li>
         </ul>
 
-        <button class="nav-cart" onclick="showPage('checkout')">
-            🛒 Panier <span class="cart-badge" id="cartCount">0</span>
-        </button>
+        <div class="nav-right">
+            <div class="lang-switcher">
+                <button class="lang-btn active" onclick="setLanguage('fr')" id="btn-fr">FR</button>
+                <button class="lang-btn" onclick="setLanguage('ar')" id="btn-ar">العربية</button>
+            </div>
+
+            <button class="nav-cart" onclick="showPage('checkout')">
+                <span data-i18n="cart_label">🛒 Panier</span> <span class="cart-badge" id="cartCount">0</span>
+            </button>
+        </div>
     </nav>
 
     <div class="page active" id="page-home">
@@ -836,26 +898,26 @@
             <div class="hero-content">
                 <div class="hero-badge">
                     <span class="dot"></span>
-                    Collection 2026 disponible
+                    <span data-i18n="hero_badge">Collection 2026 disponible</span>
                 </div>
-                <h1>
+                <h1 data-i18n-html="hero_title">
                     Des toiles <span class="gradient-text">sur mesure</span>,<br>
                     pour des murs à votre image
                 </h1>
-                <p>
+                <p data-i18n="hero_text">
                     Découvrez notre collection exclusive de toiles et tableaux personnalisés,
                     créés avec passion et adaptés à tous les espaces. Chaque œuvre est unique,
                     imprimée en haute qualité sur toile canvas premium et livrée partout en Tunisie.
                     Exprimez votre style, sublimez votre intérieur.
                 </p>
                 <div class="hero-buttons">
-                    <a href="#collection" class="btn-primary">Explorer la collection →</a>
-                    <a href="#comment" class="btn-secondary">Comment ça marche ?</a>
+                    <a href="#collection" class="btn-primary" data-i18n="hero_btn_1">Explorer la collection →</a>
+                    <a href="#comment" class="btn-secondary" data-i18n="hero_btn_2">Comment ça marche ?</a>
                 </div>
                 <div class="hero-stats">
-                    <div class="hero-stat"><h3>1.1k+</h3><p>Avis clients</p></div>
-                    <div class="hero-stat"><h3>500+</h3><p>Toiles livrées</p></div>
-                    <div class="hero-stat"><h3>100%</h3><p>Sur mesure</p></div>
+                    <div class="hero-stat"><h3>1.1k+</h3><p data-i18n="stat_1">Avis clients</p></div>
+                    <div class="hero-stat"><h3>500+</h3><p data-i18n="stat_2">Toiles livrées</p></div>
+                    <div class="hero-stat"><h3>100%</h3><p data-i18n="stat_3">Sur mesure</p></div>
                 </div>
             </div>
         </section>
@@ -864,120 +926,120 @@
             <div class="reassurance-item">
                 <div class="reassurance-icon">🚚</div>
                 <div class="reassurance-text">
-                    <h4>Livraison gratuite</h4>
-                    <p>Partout en Tunisie</p>
+                    <h4 data-i18n="reassurance_1_title">Livraison gratuite</h4>
+                    <p data-i18n="reassurance_1_text">Partout en Tunisie</p>
                 </div>
             </div>
             <div class="reassurance-item">
                 <div class="reassurance-icon">🎨</div>
                 <div class="reassurance-text">
-                    <h4>Qualité premium</h4>
-                    <p>Toile canvas HD</p>
+                    <h4 data-i18n="reassurance_2_title">Qualité premium</h4>
+                    <p data-i18n="reassurance_2_text">Toile canvas HD</p>
                 </div>
             </div>
             <div class="reassurance-item">
                 <div class="reassurance-icon">✨</div>
                 <div class="reassurance-text">
-                    <h4>100% personnalisable</h4>
-                    <p>Taille & design au choix</p>
+                    <h4 data-i18n="reassurance_3_title">100% personnalisable</h4>
+                    <p data-i18n="reassurance_3_text">Taille & design au choix</p>
                 </div>
             </div>
             <div class="reassurance-item">
                 <div class="reassurance-icon">💬</div>
                 <div class="reassurance-text">
-                    <h4>Support réactif</h4>
-                    <p>Réponse sous 24h</p>
+                    <h4 data-i18n="reassurance_4_title">Support réactif</h4>
+                    <p data-i18n="reassurance_4_text">Réponse sous 24h</p>
                 </div>
             </div>
         </div>
 
         <section class="section" id="comment">
             <div class="section-header reveal">
-                <span class="tag">✦ Simple & rapide</span>
-                <h2>Comment commander ?</h2>
+                <span class="tag" data-i18n="steps_tag">✦ Simple & rapide</span>
+                <h2 data-i18n="steps_title">Comment commander ?</h2>
                 <div class="glow-line"></div>
-                <p>En quelques étapes simples, recevez votre tableau personnalisé chez vous. Aucune compétence technique requise, on s'occupe de tout.</p>
+                <p data-i18n="steps_text">En quelques étapes simples, recevez votre tableau personnalisé chez vous. Aucune compétence technique requise, on s'occupe de tout.</p>
             </div>
             <div class="steps-grid">
                 <div class="step-card reveal">
                     <div class="step-number">1</div>
-                    <h3>Choisissez votre tableau</h3>
-                    <p>Parcourez notre collection et sélectionnez l'œuvre qui vous plaît, ou envoyez-nous votre propre design pour une création 100% unique.</p>
+                    <h3 data-i18n="step1_title">Choisissez votre tableau</h3>
+                    <p data-i18n="step1_text">Parcourez notre collection et sélectionnez l'œuvre qui vous plaît, ou envoyez-nous votre propre design pour une création 100% unique.</p>
                 </div>
                 <div class="step-card reveal">
                     <div class="step-number">2</div>
-                    <h3>Sélectionnez la taille</h3>
-                    <p>Choisissez les dimensions adaptées à votre espace : 30×40, 50×70, 60×90 cm ou sur mesure selon vos besoins.</p>
+                    <h3 data-i18n="step2_title">Sélectionnez la taille</h3>
+                    <p data-i18n="step2_text">Choisissez les dimensions adaptées à votre espace : 30×40, 50×70, 60×90 cm ou sur mesure selon vos besoins.</p>
                 </div>
                 <div class="step-card reveal">
                     <div class="step-number">3</div>
-                    <h3>Passez commande</h3>
-                    <p>Ajoutez au panier, remplissez vos informations et validez. Paiement à la livraison possible, simple et sécurisé.</p>
+                    <h3 data-i18n="step3_title">Passez commande</h3>
+                    <p data-i18n="step3_text">Ajoutez au panier, remplissez vos informations et validez. Paiement à la livraison possible, simple et sécurisé.</p>
                 </div>
                 <div class="step-card reveal">
                     <div class="step-number">4</div>
-                    <h3>Recevez & admirez</h3>
-                    <p>Votre toile arrive soigneusement emballée sous 3 à 7 jours, prête à être accrochée et admirée par tous.</p>
+                    <h3 data-i18n="step4_title">Recevez & admirez</h3>
+                    <p data-i18n="step4_text">Votre toile arrive soigneusement emballée sous 3 à 7 jours, prête à être accrochée et admirée par tous.</p>
                 </div>
             </div>
         </section>
 
         <section class="section" id="collection">
             <div class="section-header reveal">
-                <span class="tag">🎨 Nos œuvres</span>
-                <h2>La Collection</h2>
+                <span class="tag" data-i18n="collection_tag">🎨 Nos œuvres</span>
+                <h2 data-i18n="collection_title">La Collection</h2>
                 <div class="glow-line"></div>
-                <p>Des toiles uniques pour sublimer chaque intérieur. Abstrait, nature, calligraphie, moderne… Il y en a pour tous les goûts.</p>
+                <p data-i18n="collection_text">Des toiles uniques pour sublimer chaque intérieur. Abstrait, nature, calligraphie, moderne… Il y en a pour tous les goûts.</p>
             </div>
             <div class="gallery-filters reveal">
-                <button class="filter-btn active" onclick="filterGallery('all', this)">Tous</button>
-                <button class="filter-btn" onclick="filterGallery('abstrait', this)">Abstrait</button>
-                <button class="filter-btn" onclick="filterGallery('nature', this)">Nature</button>
-                <button class="filter-btn" onclick="filterGallery('calligraphie', this)">Calligraphie</button>
-                <button class="filter-btn" onclick="filterGallery('moderne', this)">Moderne</button>
-                <button class="filter-btn" onclick="filterGallery('personnalise', this)">Personnalisé</button>
+                <button class="filter-btn active" onclick="filterGallery('all', this)" data-i18n="filter_all">Tous</button>
+                <button class="filter-btn" onclick="filterGallery('abstrait', this)" data-i18n="filter_abstract">Abstrait</button>
+                <button class="filter-btn" onclick="filterGallery('nature', this)" data-i18n="filter_nature">Nature</button>
+                <button class="filter-btn" onclick="filterGallery('calligraphie', this)" data-i18n="filter_calligraphy">Calligraphie</button>
+                <button class="filter-btn" onclick="filterGallery('moderne', this)" data-i18n="filter_modern">Moderne</button>
+                <button class="filter-btn" onclick="filterGallery('personnalise', this)" data-i18n="filter_custom">Personnalisé</button>
             </div>
             <div class="gallery-grid" id="galleryGrid"></div>
         </section>
 
         <section class="section" id="avis">
             <div class="section-header reveal">
-                <span class="tag">⭐ Avis clients</span>
-                <h2>Ce que disent nos clients</h2>
+                <span class="tag" data-i18n="reviews_tag">⭐ Avis clients</span>
+                <h2 data-i18n="reviews_title">Ce que disent nos clients</h2>
                 <div class="glow-line"></div>
-                <p>Plus de 500 toiles livrées et des clients satisfaits partout en Tunisie. Découvrez leurs témoignages.</p>
+                <p data-i18n="reviews_text">Plus de 500 toiles livrées et des clients satisfaits partout en Tunisie. Découvrez leurs témoignages.</p>
             </div>
             <div class="testimonials-grid">
                 <div class="testimonial-card reveal">
                     <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="quote">"J'ai commandé une toile calligraphie pour mon salon et le résultat est magnifique ! La qualité d'impression est incroyable et les couleurs sont fidèles. Livraison rapide en plus. Je recommande à 100%."</p>
+                    <p class="quote" data-i18n="review1_text">"J'ai commandé une toile calligraphie pour mon salon et le résultat est magnifique ! La qualité d'impression est incroyable et les couleurs sont fidèles. Livraison rapide en plus. Je recommande à 100%."</p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">S</div>
                         <div class="testimonial-author-info">
                             <h4>Sarra B.</h4>
-                            <p>Tunis — Calligraphie Noor</p>
+                            <p data-i18n="review1_meta">Tunis — Calligraphie Noor</p>
                         </div>
                     </div>
                 </div>
                 <div class="testimonial-card reveal">
                     <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="quote">"Deuxième commande chez CREYA et toujours aussi satisfait. J'ai envoyé ma propre photo et ils en ont fait un tableau sublime. Le service client est très réactif et à l'écoute."</p>
+                    <p class="quote" data-i18n="review2_text">"Deuxième commande chez CREYA et toujours aussi satisfait. J'ai envoyé ma propre photo et ils en ont fait un tableau sublime. Le service client est très réactif et à l'écoute."</p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">M</div>
                         <div class="testimonial-author-info">
                             <h4>Mohamed K.</h4>
-                            <p>Sousse — Design personnalisé</p>
+                            <p data-i18n="review2_meta">Sousse — Design personnalisé</p>
                         </div>
                     </div>
                 </div>
                 <div class="testimonial-card reveal">
                     <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="quote">"Un cadeau parfait pour ma sœur ! Elle a adoré le tableau abstrait. L'emballage était soigné, la livraison gratuite et le rendu est vraiment premium. Bravo l'équipe CREYA !"</p>
+                    <p class="quote" data-i18n="review3_text">"Un cadeau parfait pour ma sœur ! Elle a adoré le tableau abstrait. L'emballage était soigné, la livraison gratuite et le rendu est vraiment premium. Bravo l'équipe CREYA !"</p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">A</div>
                         <div class="testimonial-author-info">
                             <h4>Amira T.</h4>
-                            <p>Sfax — Éclat Doré</p>
+                            <p data-i18n="review3_meta">Sfax — Éclat Doré</p>
                         </div>
                     </div>
                 </div>
@@ -991,38 +1053,30 @@
                         <img src="./about-creya.png" alt="Œuvre calligraphique CREYA" class="about-real-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="about-fallback">
                             <div class="big">🎨</div>
-                            <div>Image à propos introuvable</div>
-                            <div style="font-size:0.85rem; color: var(--text-muted);">Ajoute le fichier <strong>about-creya.png</strong> dans GitHub</div>
+                            <div data-i18n="about_img_missing">Image à propos introuvable</div>
+                            <div style="font-size:0.85rem; color: var(--text-muted);" data-i18n="about_img_hint">Ajoute le fichier about-creya.png dans GitHub</div>
                         </div>
                     </div>
                 </div>
                 <div class="about-text reveal">
-                    <span class="tag">✦ Notre histoire</span>
-                    <h2>À propos de CREYA</h2>
-                    <p>
-                        Chez CREYA, nous croyons que chaque mur mérite une œuvre d'art qui lui ressemble.
-                        Fondé en Tunisie avec la passion de l'art et du design, CREYA est né d'une idée simple :
-                        rendre l'art accessible à tous, en proposant des toiles sur mesure de qualité premium
-                        à des prix justes.
+                    <span class="tag" data-i18n="about_tag">✦ Notre histoire</span>
+                    <h2 data-i18n="about_title">À propos de CREYA</h2>
+                    <p data-i18n="about_p1">
+                        Chez CREYA, nous croyons que chaque mur mérite une œuvre d'art qui lui ressemble. Fondé en Tunisie avec la passion de l'art et du design, CREYA est né d'une idée simple : rendre l'art accessible à tous, en proposant des toiles sur mesure de qualité premium à des prix justes.
                     </p>
-                    <p>
-                        Que vous soyez un particulier souhaitant décorer votre salon, un professionnel
-                        aménageant un espace de travail, ou à la recherche du cadeau parfait, nous vous
-                        accompagnons dans la création d'œuvres uniques. Chaque toile est imprimée en haute
-                        définition sur canvas premium, montée sur châssis en bois, et livrée avec soin
-                        partout en Tunisie.
+                    <p data-i18n="about_p2">
+                        Que vous soyez un particulier souhaitant décorer votre salon, un professionnel aménageant un espace de travail, ou à la recherche du cadeau parfait, nous vous accompagnons dans la création d'œuvres uniques. Chaque toile est imprimée en haute définition sur canvas premium, montée sur châssis en bois, et livrée avec soin partout en Tunisie.
                     </p>
-                    <p>
-                        Notre équipe est à votre écoute pour tout projet personnalisé. Envoyez-nous votre
-                        photo, votre idée ou votre design, et nous le transformons en tableau d'exception.
+                    <p data-i18n="about_p3">
+                        Notre équipe est à votre écoute pour tout projet personnalisé. Envoyez-nous votre photo, votre idée ou votre design, et nous le transformons en tableau d'exception.
                     </p>
                     <div class="about-features">
-                        <div class="about-feature"><span>✦</span> Qualité premium HD</div>
-                        <div class="about-feature"><span>🚚</span> Livraison gratuite Tunisie</div>
-                        <div class="about-feature"><span>🎯</span> 100% sur mesure</div>
-                        <div class="about-feature"><span>💬</span> Support réactif 7j/7</div>
-                        <div class="about-feature"><span>🔄</span> Satisfait ou refait</div>
-                        <div class="about-feature"><span>🖼️</span> Châssis bois inclus</div>
+                        <div class="about-feature"><span>✦</span> <span data-i18n="about_f1">Qualité premium HD</span></div>
+                        <div class="about-feature"><span>🚚</span> <span data-i18n="about_f2">Livraison gratuite Tunisie</span></div>
+                        <div class="about-feature"><span>🎯</span> <span data-i18n="about_f3">100% sur mesure</span></div>
+                        <div class="about-feature"><span>💬</span> <span data-i18n="about_f4">Support réactif 7j/7</span></div>
+                        <div class="about-feature"><span>🔄</span> <span data-i18n="about_f5">Satisfait ou refait</span></div>
+                        <div class="about-feature"><span>🖼️</span> <span data-i18n="about_f6">Châssis bois inclus</span></div>
                     </div>
                 </div>
             </div>
@@ -1030,91 +1084,70 @@
 
         <section class="cta-section">
             <div class="cta-box reveal">
-                <h2>Vous avez un projet <span class="gradient-text">sur mesure</span> ?</h2>
-                <p>
+                <h2 data-i18n-html="cta_title">Vous avez un projet <span class="gradient-text">sur mesure</span> ?</h2>
+                <p data-i18n="cta_text">
                     Envoyez-nous votre photo, votre idée ou votre design et nous créerons
                     une toile unique rien que pour vous. Devis gratuit et sans engagement.
                 </p>
                 <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
-                    <a href="#contact" class="btn-primary">Demander un devis gratuit →</a>
-                    <a href="https://wa.me/21621594522" target="_blank" class="btn-secondary">💬 WhatsApp</a>
+                    <a href="#contact" class="btn-primary" data-i18n="cta_btn_1">Demander un devis gratuit →</a>
+                    <a href="https://wa.me/21621594522" target="_blank" class="btn-secondary" data-i18n="cta_btn_2">💬 WhatsApp</a>
                 </div>
             </div>
         </section>
 
         <section class="section" id="faq">
             <div class="section-header reveal">
-                <span class="tag">❓ Questions fréquentes</span>
-                <h2>FAQ</h2>
+                <span class="tag" data-i18n="faq_tag">❓ Questions fréquentes</span>
+                <h2 data-i18n="faq_title">FAQ</h2>
                 <div class="glow-line"></div>
-                <p>Retrouvez les réponses aux questions les plus posées par nos clients.</p>
+                <p data-i18n="faq_text">Retrouvez les réponses aux questions les plus posées par nos clients.</p>
             </div>
             <div class="faq-container">
                 <div class="faq-item reveal">
                     <button class="faq-question" onclick="toggleFaq(this)">
-                        Quels sont les délais de livraison ?
+                        <span data-i18n="faq1_q">Quels sont les délais de livraison ?</span>
                         <span class="faq-arrow">+</span>
                     </button>
-                    <div class="faq-answer"><div class="faq-answer-inner">Nos toiles sont livrées sous 3 à 7 jours ouvrés partout en Tunisie. Pour les commandes personnalisées nécessitant un design spécifique, comptez 5 à 10 jours. La livraison est gratuite sans minimum de commande.</div></div>
+                    <div class="faq-answer"><div class="faq-answer-inner" data-i18n="faq1_a">Nos toiles sont livrées sous 3 à 7 jours ouvrés partout en Tunisie. Pour les commandes personnalisées nécessitant un design spécifique, comptez 5 à 10 jours. La livraison est gratuite sans minimum de commande.</div></div>
                 </div>
                 <div class="faq-item reveal">
                     <button class="faq-question" onclick="toggleFaq(this)">
-                        Quelles tailles sont disponibles ?
+                        <span data-i18n="faq2_q">Quelles tailles sont disponibles ?</span>
                         <span class="faq-arrow">+</span>
                     </button>
-                    <div class="faq-answer"><div class="faq-answer-inner">Nous proposons des tailles standards : 30×40 cm, 50×70 cm, 60×90 cm, 70×100 cm et 80×120 cm. Vous pouvez aussi commander des dimensions sur mesure en nous contactant directement. Toutes nos toiles sont montées sur châssis en bois, prêtes à accrocher.</div></div>
+                    <div class="faq-answer"><div class="faq-answer-inner" data-i18n="faq2_a">Nous proposons des tailles standards : 30×40 cm, 50×70 cm, 60×90 cm, 70×100 cm et 80×120 cm. Vous pouvez aussi commander des dimensions sur mesure en nous contactant directement. Toutes nos toiles sont montées sur châssis en bois, prêtes à accrocher.</div></div>
                 </div>
                 <div class="faq-item reveal">
                     <button class="faq-question" onclick="toggleFaq(this)">
-                        Puis-je envoyer ma propre photo ou design ?
+                        <span data-i18n="faq3_q">Puis-je envoyer ma propre photo ou design ?</span>
                         <span class="faq-arrow">+</span>
                     </button>
-                    <div class="faq-answer"><div class="faq-answer-inner">Absolument ! C'est même l'un de nos services phares. Envoyez-nous votre photo, illustration ou design par WhatsApp, email ou via le formulaire de contact, et nous le transformerons en toile canvas de haute qualité. Nous vous enverrons un aperçu avant impression pour validation.</div></div>
+                    <div class="faq-answer"><div class="faq-answer-inner" data-i18n="faq3_a">Absolument ! C'est même l'un de nos services phares. Envoyez-nous votre photo, illustration ou design par WhatsApp, email ou via le formulaire de contact, et nous le transformerons en toile canvas de haute qualité. Nous vous enverrons un aperçu avant impression pour validation.</div></div>
                 </div>
                 <div class="faq-item reveal">
                     <button class="faq-question" onclick="toggleFaq(this)">
-                        Quels modes de paiement acceptez-vous ?
+                        <span data-i18n="faq4_q">Quels modes de paiement acceptez-vous ?</span>
                         <span class="faq-arrow">+</span>
                     </button>
-                    <div class="faq-answer"><div class="faq-answer-inner">Nous acceptons le paiement à la livraison (cash), le virement bancaire et les paiements mobiles via D17 ou Flouci. Le paiement à la livraison est le plus populaire : vous ne payez que lorsque vous recevez votre toile.</div></div>
-                </div>
-                <div class="faq-item reveal">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        La qualité d'impression est-elle garantie ?
-                        <span class="faq-arrow">+</span>
-                    </button>
-                    <div class="faq-answer"><div class="faq-answer-inner">Oui, nous utilisons des imprimantes professionnelles haute définition avec des encres résistantes aux UV et à l'humidité. Nos toiles sont imprimées sur canvas premium de 380g/m² et montées sur châssis en bois massif. Si le résultat ne vous satisfait pas, nous nous engageons à refaire votre toile gratuitement.</div></div>
-                </div>
-                <div class="faq-item reveal">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        Livrez-vous en dehors de Tunis ?
-                        <span class="faq-arrow">+</span>
-                    </button>
-                    <div class="faq-answer"><div class="faq-answer-inner">Oui, nous livrons partout en Tunisie : Tunis, Sousse, Sfax, Monastir, Bizerte, Nabeul, Hammamet, Gabès, Kairouan, et toutes les autres villes. La livraison est gratuite quelle que soit votre localisation.</div></div>
-                </div>
-                <div class="faq-item reveal">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        Comment accrocher ma toile ?
-                        <span class="faq-arrow">+</span>
-                    </button>
-                    <div class="faq-answer"><div class="faq-answer-inner">Nos toiles arrivent montées sur châssis en bois avec un système d'accroche intégré à l'arrière. Il vous suffit d'un simple clou ou crochet pour l'accrocher au mur. Aucun cadre supplémentaire n'est nécessaire, la toile est prête à être exposée dès la réception.</div></div>
+                    <div class="faq-answer"><div class="faq-answer-inner" data-i18n="faq4_a">Nous acceptons le paiement à la livraison (cash), le virement bancaire et les paiements mobiles via D17 ou Flouci. Le paiement à la livraison est le plus populaire : vous ne payez que lorsque vous recevez votre toile.</div></div>
                 </div>
             </div>
         </section>
 
         <section class="section" id="contact">
             <div class="section-header reveal">
-                <span class="tag">💬 Contactez-nous</span>
-                <h2>Restons en contact</h2>
+                <span class="tag" data-i18n="contact_tag">💬 Contactez-nous</span>
+                <h2 data-i18n="contact_title">Restons en contact</h2>
                 <div class="glow-line"></div>
-                <p>Une question ? Un projet personnalisé ? N'hésitez pas à nous écrire, nous répondons sous 24h.</p>
+                <p data-i18n="contact_text">Une question ? Un projet personnalisé ? N'hésitez pas à nous écrire, nous répondons sous 24h.</p>
             </div>
             <div class="contact-grid">
                 <div class="contact-info-cards reveal">
-                    <div class="contact-card"><div class="card-icon">📍</div><div><h4>Adresse</h4><p>Tunis, Tunisie</p></div></div>
-                    <div class="contact-card"><div class="card-icon">📱</div><div><h4>Téléphone / WhatsApp</h4><p>+216 21 594 522</p></div></div>
-                    <div class="contact-card"><div class="card-icon">📧</div><div><h4>Email</h4><p>Contact@creya.tn</p></div></div>
-                    <div class="contact-card"><div class="card-icon">⏰</div><div><h4>Horaires</h4><p>Lun - Sam : 9h - 18h</p></div></div>
+                    <div class="contact-card"><div class="card-icon">📍</div><div><h4 data-i18n="contact_address_title">Adresse</h4><p data-i18n="contact_address_text">Tunis, Tunisie</p></div></div>
+                    <div class="contact-card"><div class="card-icon">📱</div><div><h4 data-i18n="contact_phone_title">Téléphone / WhatsApp</h4><p>+216 21 594 522</p></div></div>
+                    <div class="contact-card"><div class="card-icon">📧</div><div><h4 data-i18n="contact_email_title">Email</h4><p>Contact@creya.tn</p></div></div>
+                    <div class="contact-card"><div class="card-icon">⏰</div><div><h4 data-i18n="contact_hours_title">Horaires</h4><p data-i18n="contact_hours_text">Lun - Sam : 9h - 18h</p></div></div>
                     <div class="social-links">
                         <a href="https://www.facebook.com/profile.php?id=61581723062565" target="_blank" class="social-link" title="Facebook">f</a>
                         <a href="https://www.instagram.com/creya.tn" target="_blank" class="social-link" title="Instagram">📷</a>
@@ -1122,20 +1155,20 @@
                     </div>
                 </div>
                 <div class="checkout-panel reveal">
-                    <h2>✉️ Envoyez un message</h2>
-                    <div class="form-group"><label>Nom complet</label><input type="text" placeholder="Votre nom"></div>
-                    <div class="form-group"><label>Email</label><input type="email" placeholder="votre@email.com"></div>
-                    <div class="form-group"><label>Sujet</label>
+                    <h2 data-i18n="contact_form_title">✉️ Envoyez un message</h2>
+                    <div class="form-group"><label data-i18n="form_name">Nom complet</label><input type="text" data-i18n-placeholder="form_name_ph" placeholder="Votre nom"></div>
+                    <div class="form-group"><label data-i18n="form_email">Email</label><input type="email" data-i18n-placeholder="form_email_ph" placeholder="votre@email.com"></div>
+                    <div class="form-group"><label data-i18n="form_subject">Sujet</label>
                         <select>
-                            <option>Question générale</option>
-                            <option>Commande personnalisée</option>
-                            <option>Suivi de commande</option>
-                            <option>Demande de devis</option>
-                            <option>Autre</option>
+                            <option data-i18n="subject_1">Question générale</option>
+                            <option data-i18n="subject_2">Commande personnalisée</option>
+                            <option data-i18n="subject_3">Suivi de commande</option>
+                            <option data-i18n="subject_4">Demande de devis</option>
+                            <option data-i18n="subject_5">Autre</option>
                         </select>
                     </div>
-                    <div class="form-group"><label>Message</label><textarea rows="4" placeholder="Décrivez votre projet ou posez votre question..."></textarea></div>
-                    <button class="btn-primary" style="width:100%" onclick="showToast('✅ Message envoyé avec succès ! Nous vous répondrons sous 24h.')">Envoyer →</button>
+                    <div class="form-group"><label data-i18n="form_message">Message</label><textarea rows="4" data-i18n-placeholder="form_message_ph" placeholder="Décrivez votre projet ou posez votre question..."></textarea></div>
+                    <button class="btn-primary" style="width:100%" onclick="showToast(t('toast_message_sent'))" data-i18n="form_send">Envoyer →</button>
                 </div>
             </div>
         </section>
@@ -1144,43 +1177,43 @@
     <div class="page" id="page-checkout">
         <div class="checkout-container">
             <div class="checkout-panel">
-                <h2>📦 Informations de livraison</h2>
+                <h2 data-i18n="checkout_title">📦 Informations de livraison</h2>
                 <div class="form-row">
-                    <div class="form-group"><label>Prénom *</label><input type="text" placeholder="Votre prénom" id="firstName"></div>
-                    <div class="form-group"><label>Nom *</label><input type="text" placeholder="Votre nom" id="lastName"></div>
+                    <div class="form-group"><label data-i18n="checkout_firstname">Prénom *</label><input type="text" data-i18n-placeholder="checkout_firstname_ph" placeholder="Votre prénom" id="firstName"></div>
+                    <div class="form-group"><label data-i18n="checkout_lastname">Nom *</label><input type="text" data-i18n-placeholder="checkout_lastname_ph" placeholder="Votre nom" id="lastName"></div>
                 </div>
-                <div class="form-group"><label>Téléphone *</label><input type="tel" placeholder="+216 XX XXX XXX" id="phone"></div>
-                <div class="form-group"><label>Email</label><input type="email" placeholder="votre@email.com" id="email"></div>
-                <div class="form-group"><label>Adresse de livraison *</label><input type="text" placeholder="Rue, numéro..." id="address"></div>
+                <div class="form-group"><label data-i18n="checkout_phone">Téléphone *</label><input type="tel" placeholder="+216 XX XXX XXX" id="phone"></div>
+                <div class="form-group"><label data-i18n="checkout_email">Email</label><input type="email" data-i18n-placeholder="form_email_ph" placeholder="votre@email.com" id="email"></div>
+                <div class="form-group"><label data-i18n="checkout_address">Adresse de livraison *</label><input type="text" data-i18n-placeholder="checkout_address_ph" placeholder="Rue, numéro..." id="address"></div>
                 <div class="form-row">
-                    <div class="form-group"><label>Ville *</label><input type="text" placeholder="Ex: Tunis" id="city"></div>
-                    <div class="form-group"><label>Code postal</label><input type="text" placeholder="1000" id="zip"></div>
+                    <div class="form-group"><label data-i18n="checkout_city">Ville *</label><input type="text" data-i18n-placeholder="checkout_city_ph" placeholder="Ex: Tunis" id="city"></div>
+                    <div class="form-group"><label data-i18n="checkout_zip">Code postal</label><input type="text" placeholder="1000" id="zip"></div>
                 </div>
-                <div class="form-group"><label>Note / Instructions</label><textarea rows="3" placeholder="Instructions spéciales..." id="notes"></textarea></div>
+                <div class="form-group"><label data-i18n="checkout_notes">Note / Instructions</label><textarea rows="3" data-i18n-placeholder="checkout_notes_ph" placeholder="Instructions spéciales..." id="notes"></textarea></div>
                 <div class="form-group">
-                    <label>Mode de paiement</label>
+                    <label data-i18n="checkout_payment">Mode de paiement</label>
                     <select id="payment">
-                        <option>💵 Paiement à la livraison</option>
-                        <option>💳 Virement bancaire</option>
-                        <option>📱 D17 / Flouci</option>
+                        <option data-i18n="pay_1">💵 Paiement à la livraison</option>
+                        <option data-i18n="pay_2">💳 Virement bancaire</option>
+                        <option data-i18n="pay_3">📱 D17 / Flouci</option>
                     </select>
                 </div>
-                <button class="btn-checkout" onclick="placeOrder()">✨ Confirmer la commande</button>
+                <button class="btn-checkout" onclick="placeOrder()" data-i18n="checkout_confirm">✨ Confirmer la commande</button>
             </div>
             <div>
                 <div class="checkout-panel">
-                    <h2>🛒 Récapitulatif</h2>
+                    <h2 data-i18n="checkout_summary">🛒 Récapitulatif</h2>
                     <div class="cart-items" id="cartItems">
                         <div class="empty-cart" id="emptyCart">
                             <div class="icon">🛒</div>
-                            <p>Votre panier est vide</p><br>
-                            <a href="#collection" class="btn-secondary" onclick="showPage('home')" style="font-size:0.85rem;padding:10px 24px;">Explorer la collection</a>
+                            <p data-i18n="empty_cart">Votre panier est vide</p><br>
+                            <a href="#collection" class="btn-secondary" onclick="showPage('home')" style="font-size:0.85rem;padding:10px 24px;" data-i18n="empty_cart_btn">Explorer la collection</a>
                         </div>
                     </div>
                     <div id="cartSummary" style="display:none">
-                        <div class="cart-summary-row"><span>Sous-total</span><span id="subtotal">0 TND</span></div>
-                        <div class="cart-summary-row"><span>Livraison</span><span style="color:var(--success)">Gratuite 🎉</span></div>
-                        <div class="cart-summary-row total"><span>Total</span><span class="amount" id="totalAmount">0 TND</span></div>
+                        <div class="cart-summary-row"><span data-i18n="subtotal_label">Sous-total</span><span id="subtotal">0 TND</span></div>
+                        <div class="cart-summary-row"><span data-i18n="shipping_label">Livraison</span><span style="color:var(--success)" data-i18n="shipping_free">Gratuite 🎉</span></div>
+                        <div class="cart-summary-row total"><span data-i18n="total_label">Total</span><span class="amount" id="totalAmount">0 TND</span></div>
                     </div>
                 </div>
             </div>
@@ -1203,12 +1236,12 @@
                     <line x1="375" y1="150" x2="430" y2="150" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
                 </svg>
             </div>
-            <p class="footer-text">© 2026 <a href="#">CREYA by Tass</a> — Toiles & Tableaux sur mesure · Tunis, Tunisie</p>
+            <p class="footer-text" data-i18n="footer_text">© 2025 CREYA by Tass — Toiles & Tableaux sur mesure · Tunis, Tunisie</p>
             <div class="footer-links">
-                <a href="#collection" onclick="showPage('home')">Collection</a>
-                <a href="#apropos" onclick="showPage('home')">À propos</a>
-                <a href="#faq" onclick="showPage('home')">FAQ</a>
-                <a href="#contact" onclick="showPage('home')">Contact</a>
+                <a href="#collection" onclick="showPage('home')" data-i18n="nav_collection">Collection</a>
+                <a href="#apropos" onclick="showPage('home')" data-i18n="nav_about">À propos</a>
+                <a href="#faq" onclick="showPage('home')" data-i18n="nav_faq">FAQ</a>
+                <a href="#contact" onclick="showPage('home')" data-i18n="nav_contact">Contact</a>
             </div>
         </div>
     </footer>
@@ -1219,26 +1252,442 @@
         <div class="modal">
             <button class="modal-close" onclick="closeModal()">✕</button>
             <div class="success-icon">🎉</div>
-            <h3>Commande confirmée !</h3>
-            <p>Merci pour votre commande ! Nous vous contacterons au <strong>+216 21 594 522</strong> pour confirmer les détails. Préparez vos murs ! 🖼️</p><br>
-            <button class="btn-primary" onclick="closeModal(); showPage('home');">Retour à l'accueil</button>
+            <h3 data-i18n="modal_title">Commande confirmée !</h3>
+            <p data-i18n="modal_text">Merci pour votre commande ! Nous vous contacterons au +216 21 594 522 pour confirmer les détails. Préparez vos murs ! 🖼️</p><br>
+            <button class="btn-primary" onclick="closeModal(); showPage('home');" data-i18n="modal_btn">Retour à l'accueil</button>
         </div>
     </div>
 
     <script>
+        const translations = {
+            fr: {
+                nav_home: "Accueil",
+                nav_collection: "Collection",
+                nav_about: "À propos",
+                nav_faq: "FAQ",
+                nav_contact: "Contact",
+                cart_label: "🛒 Panier",
+                hero_badge: "Collection 2026 disponible",
+                hero_title: `Des toiles <span class="gradient-text">sur mesure</span>,<br>pour des murs à votre image`,
+                hero_text: "Découvrez notre collection exclusive de toiles et tableaux personnalisés, créés avec passion et adaptés à tous les espaces. Chaque œuvre est unique, imprimée en haute qualité sur toile canvas premium et livrée partout en Tunisie. Exprimez votre style, sublimez votre intérieur.",
+                hero_btn_1: "Explorer la collection →",
+                hero_btn_2: "Comment ça marche ?",
+                stat_1: "Avis clients",
+                stat_2: "Toiles livrées",
+                stat_3: "Sur mesure",
+                reassurance_1_title: "Livraison gratuite",
+                reassurance_1_text: "Partout en Tunisie",
+                reassurance_2_title: "Qualité premium",
+                reassurance_2_text: "Toile canvas HD",
+                reassurance_3_title: "100% personnalisable",
+                reassurance_3_text: "Taille & design au choix",
+                reassurance_4_title: "Support réactif",
+                reassurance_4_text: "Réponse sous 24h",
+                steps_tag: "✦ Simple & rapide",
+                steps_title: "Comment commander ?",
+                steps_text: "En quelques étapes simples, recevez votre tableau personnalisé chez vous. Aucune compétence technique requise, on s'occupe de tout.",
+                step1_title: "Choisissez votre tableau",
+                step1_text: "Parcourez notre collection et sélectionnez l'œuvre qui vous plaît, ou envoyez-nous votre propre design pour une création 100% unique.",
+                step2_title: "Sélectionnez la taille",
+                step2_text: "Choisissez les dimensions adaptées à votre espace : 30×40, 50×70, 60×90 cm ou sur mesure selon vos besoins.",
+                step3_title: "Passez commande",
+                step3_text: "Ajoutez au panier, remplissez vos informations et validez. Paiement à la livraison possible, simple et sécurisé.",
+                step4_title: "Recevez & admirez",
+                step4_text: "Votre toile arrive soigneusement emballée sous 3 à 7 jours, prête à être accrochée et admirée par tous.",
+                collection_tag: "🎨 Nos œuvres",
+                collection_title: "La Collection",
+                collection_text: "Des toiles uniques pour sublimer chaque intérieur. Abstrait, nature, calligraphie, moderne… Il y en a pour tous les goûts.",
+                filter_all: "Tous",
+                filter_abstract: "Abstrait",
+                filter_nature: "Nature",
+                filter_calligraphy: "Calligraphie",
+                filter_modern: "Moderne",
+                filter_custom: "Personnalisé",
+                reviews_tag: "⭐ Avis clients",
+                reviews_title: "Ce que disent nos clients",
+                reviews_text: "Plus de 500 toiles livrées et des clients satisfaits partout en Tunisie. Découvrez leurs témoignages.",
+                review1_text: `"J'ai commandé une toile calligraphie pour mon salon et le résultat est magnifique ! La qualité d'impression est incroyable et les couleurs sont fidèles. Livraison rapide en plus. Je recommande à 100%."`,
+                review1_meta: "Tunis — Calligraphie Noor",
+                review2_text: `"Deuxième commande chez CREYA et toujours aussi satisfait. J'ai envoyé ma propre photo et ils en ont fait un tableau sublime. Le service client est très réactif et à l'écoute."`,
+                review2_meta: "Sousse — Design personnalisé",
+                review3_text: `"Un cadeau parfait pour ma sœur ! Elle a adoré le tableau abstrait. L'emballage était soigné, la livraison gratuite et le rendu est vraiment premium. Bravo l'équipe CREYA !"`,
+                review3_meta: "Sfax — Éclat Doré",
+                about_tag: "✦ Notre histoire",
+                about_title: "À propos de CREYA",
+                about_p1: "Chez CREYA, nous croyons que chaque mur mérite une œuvre d'art qui lui ressemble. Fondé en Tunisie avec la passion de l'art et du design, CREYA est né d'une idée simple : rendre l'art accessible à tous, en proposant des toiles sur mesure de qualité premium à des prix justes.",
+                about_p2: "Que vous soyez un particulier souhaitant décorer votre salon, un professionnel aménageant un espace de travail, ou à la recherche du cadeau parfait, nous vous accompagnons dans la création d'œuvres uniques. Chaque toile est imprimée en haute définition sur canvas premium, montée sur châssis en bois, et livrée avec soin partout en Tunisie.",
+                about_p3: "Notre équipe est à votre écoute pour tout projet personnalisé. Envoyez-nous votre photo, votre idée ou votre design, et nous le transformons en tableau d'exception.",
+                about_f1: "Qualité premium HD",
+                about_f2: "Livraison gratuite Tunisie",
+                about_f3: "100% sur mesure",
+                about_f4: "Support réactif 7j/7",
+                about_f5: "Satisfait ou refait",
+                about_f6: "Châssis bois inclus",
+                about_img_missing: "Image à propos introuvable",
+                about_img_hint: "Ajoute le fichier about-creya.png dans GitHub",
+                cta_title: `Vous avez un projet <span class="gradient-text">sur mesure</span> ?`,
+                cta_text: "Envoyez-nous votre photo, votre idée ou votre design et nous créerons une toile unique rien que pour vous. Devis gratuit et sans engagement.",
+                cta_btn_1: "Demander un devis gratuit →",
+                cta_btn_2: "💬 WhatsApp",
+                faq_tag: "❓ Questions fréquentes",
+                faq_title: "FAQ",
+                faq_text: "Retrouvez les réponses aux questions les plus posées par nos clients.",
+                faq1_q: "Quels sont les délais de livraison ?",
+                faq1_a: "Nos toiles sont livrées sous 3 à 7 jours ouvrés partout en Tunisie. Pour les commandes personnalisées nécessitant un design spécifique, comptez 5 à 10 jours. La livraison est gratuite sans minimum de commande.",
+                faq2_q: "Quelles tailles sont disponibles ?",
+                faq2_a: "Nous proposons des tailles standards : 30×40 cm, 50×70 cm, 60×90 cm, 70×100 cm et 80×120 cm. Vous pouvez aussi commander des dimensions sur mesure en nous contactant directement. Toutes nos toiles sont montées sur châssis en bois, prêtes à accrocher.",
+                faq3_q: "Puis-je envoyer ma propre photo ou design ?",
+                faq3_a: "Absolument ! C'est même l'un de nos services phares. Envoyez-nous votre photo, illustration ou design par WhatsApp, email ou via le formulaire de contact, et nous le transformerons en toile canvas de haute qualité. Nous vous enverrons un aperçu avant impression pour validation.",
+                faq4_q: "Quels modes de paiement acceptez-vous ?",
+                faq4_a: "Nous acceptons le paiement à la livraison (cash), le virement bancaire et les paiements mobiles via D17 ou Flouci. Le paiement à la livraison est le plus populaire : vous ne payez que lorsque vous recevez votre toile.",
+                contact_tag: "💬 Contactez-nous",
+                contact_title: "Restons en contact",
+                contact_text: "Une question ? Un projet personnalisé ? N'hésitez pas à nous écrire, nous répondons sous 24h.",
+                contact_address_title: "Adresse",
+                contact_address_text: "Tunis, Tunisie",
+                contact_phone_title: "Téléphone / WhatsApp",
+                contact_email_title: "Email",
+                contact_hours_title: "Horaires",
+                contact_hours_text: "Lun - Sam : 9h - 18h",
+                contact_form_title: "✉️ Envoyez un message",
+                form_name: "Nom complet",
+                form_name_ph: "Votre nom",
+                form_email: "Email",
+                form_email_ph: "votre@email.com",
+                form_subject: "Sujet",
+                subject_1: "Question générale",
+                subject_2: "Commande personnalisée",
+                subject_3: "Suivi de commande",
+                subject_4: "Demande de devis",
+                subject_5: "Autre",
+                form_message: "Message",
+                form_message_ph: "Décrivez votre projet ou posez votre question...",
+                form_send: "Envoyer →",
+                checkout_title: "📦 Informations de livraison",
+                checkout_firstname: "Prénom *",
+                checkout_firstname_ph: "Votre prénom",
+                checkout_lastname: "Nom *",
+                checkout_lastname_ph: "Votre nom",
+                checkout_phone: "Téléphone *",
+                checkout_email: "Email",
+                checkout_address: "Adresse de livraison *",
+                checkout_address_ph: "Rue, numéro...",
+                checkout_city: "Ville *",
+                checkout_city_ph: "Ex: Tunis",
+                checkout_zip: "Code postal",
+                checkout_notes: "Note / Instructions",
+                checkout_notes_ph: "Instructions spéciales...",
+                checkout_payment: "Mode de paiement",
+                pay_1: "💵 Paiement à la livraison",
+                pay_2: "💳 Virement bancaire",
+                pay_3: "📱 D17 / Flouci",
+                checkout_confirm: "✨ Confirmer la commande",
+                checkout_summary: "🛒 Récapitulatif",
+                empty_cart: "Votre panier est vide",
+                empty_cart_btn: "Explorer la collection",
+                subtotal_label: "Sous-total",
+                shipping_label: "Livraison",
+                shipping_free: "Gratuite 🎉",
+                total_label: "Total",
+                footer_text: "© 2025 CREYA by Tass — Toiles & Tableaux sur mesure · Tunis, Tunisie",
+                modal_title: "Commande confirmée !",
+                modal_text: "Merci pour votre commande ! Nous vous contacterons au +216 21 594 522 pour confirmer les détails. Préparez vos murs ! 🖼️",
+                modal_btn: "Retour à l'accueil",
+                toast_message_sent: "✅ Message envoyé avec succès ! Nous vous répondrons sous 24h.",
+                toast_cart_empty: "⚠️ Votre panier est vide !",
+                toast_required: "⚠️ Remplissez tous les champs obligatoires.",
+                toast_added: "ajouté au panier !",
+                cart_size: "Taille",
+                shipping_city_example: "Ex: Tunis"
+            },
+            ar: {
+                nav_home: "الرئيسية",
+                nav_collection: "المجموعة",
+                nav_about: "من نحن",
+                nav_faq: "الأسئلة الشائعة",
+                nav_contact: "اتصل بنا",
+                cart_label: "🛒 السلة",
+                hero_badge: "مجموعة 2026 متوفرة الآن",
+                hero_title: `لوحات <span class="gradient-text">مصممة حسب الطلب</span><br>لجدران تعبّر عن ذوقك`,
+                hero_text: "اكتشف مجموعتنا الحصرية من اللوحات الفنية والكانفاس المخصصة، المصممة بشغف لتناسب جميع المساحات. كل قطعة فريدة من نوعها، مطبوعة بجودة عالية على قماش كانفاس فاخر، مع توصيل إلى جميع أنحاء تونس. عبّر عن أسلوبك وامنح مساحتك لمسة فنية مميزة.",
+                hero_btn_1: "اكتشف المجموعة ←",
+                hero_btn_2: "كيف يتم الطلب؟",
+                stat_1: "آراء العملاء",
+                stat_2: "لوحة تم تسليمها",
+                stat_3: "حسب الطلب",
+                reassurance_1_title: "توصيل مجاني",
+                reassurance_1_text: "إلى كامل تونس",
+                reassurance_2_title: "جودة فاخرة",
+                reassurance_2_text: "كانفاس HD",
+                reassurance_3_title: "تخصيص كامل",
+                reassurance_3_text: "المقاس والتصميم حسب اختيارك",
+                reassurance_4_title: "دعم سريع",
+                reassurance_4_text: "الرد خلال 24 ساعة",
+                steps_tag: "✦ سهل وسريع",
+                steps_title: "كيف يتم الطلب؟",
+                steps_text: "في خطوات بسيطة، تحصل على لوحتك المخصصة حتى باب منزلك. لا حاجة لأي خبرة تقنية، نحن نتكفل بكل شيء.",
+                step1_title: "اختر اللوحة",
+                step1_text: "تصفح مجموعتنا واختر العمل الذي يناسبك، أو أرسل لنا تصميمك الخاص للحصول على قطعة فنية فريدة 100٪.",
+                step2_title: "اختر المقاس",
+                step2_text: "اختر الأبعاد المناسبة لمساحتك: 30×40، 50×70، 60×90 سم أو مقاس مخصص حسب طلبك.",
+                step3_title: "أكمل الطلب",
+                step3_text: "أضف اللوحة إلى السلة، أدخل معلوماتك، ثم أكّد طلبك. يتوفر الدفع عند الاستلام بسهولة وأمان.",
+                step4_title: "استلم واستمتع",
+                step4_text: "تصلك لوحتك مغلفة بعناية خلال 3 إلى 7 أيام، جاهزة للتعليق والاستمتاع بجمالها.",
+                collection_tag: "🎨 أعمالنا",
+                collection_title: "المجموعة",
+                collection_text: "لوحات فريدة تضيف لمسة راقية لكل مساحة. تجريدي، طبيعي، خط عربي، عصري... لدينا ما يناسب كل ذوق.",
+                filter_all: "الكل",
+                filter_abstract: "تجريدي",
+                filter_nature: "طبيعة",
+                filter_calligraphy: "خط عربي",
+                filter_modern: "عصري",
+                filter_custom: "مخصص",
+                reviews_tag: "⭐ آراء العملاء",
+                reviews_title: "ماذا يقول عملاؤنا",
+                reviews_text: "أكثر من 500 لوحة تم تسليمها وعملاء راضون في مختلف أنحاء تونس. اكتشف تجاربهم معنا.",
+                review1_text: `"طلبت لوحة خط عربي لغرفة الجلوس وكانت النتيجة رائعة جدًا! جودة الطباعة ممتازة والألوان جميلة جدًا. كما أن التوصيل كان سريعًا. أنصح بهم بشدة."`,
+                review1_meta: "تونس — Calligraphie Noor",
+                review2_text: `"هذه ثاني مرة أطلب من CREYA وأنا راضٍ جدًا. أرسلت لهم صورتي الخاصة وحولوها إلى لوحة مميزة. خدمة العملاء سريعة ومتعاونة جدًا."`,
+                review2_meta: "سوسة — تصميم مخصص",
+                review3_text: `"هدية مثالية لأختي! أحبت اللوحة التجريدية كثيرًا. التغليف كان أنيقًا، التوصيل مجاني، والنتيجة فعلًا فاخرة. عمل رائع من فريق CREYA!"`,
+                review3_meta: "صفاقس — Éclat Doré",
+                about_tag: "✦ قصتنا",
+                about_title: "من نحن في CREYA",
+                about_p1: "في CREYA نؤمن أن كل جدار يستحق عملاً فنياً يعكس شخصية صاحبه. انطلقت علامتنا في تونس من شغف حقيقي بالفن والتصميم، بفكرة بسيطة: جعل الفن في متناول الجميع من خلال لوحات مخصصة بجودة ممتازة وأسعار مدروسة.",
+                about_p2: "سواء كنت ترغب في تزيين منزلك، أو تجهيز مساحة عمل احترافية، أو تبحث عن هدية مميزة، فنحن نرافقك في تصميم أعمال فنية فريدة. كل لوحة تُطبع بدقة عالية على كانفاس فاخر، وتُثبت على إطار خشبي، ثم تُسلّم بعناية إلى مختلف مناطق تونس.",
+                about_p3: "فريقنا على ذمتك في كل مشروع مخصص. أرسل لنا صورتك أو فكرتك أو تصميمك، وسنحوّلها إلى لوحة استثنائية.",
+                about_f1: "جودة HD فاخرة",
+                about_f2: "توصيل مجاني داخل تونس",
+                about_f3: "تصميم حسب الطلب 100٪",
+                about_f4: "دعم سريع 7/7",
+                about_f5: "إرضاؤك أولويتنا",
+                about_f6: "إطار خشبي مرفق",
+                about_img_missing: "تعذّر العثور على صورة قسم من نحن",
+                about_img_hint: "أضف الملف about-creya.png إلى GitHub",
+                cta_title: `هل لديك مشروع <span class="gradient-text">مخصص</span>؟`,
+                cta_text: "أرسل لنا صورتك أو فكرتك أو تصميمك، وسنبتكر لك لوحة فريدة وخاصة بك. عرض سعر مجاني وبدون التزام.",
+                cta_btn_1: "اطلب عرض سعر مجاني ←",
+                cta_btn_2: "💬 واتساب",
+                faq_tag: "❓ الأسئلة الشائعة",
+                faq_title: "الأسئلة الشائعة",
+                faq_text: "اعثر على إجابات لأكثر الأسئلة التي يطرحها عملاؤنا.",
+                faq1_q: "ما هي مدة التوصيل؟",
+                faq1_a: "يتم تسليم اللوحات خلال 3 إلى 7 أيام عمل في جميع أنحاء تونس. أما الطلبات المخصصة التي تتطلب تصميمًا خاصًا فقد تستغرق من 5 إلى 10 أيام. التوصيل مجاني دون حد أدنى للطلب.",
+                faq2_q: "ما هي المقاسات المتوفرة؟",
+                faq2_a: "نوفر مقاسات قياسية مثل 30×40 سم، 50×70 سم، 60×90 سم، 70×100 سم و80×120 سم. كما يمكنك طلب مقاس مخصص عبر التواصل معنا مباشرة. جميع اللوحات مثبتة على إطار خشبي وجاهزة للتعليق.",
+                faq3_q: "هل يمكنني إرسال صورتي أو تصميمي الخاص؟",
+                faq3_a: "بالتأكيد، وهذا من أهم خدماتنا. أرسل لنا صورتك أو تصميمك عبر واتساب أو البريد الإلكتروني أو نموذج الاتصال، وسنحوّلها إلى لوحة كانفاس عالية الجودة. كما نرسل لك معاينة قبل الطباعة للتأكيد.",
+                faq4_q: "ما هي طرق الدفع المتوفرة؟",
+                faq4_a: "نقبل الدفع عند الاستلام، والتحويل البنكي، والدفع عبر D17 أو Flouci. الدفع عند الاستلام هو الخيار الأكثر طلبًا، حيث تدفع فقط عند استلام لوحتك.",
+                contact_tag: "💬 تواصل معنا",
+                contact_title: "ابقَ على تواصل معنا",
+                contact_text: "هل لديك سؤال أو مشروع مخصص؟ لا تتردد في مراسلتنا، وسنرد عليك خلال 24 ساعة.",
+                contact_address_title: "العنوان",
+                contact_address_text: "تونس، تونس",
+                contact_phone_title: "الهاتف / واتساب",
+                contact_email_title: "البريد الإلكتروني",
+                contact_hours_title: "أوقات العمل",
+                contact_hours_text: "من الإثنين إلى السبت: 9 صباحًا - 6 مساءً",
+                contact_form_title: "✉️ أرسل لنا رسالة",
+                form_name: "الاسم الكامل",
+                form_name_ph: "اسمك الكامل",
+                form_email: "البريد الإلكتروني",
+                form_email_ph: "your@email.com",
+                form_subject: "الموضوع",
+                subject_1: "استفسار عام",
+                subject_2: "طلب مخصص",
+                subject_3: "متابعة الطلب",
+                subject_4: "طلب عرض سعر",
+                subject_5: "أخرى",
+                form_message: "الرسالة",
+                form_message_ph: "صف مشروعك أو اطرح سؤالك...",
+                form_send: "إرسال →",
+                checkout_title: "📦 معلومات التوصيل",
+                checkout_firstname: "الاسم *",
+                checkout_firstname_ph: "اسمك",
+                checkout_lastname: "اللقب *",
+                checkout_lastname_ph: "لقبك",
+                checkout_phone: "الهاتف *",
+                checkout_email: "البريد الإلكتروني",
+                checkout_address: "عنوان التوصيل *",
+                checkout_address_ph: "الشارع، الرقم...",
+                checkout_city: "المدينة *",
+                checkout_city_ph: "مثال: تونس",
+                checkout_zip: "الرمز البريدي",
+                checkout_notes: "ملاحظات / تعليمات",
+                checkout_notes_ph: "تعليمات خاصة...",
+                checkout_payment: "طريقة الدفع",
+                pay_1: "💵 الدفع عند الاستلام",
+                pay_2: "💳 تحويل بنكي",
+                pay_3: "📱 D17 / Flouci",
+                checkout_confirm: "✨ تأكيد الطلب",
+                checkout_summary: "🛒 ملخص الطلب",
+                empty_cart: "سلتك فارغة",
+                empty_cart_btn: "اكتشف المجموعة",
+                subtotal_label: "المجموع الفرعي",
+                shipping_label: "التوصيل",
+                shipping_free: "مجاني 🎉",
+                total_label: "الإجمالي",
+                footer_text: "© 2025 CREYA by Tass — لوحات وكانفاس حسب الطلب · تونس، تونس",
+                modal_title: "تم تأكيد الطلب!",
+                modal_text: "شكرًا لطلبك! سنتصل بك على الرقم +216 21 594 522 لتأكيد التفاصيل. حضّر جدرانك لاستقبال الفن! 🖼️",
+                modal_btn: "العودة إلى الرئيسية",
+                toast_message_sent: "✅ تم إرسال رسالتك بنجاح! سنرد عليك خلال 24 ساعة.",
+                toast_cart_empty: "⚠️ سلتك فارغة!",
+                toast_required: "⚠️ يرجى ملء جميع الحقول الإلزامية.",
+                toast_added: "تمت إضافته إلى السلة!",
+                cart_size: "المقاس",
+                shipping_city_example: "مثال: تونس"
+            }
+        };
+
+        let currentLang = 'fr';
+
+        function t(key) {
+            return translations[currentLang][key] || key;
+        }
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+            document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+            document.getElementById('btn-ar').classList.toggle('active', lang === 'ar');
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                el.textContent = t(key);
+            });
+
+            document.querySelectorAll('[data-i18n-html]').forEach(el => {
+                const key = el.getAttribute('data-i18n-html');
+                el.innerHTML = t(key);
+            });
+
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                el.placeholder = t(key);
+            });
+
+            document.title = lang === 'ar'
+                ? 'CREYA by Tass — لوحات وكانفاس حسب الطلب'
+                : 'CREYA by Tass — Toiles & Tableaux Sur Mesure';
+
+            renderGallery(document.querySelector('.filter-btn.active')?.dataset.filter || 'all');
+            renderCheckoutCart();
+        }
+
         const artworks = [
-            { id:1, name:"Éclat Doré", category:"abstrait", price:89, img:"https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=600&h=700&fit=crop", sizes:["30×40","50×70","60×90"] },
-            { id:2, name:"Vague Azur", category:"abstrait", price:110, img:"https://images.unsplash.com/photo-1549490349-8643362247b5?w=600&h=700&fit=crop", sizes:["30×40","50×70","60×90"] },
-            { id:3, name:"Feuille d'Or", category:"nature", price:95, img:"https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=600&h=700&fit=crop", sizes:["30×40","50×70","60×90"] },
-            { id:4, name:"Calligraphie Noor", category:"calligraphie", price:120, img:"https://images.unsplash.com/photo-1609599006353-e629aaabfeae?w=600&h=700&fit=crop", sizes:["40×60","50×70","70×100"] },
-            { id:5, name:"Horizon Noir", category:"moderne", price:105, img:"https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=600&h=700&fit=crop", sizes:["30×40","50×70","60×90"] },
-            { id:6, name:"Fleur Éternelle", category:"nature", price:85, img:"https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=600&h=700&fit=crop", sizes:["30×40","50×70"] },
-            { id:7, name:"Basmala Élégante", category:"calligraphie", price:130, img:"https://images.unsplash.com/photo-1580136579312-94651dfd596d?w=600&h=700&fit=crop", sizes:["40×60","50×70","70×100"] },
-            { id:8, name:"Structure Urbaine", category:"moderne", price:115, img:"https://images.unsplash.com/photo-1459908676235-d5f02a50184b?w=600&h=700&fit=crop", sizes:["30×40","50×70","60×90"] },
-            { id:9, name:"Votre Design", category:"personnalise", price:99, img:"https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&h=700&fit=crop", sizes:["30×40","50×70","60×90","Custom"] },
-            { id:10, name:"Cosmos Abstract", category:"abstrait", price:125, img:"https://images.unsplash.com/photo-1507908708918-778587c9e563?w=600&h=700&fit=crop", sizes:["50×70","60×90"] },
-            { id:11, name:"Zen Garden", category:"nature", price:90, img:"https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=600&h=700&fit=crop", sizes:["30×40","50×70","60×90"] },
-            { id:12, name:"Neon Geometry", category:"moderne", price:140, img:"https://images.unsplash.com/photo-1550859492-d5da9d8e45f3?w=600&h=700&fit=crop", sizes:["50×70","60×90","80×120"] }
+            {
+                id:1,
+                name:{fr:"Éclat Doré", ar:"بريق ذهبي"},
+                category:"abstrait",
+                categoryLabel:{fr:"abstrait", ar:"تجريدي"},
+                price:89,
+                img:"https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=600&h=700&fit=crop",
+                sizes:["30×40","50×70","60×90"]
+            },
+            {
+                id:2,
+                name:{fr:"Vague Azur", ar:"موجة زرقاء"},
+                category:"abstrait",
+                categoryLabel:{fr:"abstrait", ar:"تجريدي"},
+                price:110,
+                img:"https://images.unsplash.com/photo-1549490349-8643362247b5?w=600&h=700&fit=crop",
+                sizes:["30×40","50×70","60×90"]
+            },
+            {
+                id:3,
+                name:{fr:"Feuille d'Or", ar:"ورقة من ذهب"},
+                category:"nature",
+                categoryLabel:{fr:"nature", ar:"طبيعة"},
+                price:95,
+                img:"https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=600&h=700&fit=crop",
+                sizes:["30×40","50×70","60×90"]
+            },
+            {
+                id:4,
+                name:{fr:"Calligraphie Noor", ar:"خط نور"},
+                category:"calligraphie",
+                categoryLabel:{fr:"calligraphie", ar:"خط عربي"},
+                price:120,
+                img:"https://images.unsplash.com/photo-1609599006353-e629aaabfeae?w=600&h=700&fit=crop",
+                sizes:["40×60","50×70","70×100"]
+            },
+            {
+                id:5,
+                name:{fr:"Horizon Noir", ar:"أفق أسود"},
+                category:"moderne",
+                categoryLabel:{fr:"moderne", ar:"عصري"},
+                price:105,
+                img:"https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=600&h=700&fit=crop",
+                sizes:["30×40","50×70","60×90"]
+            },
+            {
+                id:6,
+                name:{fr:"Fleur Éternelle", ar:"زهرة خالدة"},
+                category:"nature",
+                categoryLabel:{fr:"nature", ar:"طبيعة"},
+                price:85,
+                img:"https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=600&h=700&fit=crop",
+                sizes:["30×40","50×70"]
+            },
+            {
+                id:7,
+                name:{fr:"Basmala Élégante", ar:"بسملة أنيقة"},
+                category:"calligraphie",
+                categoryLabel:{fr:"calligraphie", ar:"خط عربي"},
+                price:130,
+                img:"https://images.unsplash.com/photo-1580136579312-94651dfd596d?w=600&h=700&fit=crop",
+                sizes:["40×60","50×70","70×100"]
+            },
+            {
+                id:8,
+                name:{fr:"Structure Urbaine", ar:"هيكل حضري"},
+                category:"moderne",
+                categoryLabel:{fr:"moderne", ar:"عصري"},
+                price:115,
+                img:"https://images.unsplash.com/photo-1459908676235-d5f02a50184b?w=600&h=700&fit=crop",
+                sizes:["30×40","50×70","60×90"]
+            },
+            {
+                id:9,
+                name:{fr:"Votre Design", ar:"تصميمك الخاص"},
+                category:"personnalise",
+                categoryLabel:{fr:"personnalisé", ar:"مخصص"},
+                price:99,
+                img:"https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&h=700&fit=crop",
+                sizes:["30×40","50×70","60×90","Custom"]
+            },
+            {
+                id:10,
+                name:{fr:"Cosmos Abstract", ar:"كون تجريدي"},
+                category:"abstrait",
+                categoryLabel:{fr:"abstrait", ar:"تجريدي"},
+                price:125,
+                img:"https://images.unsplash.com/photo-1507908708918-778587c9e563?w=600&h=700&fit=crop",
+                sizes:["50×70","60×90"]
+            },
+            {
+                id:11,
+                name:{fr:"Zen Garden", ar:"حديقة الزن"},
+                category:"nature",
+                categoryLabel:{fr:"nature", ar:"طبيعة"},
+                price:90,
+                img:"https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=600&h=700&fit=crop",
+                sizes:["30×40","50×70","60×90"]
+            },
+            {
+                id:12,
+                name:{fr:"Neon Geometry", ar:"هندسة نيون"},
+                category:"moderne",
+                categoryLabel:{fr:"moderne", ar:"عصري"},
+                price:140,
+                img:"https://images.unsplash.com/photo-1550859492-d5da9d8e45f3?w=600&h=700&fit=crop",
+                sizes:["50×70","60×90","80×120"]
+            }
         ];
 
         let cart = [];
@@ -1250,15 +1699,15 @@
             grid.innerHTML = filtered.map(art => `
                 <div class="artwork-card reveal visible">
                     <div class="artwork-img-wrapper">
-                        <img class="artwork-img" src="${art.img}" alt="${art.name}" loading="lazy">
+                        <img class="artwork-img" src="${art.img}" alt="${art.name[currentLang]}" loading="lazy">
                         <div class="artwork-overlay">
-                            <button class="artwork-quick-add" onclick="addToCart(${art.id})">+ Ajouter au panier</button>
+                            <button class="artwork-quick-add" onclick="addToCart(${art.id})">${currentLang === 'ar' ? '+ أضف إلى السلة' : '+ Ajouter au panier'}</button>
                         </div>
                     </div>
                     <div class="artwork-info">
-                        <h3>${art.name}</h3>
+                        <h3>${art.name[currentLang]}</h3>
                         <div class="artwork-meta">
-                            <span class="artwork-category">${art.category}</span>
+                            <span class="artwork-category">${art.categoryLabel[currentLang]}</span>
                             <span class="artwork-price">${art.price} TND</span>
                         </div>
                         <div class="artwork-sizes">
@@ -1267,6 +1716,11 @@
                     </div>
                 </div>
             `).join('');
+
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                const txt = btn.getAttribute('data-i18n');
+                if(txt) btn.dataset.filter = btn.getAttribute('onclick').match(/'([^']+)'/)[1];
+            });
         }
 
         function filterGallery(cat, btn) {
@@ -1288,7 +1742,7 @@
             if (existing) existing.qty++;
             else cart.push({ ...art, size, qty: 1 });
             updateCartUI();
-            showToast(`✅ "${art.name}" (${size}) ajouté au panier !`);
+            showToast(`✅ "${art.name[currentLang]}" (${size}) ${t('toast_added')}`);
         }
 
         function removeFromCart(i) {
@@ -1323,9 +1777,10 @@
             summary.style.display = 'block';
             container.innerHTML = cart.map((item, i) => `
                 <div class="cart-item">
-                    <img class="cart-item-img" src="${item.img}" alt="${item.name}">
+                    <img class="cart-item-img" src="${item.img}" alt="${item.name[currentLang]}">
                     <div class="cart-item-info">
-                        <h4>${item.name}</h4><p>Taille: ${item.size}</p>
+                        <h4>${item.name[currentLang]}</h4>
+                        <p>${t('cart_size')}: ${item.size}</p>
                         <div class="qty-control">
                             <button class="qty-btn" onclick="changeQty(${i},-1)">−</button>
                             <span class="qty-value">${item.qty}</span>
@@ -1361,15 +1816,16 @@
         }
 
         function placeOrder() {
-            if (cart.length === 0) { showToast('⚠️ Votre panier est vide !'); return; }
+            if (cart.length === 0) { showToast(t('toast_cart_empty')); return; }
             const f = document.getElementById('firstName').value;
             const p = document.getElementById('phone').value;
             const a = document.getElementById('address').value;
             const c = document.getElementById('city').value;
-            if (!f || !p || !a || !c) { showToast('⚠️ Remplissez tous les champs obligatoires.'); return; }
+            if (!f || !p || !a || !c) { showToast(t('toast_required')); return; }
             document.getElementById('successModal').classList.add('show');
             cart = [];
             updateCartUI();
+            renderCheckoutCart();
         }
 
         function closeModal() {
@@ -1377,10 +1833,10 @@
         }
 
         function showToast(msg) {
-            const t = document.getElementById('toast');
-            t.innerHTML = msg;
-            t.classList.add('show');
-            setTimeout(() => t.classList.remove('show'), 3000);
+            const tEl = document.getElementById('toast');
+            tEl.innerHTML = msg;
+            tEl.classList.add('show');
+            setTimeout(() => tEl.classList.remove('show'), 3000);
         }
 
         window.addEventListener('scroll', () => {
@@ -1394,7 +1850,7 @@
 
         renderGallery();
         artworks.forEach(art => { selectedSizes[art.id] = art.sizes[0]; });
+        setLanguage('fr');
     </script>
 </body>
 </html>
-
