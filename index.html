@@ -21,8 +21,8 @@
             --bg-glass: rgba(255, 255, 255, 0.03);
             --border-glass: rgba(255, 255, 255, 0.08);
             --text-primary: #f0f0f5;
-            --text-secondary: #8888a0;
-            --text-muted: #55556a;
+            --text-secondary: #b0b0c8;
+            --text-muted: #8888a0;
             --accent: #6c5ce7;
             --accent-light: #a29bfe;
             --accent-glow: rgba(108, 92, 231, 0.3);
@@ -73,6 +73,14 @@
             0%, 100% { transform: translate(0,0) scale(1); }
             33% { transform: translate(30px,-30px) scale(1.05); }
             66% { transform: translate(-20px,20px) scale(0.95); }
+        }
+
+        /* ============ PARTICLE CANVAS ============ */
+        #particleCanvas {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
         }
 
         /* ============ NAVBAR ============ */
@@ -128,8 +136,9 @@
             min-height: 100vh; display: flex; align-items: center;
             justify-content: center; text-align: center;
             padding: 140px 40px 80px; position: relative; z-index: 1;
+            overflow: hidden;
         }
-        .hero-content { max-width: 850px; }
+        .hero-content { max-width: 850px; position: relative; z-index: 2; }
 
         .hero-badge {
             display: inline-flex; align-items: center; gap: 8px;
@@ -214,7 +223,7 @@
             font-family: 'Space Grotesk', sans-serif;
             font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -1px;
         }
-        .section-header p { color: var(--text-secondary); max-width: 500px; margin: 16px auto 0; }
+        .section-header p { color: var(--text-secondary); max-width: 550px; margin: 16px auto 0; }
 
         .glow-line {
             width: 80px; height: 3px;
@@ -228,6 +237,34 @@
             animation: glowSlide 2s ease-in-out infinite;
         }
         @keyframes glowSlide { 0% { left: -50%; } 100% { left: 150%; } }
+
+        /* ============ REASSURANCE BAR ============ */
+        .reassurance-bar {
+            display: flex; justify-content: center; flex-wrap: wrap;
+            gap: 40px; max-width: 1100px; margin: 0 auto;
+            padding: 50px 20px;
+            position: relative; z-index: 1;
+        }
+        .reassurance-item {
+            display: flex; align-items: center; gap: 14px;
+            padding: 16px 24px;
+            background: var(--bg-glass); border: 1px solid var(--border-glass);
+            border-radius: var(--radius); transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+        .reassurance-item:hover {
+            border-color: rgba(225,112,85,0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .reassurance-icon {
+            width: 48px; height: 48px;
+            background: linear-gradient(135deg, var(--accent3), var(--accent));
+            border-radius: 12px; display: flex; align-items: center;
+            justify-content: center; font-size: 1.4rem; flex-shrink: 0;
+        }
+        .reassurance-text h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 2px; }
+        .reassurance-text p { font-size: 0.8rem; color: var(--text-secondary); }
 
         /* ============ STEPS ============ */
         .steps-grid {
@@ -318,6 +355,36 @@
             border-color: var(--accent3); color: var(--accent4); background: rgba(225,112,85,0.1);
         }
 
+        /* ============ TESTIMONIALS ============ */
+        .testimonials-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px; max-width: 1200px; margin: 0 auto;
+        }
+        .testimonial-card {
+            background: var(--bg-glass); border: 1px solid var(--border-glass);
+            border-radius: var(--radius); padding: 32px;
+            transition: var(--transition); position: relative;
+        }
+        .testimonial-card:hover {
+            border-color: rgba(225,112,85,0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        .testimonial-card .stars { font-size: 1rem; margin-bottom: 16px; letter-spacing: 2px; }
+        .testimonial-card .quote {
+            color: var(--text-secondary); font-size: 0.95rem;
+            line-height: 1.8; margin-bottom: 20px; font-style: italic;
+        }
+        .testimonial-author { display: flex; align-items: center; gap: 12px; }
+        .testimonial-avatar {
+            width: 44px; height: 44px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent3), var(--accent));
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 1rem;
+        }
+        .testimonial-author-info h4 { font-size: 0.9rem; font-weight: 600; }
+        .testimonial-author-info p { font-size: 0.8rem; color: var(--text-muted); }
+
         /* ============ ABOUT ============ */
         .about-content {
             max-width: 1100px; margin: 0 auto;
@@ -361,6 +428,69 @@
             transition: var(--transition);
         }
         .about-feature:hover { border-color: var(--accent3); transform: translateX(4px); }
+
+        /* ============ FAQ ============ */
+        .faq-container {
+            max-width: 800px; margin: 0 auto;
+        }
+        .faq-item {
+            background: var(--bg-glass); border: 1px solid var(--border-glass);
+            border-radius: var(--radius); margin-bottom: 12px;
+            overflow: hidden; transition: var(--transition);
+        }
+        .faq-item:hover { border-color: rgba(225,112,85,0.3); }
+        .faq-item.open { border-color: rgba(225,112,85,0.4); }
+        .faq-question {
+            width: 100%; padding: 22px 28px;
+            background: transparent; border: none;
+            color: var(--text-primary); font-size: 1rem; font-weight: 600;
+            font-family: 'Inter', sans-serif; cursor: pointer;
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 16px; text-align: left; transition: var(--transition);
+        }
+        .faq-question:hover { color: var(--accent4); }
+        .faq-arrow {
+            font-size: 1.2rem; transition: transform 0.3s ease;
+            color: var(--accent3); flex-shrink: 0;
+        }
+        .faq-item.open .faq-arrow { transform: rotate(45deg); }
+        .faq-answer {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+        .faq-item.open .faq-answer { max-height: 300px; }
+        .faq-answer-inner {
+            padding: 0 28px 22px;
+            color: var(--text-secondary); font-size: 0.95rem; line-height: 1.8;
+        }
+
+        /* ============ CTA SECTION ============ */
+        .cta-section {
+            padding: 80px 40px;
+            position: relative; z-index: 1;
+            text-align: center;
+        }
+        .cta-box {
+            max-width: 800px; margin: 0 auto;
+            background: linear-gradient(135deg, rgba(225,112,85,0.1), rgba(108,92,231,0.1));
+            border: 1px solid rgba(225,112,85,0.2);
+            border-radius: var(--radius); padding: 60px 40px;
+            position: relative; overflow: hidden;
+        }
+        .cta-box::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 100%; height: 2px;
+            background: linear-gradient(90deg, var(--accent4), var(--accent3), var(--accent));
+        }
+        .cta-box h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 700; margin-bottom: 16px; letter-spacing: -1px;
+        }
+        .cta-box p {
+            color: var(--text-secondary); font-size: 1.05rem;
+            max-width: 550px; margin: 0 auto 30px; line-height: 1.8;
+        }
 
         /* ============ CONTACT ============ */
         .contact-grid {
@@ -547,6 +677,10 @@
             .form-row { grid-template-columns: 1fr; }
             .footer-content { flex-direction: column; text-align: center; }
             .about-features { grid-template-columns: 1fr; }
+            .reassurance-bar { gap: 16px; }
+            .reassurance-item { width: 100%; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .cta-box { padding: 40px 24px; }
         }
     </style>
 </head>
@@ -558,7 +692,7 @@
     <div class="bg-orb bg-orb-3"></div>
 
     <!-- ==========================================
-         NAVBAR — Logo 4 Bold Impact (GRANDE TAILLE)
+         NAVBAR
          ========================================== -->
     <nav class="navbar" id="navbar">
         <a href="#" class="nav-logo" onclick="showPage('home')">
@@ -574,19 +708,13 @@
                     </linearGradient>
                     <filter id="ng4glow"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
                 </defs>
-                <!-- BG accent bar -->
                 <rect x="70" y="88" width="380" height="45" rx="4" fill="url(#ng4b)" opacity="0.08"/>
-                <!-- Subtitle bg -->
                 <text x="260" y="78" text-anchor="middle" font-family="'Bebas Neue',Impact,'Arial Black',sans-serif" font-size="28" fill="rgba(255,255,255,0.06)" letter-spacing="14">TOILES SUR MESURE</text>
-                <!-- CREYA main -->
                 <text x="260" y="133" text-anchor="middle" font-family="'Bebas Neue',Impact,'Arial Black',sans-serif" font-size="95" fill="url(#ng4)" letter-spacing="12" filter="url(#ng4glow)">CREYA</text>
-                <!-- Outline -->
                 <text x="260" y="133" text-anchor="middle" font-family="'Bebas Neue',Impact,'Arial Black',sans-serif" font-size="95" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.8" letter-spacing="12">CREYA</text>
-                <!-- Lines + by Tass -->
                 <line x1="120" y1="152" x2="250" y2="152" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
                 <text x="325" y="158" text-anchor="middle" font-family="'Permanent Marker',cursive" font-size="22" fill="#ffffff" opacity="0.8" letter-spacing="1">by Tass</text>
                 <line x1="390" y1="152" x2="440" y2="152" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-                <!-- Brush stroke -->
                 <rect x="130" y="170" width="260" height="3" rx="1.5" fill="url(#ng4)" opacity="0.15"/>
             </svg>
         </a>
@@ -599,6 +727,7 @@
             <li><a href="#" class="active" onclick="showPage('home')">Accueil</a></li>
             <li><a href="#collection" onclick="showPage('home')">Collection</a></li>
             <li><a href="#apropos" onclick="showPage('home')">À propos</a></li>
+            <li><a href="#faq" onclick="showPage('home')">FAQ</a></li>
             <li><a href="#contact" onclick="showPage('home')">Contact</a></li>
         </ul>
 
@@ -612,8 +741,9 @@
          ========================================== -->
     <div class="page active" id="page-home">
 
-        <!-- HERO (PAS DE LOGO ICI) -->
+        <!-- HERO -->
         <section class="hero">
+            <canvas id="particleCanvas"></canvas>
             <div class="hero-content">
                 <div class="hero-badge">
                     <span class="dot"></span>
@@ -624,8 +754,10 @@
                     pour des murs à votre image
                 </h1>
                 <p>
-                    Découvrez notre collection de toiles et tableaux personnalisés,
-                    créés selon vos envies et adaptés à tous les espaces. Exprimez votre style unique.
+                    Découvrez notre collection exclusive de toiles et tableaux personnalisés,
+                    créés avec passion et adaptés à tous les espaces. Chaque œuvre est unique,
+                    imprimée en haute qualité sur toile canvas premium et livrée partout en Tunisie.
+                    Exprimez votre style, sublimez votre intérieur.
                 </p>
                 <div class="hero-buttons">
                     <a href="#collection" class="btn-primary">Explorer la collection →</a>
@@ -639,34 +771,66 @@
             </div>
         </section>
 
+        <!-- REASSURANCE BAR -->
+        <div class="reassurance-bar reveal">
+            <div class="reassurance-item">
+                <div class="reassurance-icon">🚚</div>
+                <div class="reassurance-text">
+                    <h4>Livraison gratuite</h4>
+                    <p>Partout en Tunisie</p>
+                </div>
+            </div>
+            <div class="reassurance-item">
+                <div class="reassurance-icon">🎨</div>
+                <div class="reassurance-text">
+                    <h4>Qualité premium</h4>
+                    <p>Toile canvas HD</p>
+                </div>
+            </div>
+            <div class="reassurance-item">
+                <div class="reassurance-icon">✨</div>
+                <div class="reassurance-text">
+                    <h4>100% personnalisable</h4>
+                    <p>Taille & design au choix</p>
+                </div>
+            </div>
+            <div class="reassurance-item">
+                <div class="reassurance-icon">💬</div>
+                <div class="reassurance-text">
+                    <h4>Support réactif</h4>
+                    <p>Réponse sous 24h</p>
+                </div>
+            </div>
+        </div>
+
         <!-- HOW IT WORKS -->
         <section class="section" id="comment">
             <div class="section-header reveal">
                 <span class="tag">✦ Simple & rapide</span>
                 <h2>Comment commander ?</h2>
                 <div class="glow-line"></div>
-                <p>En quelques étapes simples, recevez votre tableau personnalisé chez vous.</p>
+                <p>En quelques étapes simples, recevez votre tableau personnalisé chez vous. Aucune compétence technique requise, on s'occupe de tout.</p>
             </div>
             <div class="steps-grid">
                 <div class="step-card reveal">
                     <div class="step-number">1</div>
                     <h3>Choisissez votre tableau</h3>
-                    <p>Parcourez notre collection et sélectionnez l'œuvre qui vous plaît ou envoyez-nous votre propre design.</p>
+                    <p>Parcourez notre collection et sélectionnez l'œuvre qui vous plaît, ou envoyez-nous votre propre design pour une création 100% unique.</p>
                 </div>
                 <div class="step-card reveal">
                     <div class="step-number">2</div>
                     <h3>Sélectionnez la taille</h3>
-                    <p>Choisissez les dimensions adaptées à votre espace : 30×40, 50×70, 60×90 ou personnalisé.</p>
+                    <p>Choisissez les dimensions adaptées à votre espace : 30×40, 50×70, 60×90 cm ou sur mesure selon vos besoins.</p>
                 </div>
                 <div class="step-card reveal">
                     <div class="step-number">3</div>
                     <h3>Passez commande</h3>
-                    <p>Ajoutez au panier, remplissez vos infos et validez. Livraison rapide partout en Tunisie.</p>
+                    <p>Ajoutez au panier, remplissez vos informations et validez. Paiement à la livraison possible, simple et sécurisé.</p>
                 </div>
                 <div class="step-card reveal">
                     <div class="step-number">4</div>
                     <h3>Recevez & admirez</h3>
-                    <p>Votre toile arrive soigneusement emballée, prête à être accrochée et admirée.</p>
+                    <p>Votre toile arrive soigneusement emballée sous 3 à 7 jours, prête à être accrochée et admirée par tous.</p>
                 </div>
             </div>
         </section>
@@ -677,7 +841,7 @@
                 <span class="tag">🎨 Nos œuvres</span>
                 <h2>La Collection</h2>
                 <div class="glow-line"></div>
-                <p>Des toiles uniques pour sublimer chaque intérieur.</p>
+                <p>Des toiles uniques pour sublimer chaque intérieur. Abstrait, nature, calligraphie, moderne… Il y en a pour tous les goûts.</p>
             </div>
             <div class="gallery-filters reveal">
                 <button class="filter-btn active" onclick="filterGallery('all', this)">Tous</button>
@@ -688,6 +852,51 @@
                 <button class="filter-btn" onclick="filterGallery('personnalise', this)">Personnalisé</button>
             </div>
             <div class="gallery-grid" id="galleryGrid"></div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section class="section" id="avis">
+            <div class="section-header reveal">
+                <span class="tag">⭐ Avis clients</span>
+                <h2>Ce que disent nos clients</h2>
+                <div class="glow-line"></div>
+                <p>Plus de 500 toiles livrées et des clients satisfaits partout en Tunisie. Découvrez leurs témoignages.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="quote">"J'ai commandé une toile calligraphie pour mon salon et le résultat est magnifique ! La qualité d'impression est incroyable et les couleurs sont fidèles. Livraison rapide en plus. Je recommande à 100%."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">S</div>
+                        <div class="testimonial-author-info">
+                            <h4>Sarra B.</h4>
+                            <p>Tunis — Calligraphie Noor</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="quote">"Deuxième commande chez CREYA et toujours aussi satisfait. J'ai envoyé ma propre photo et ils en ont fait un tableau sublime. Le service client est très réactif et à l'écoute."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">M</div>
+                        <div class="testimonial-author-info">
+                            <h4>Mohamed K.</h4>
+                            <p>Sousse — Design personnalisé</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card reveal">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="quote">"Un cadeau parfait pour ma sœur ! Elle a adoré le tableau abstrait. L'emballage était soigné, la livraison gratuite et le rendu est vraiment premium. Bravo l'équipe CREYA !"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">A</div>
+                        <div class="testimonial-author-info">
+                            <h4>Amira T.</h4>
+                            <p>Sfax — Éclat Doré</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- ABOUT -->
@@ -705,19 +914,133 @@
                     <span class="tag">✦ Notre histoire</span>
                     <h2>À propos de CREYA</h2>
                     <p>
-                        Chez CREYA, nous croyons que chaque mur mérite une œuvre d'art qui lui ressemble. 
-                        Spécialistes de la création de toiles et tableaux sur mesure, nous mettons notre expertise 
-                        et notre passion pour l'art au service de vos projets.
+                        Chez CREYA, nous croyons que chaque mur mérite une œuvre d'art qui lui ressemble.
+                        Fondé en Tunisie avec la passion de l'art et du design, CREYA est né d'une idée simple :
+                        rendre l'art accessible à tous, en proposant des toiles sur mesure de qualité premium
+                        à des prix justes.
                     </p>
                     <p>
-                        Que vous soyez un particulier ou un professionnel, nous vous accompagnons dans la création 
-                        d'œuvres uniques, personnalisées et de qualité, qui sublimeront vos espaces.
+                        Que vous soyez un particulier souhaitant décorer votre salon, un professionnel
+                        aménageant un espace de travail, ou à la recherche du cadeau parfait, nous vous
+                        accompagnons dans la création d'œuvres uniques. Chaque toile est imprimée en haute
+                        définition sur canvas premium, montée sur châssis en bois, et livrée avec soin
+                        partout en Tunisie.
+                    </p>
+                    <p>
+                        Notre équipe est à votre écoute pour tout projet personnalisé. Envoyez-nous votre
+                        photo, votre idée ou votre design, et nous le transformons en tableau d'exception.
                     </p>
                     <div class="about-features">
-                        <div class="about-feature"><span>✦</span> Qualité premium</div>
-                        <div class="about-feature"><span>🚚</span> Livraison Tunisie</div>
+                        <div class="about-feature"><span>✦</span> Qualité premium HD</div>
+                        <div class="about-feature"><span>🚚</span> Livraison gratuite Tunisie</div>
                         <div class="about-feature"><span>🎯</span> 100% sur mesure</div>
-                        <div class="about-feature"><span>💬</span> Support 24/7</div>
+                        <div class="about-feature"><span>💬</span> Support réactif 7j/7</div>
+                        <div class="about-feature"><span>🔄</span> Satisfait ou refait</div>
+                        <div class="about-feature"><span>🖼️</span> Châssis bois inclus</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA SECTION -->
+        <section class="cta-section">
+            <div class="cta-box reveal">
+                <h2>Vous avez un projet <span class="gradient-text">sur mesure</span> ?</h2>
+                <p>
+                    Envoyez-nous votre photo, votre idée ou votre design et nous créerons
+                    une toile unique rien que pour vous. Devis gratuit et sans engagement.
+                </p>
+                <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+                    <a href="#contact" class="btn-primary">Demander un devis gratuit →</a>
+                    <a href="https://wa.me/21621594522" target="_blank" class="btn-secondary">💬 WhatsApp</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="section" id="faq">
+            <div class="section-header reveal">
+                <span class="tag">❓ Questions fréquentes</span>
+                <h2>FAQ</h2>
+                <div class="glow-line"></div>
+                <p>Retrouvez les réponses aux questions les plus posées par nos clients.</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item reveal">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        Quels sont les délais de livraison ?
+                        <span class="faq-arrow">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Nos toiles sont livrées sous 3 à 7 jours ouvrés partout en Tunisie. Pour les commandes personnalisées nécessitant un design spécifique, comptez 5 à 10 jours. La livraison est gratuite sans minimum de commande.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        Quelles tailles sont disponibles ?
+                        <span class="faq-arrow">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Nous proposons des tailles standards : 30×40 cm, 50×70 cm, 60×90 cm, 70×100 cm et 80×120 cm. Vous pouvez aussi commander des dimensions sur mesure en nous contactant directement. Toutes nos toiles sont montées sur châssis en bois, prêtes à accrocher.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        Puis-je envoyer ma propre photo ou design ?
+                        <span class="faq-arrow">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Absolument ! C'est même l'un de nos services phares. Envoyez-nous votre photo, illustration ou design par WhatsApp, email ou via le formulaire de contact, et nous le transformerons en toile canvas de haute qualité. Nous vous enverrons un aperçu avant impression pour validation.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        Quels modes de paiement acceptez-vous ?
+                        <span class="faq-arrow">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Nous acceptons le paiement à la livraison (cash), le virement bancaire et les paiements mobiles via D17 ou Flouci. Le paiement à la livraison est le plus populaire : vous ne payez que lorsque vous recevez votre toile.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        La qualité d'impression est-elle garantie ?
+                        <span class="faq-arrow">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Oui, nous utilisons des imprimantes professionnelles haute définition avec des encres résistantes aux UV et à l'humidité. Nos toiles sont imprimées sur canvas premium de 380g/m² et montées sur châssis en bois massif. Si le résultat ne vous satisfait pas, nous nous engageons à refaire votre toile gratuitement.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        Livrez-vous en dehors de Tunis ?
+                        <span class="faq-arrow">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Oui, nous livrons partout en Tunisie : Tunis, Sousse, Sfax, Monastir, Bizerte, Nabeul, Hammamet, Gabès, Kairouan, et toutes les autres villes. La livraison est gratuite quelle que soit votre localisation.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        Comment accrocher ma toile ?
+                        <span class="faq-arrow">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Nos toiles arrivent montées sur châssis en bois avec un système d'accroche intégré à l'arrière. Il vous suffit d'un simple clou ou crochet pour l'accrocher au mur. Aucun cadre supplémentaire n'est nécessaire, la toile est prête à être exposée dès la réception.
+                        </div>
                     </div>
                 </div>
             </div>
@@ -729,7 +1052,7 @@
                 <span class="tag">💬 Contactez-nous</span>
                 <h2>Restons en contact</h2>
                 <div class="glow-line"></div>
-                <p>Une question ? Un projet personnalisé ? N'hésitez pas.</p>
+                <p>Une question ? Un projet personnalisé ? N'hésitez pas à nous écrire, nous répondons sous 24h.</p>
             </div>
             <div class="contact-grid">
                 <div class="contact-info-cards reveal">
@@ -739,7 +1062,7 @@
                     </div>
                     <div class="contact-card">
                         <div class="card-icon">📱</div>
-                        <div><h4>Téléphone</h4><p>+216 21 594 522</p></div>
+                        <div><h4>Téléphone / WhatsApp</h4><p>+216 21 594 522</p></div>
                     </div>
                     <div class="contact-card">
                         <div class="card-icon">📧</div>
@@ -750,17 +1073,26 @@
                         <div><h4>Horaires</h4><p>Lun - Sam : 9h - 18h</p></div>
                     </div>
                     <div class="social-links">
-                        <a href="#" class="social-link">f</a>
-                        <a href="#" class="social-link">📷</a>
-                        <a href="#" class="social-link">🎵</a>
+                        <a href="https://www.facebook.com/profile.php?id=61581723062565" target="_blank" class="social-link" title="Facebook">f</a>
+                        <a href="https://www.instagram.com/creya.tn" target="_blank" class="social-link" title="Instagram">📷</a>
+                        <a href="https://wa.me/21621594522" target="_blank" class="social-link" title="WhatsApp">💬</a>
                     </div>
                 </div>
                 <div class="checkout-panel reveal">
                     <h2>✉️ Envoyez un message</h2>
                     <div class="form-group"><label>Nom complet</label><input type="text" placeholder="Votre nom"></div>
                     <div class="form-group"><label>Email</label><input type="email" placeholder="votre@email.com"></div>
-                    <div class="form-group"><label>Message</label><textarea rows="4" placeholder="Décrivez votre projet..."></textarea></div>
-                    <button class="btn-primary" style="width:100%" onclick="showToast('✅ Message envoyé avec succès !')">Envoyer →</button>
+                    <div class="form-group"><label>Sujet</label>
+                        <select>
+                            <option>Question générale</option>
+                            <option>Commande personnalisée</option>
+                            <option>Suivi de commande</option>
+                            <option>Demande de devis</option>
+                            <option>Autre</option>
+                        </select>
+                    </div>
+                    <div class="form-group"><label>Message</label><textarea rows="4" placeholder="Décrivez votre projet ou posez votre question..."></textarea></div>
+                    <button class="btn-primary" style="width:100%" onclick="showToast('✅ Message envoyé avec succès ! Nous vous répondrons sous 24h.')">Envoyer →</button>
                 </div>
             </div>
         </section>
@@ -811,12 +1143,24 @@
                         <div class="cart-summary-row total"><span>Total</span><span class="amount" id="totalAmount">0 TND</span></div>
                     </div>
                 </div>
+                <!-- Checkout reassurance -->
+                <div style="margin-top:20px;display:flex;flex-direction:column;gap:12px;">
+                    <div style="display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--radius-sm);font-size:0.85rem;color:var(--text-secondary);">
+                        🚚 <span>Livraison <strong style="color:var(--success)">gratuite</strong> partout en Tunisie</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--radius-sm);font-size:0.85rem;color:var(--text-secondary);">
+                        🔒 <span>Paiement <strong style="color:var(--text-primary)">100% sécurisé</strong></span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--radius-sm);font-size:0.85rem;color:var(--text-secondary);">
+                        🔄 <span>Satisfait ou <strong style="color:var(--accent4)">refait</strong></span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- ==========================================
-         FOOTER — Logo 4 Bold Impact
+         FOOTER
          ========================================== -->
     <footer class="footer">
         <div class="footer-content">
@@ -838,6 +1182,7 @@
             <div class="footer-links">
                 <a href="#collection" onclick="showPage('home')">Collection</a>
                 <a href="#apropos" onclick="showPage('home')">À propos</a>
+                <a href="#faq" onclick="showPage('home')">FAQ</a>
                 <a href="#contact" onclick="showPage('home')">Contact</a>
             </div>
         </div>
@@ -859,6 +1204,124 @@
 
     <!-- ============ JAVASCRIPT ============ -->
     <script>
+        // ============ PARTICLE ANIMATION ============
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let animationId;
+        let mouse = { x: null, y: null };
+
+        function resizeCanvas() {
+            const hero = document.querySelector('.hero');
+            canvas.width = hero.offsetWidth;
+            canvas.height = hero.offsetHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.6;
+                this.speedY = (Math.random() - 0.5) * 0.6;
+                this.opacity = Math.random() * 0.4 + 0.1;
+                // Random color from palette
+                const colors = [
+                    'rgba(253,203,110,', // gold
+                    'rgba(225,112,85,',  // orange
+                    'rgba(108,92,231,',  // purple
+                    'rgba(162,155,254,', // light purple
+                    'rgba(0,206,201,',   // teal
+                ];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Mouse interaction
+                if (mouse.x !== null) {
+                    const dx = mouse.x - this.x;
+                    const dy = mouse.y - this.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 120) {
+                        this.x -= dx * 0.008;
+                        this.y -= dy * 0.008;
+                    }
+                }
+
+                // Wrap around
+                if (this.x > canvas.width + 10) this.x = -10;
+                if (this.x < -10) this.x = canvas.width + 10;
+                if (this.y > canvas.height + 10) this.y = -10;
+                if (this.y < -10) this.y = canvas.height + 10;
+            }
+            draw() {
+                ctx.fillStyle = this.color + this.opacity + ')';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = Math.min(80, Math.floor((canvas.width * canvas.height) / 12000));
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function drawConnections() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 130) {
+                        const opacity = (1 - dist / 130) * 0.12;
+                        ctx.strokeStyle = `rgba(225,112,85,${opacity})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            drawConnections();
+            animationId = requestAnimationFrame(animateParticles);
+        }
+
+        // Mouse tracking on hero
+        document.querySelector('.hero').addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
+        });
+        document.querySelector('.hero').addEventListener('mouseleave', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initParticles();
+        });
+
+        resizeCanvas();
+        initParticles();
+        animateParticles();
+
+        // ============ ARTWORKS DATA ============
         const artworks = [
             { id:1, name:"Éclat Doré", category:"abstrait", price:89, img:"https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=600&h=700&fit=crop", sizes:["30×40","50×70","60×90"] },
             { id:2, name:"Vague Azur", category:"abstrait", price:110, img:"https://images.unsplash.com/photo-1549490349-8643362247b5?w=600&h=700&fit=crop", sizes:["30×40","50×70","60×90"] },
@@ -974,6 +1437,16 @@
         }
 
         function toggleMenu() { document.getElementById('navLinks').classList.toggle('open'); }
+
+        // ============ FAQ TOGGLE ============
+        function toggleFaq(btn) {
+            const item = btn.parentElement;
+            const wasOpen = item.classList.contains('open');
+            // Close all
+            document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
+            // Open clicked if wasn't open
+            if (!wasOpen) item.classList.add('open');
+        }
 
         function placeOrder() {
             if (cart.length === 0) { showToast('⚠️ Votre panier est vide !'); return; }
