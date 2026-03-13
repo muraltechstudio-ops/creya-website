@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CREYA — Toiles & Tableaux Sur Mesure</title>
-    
+    <title>CREYA by TAS — Toiles & Tableaux Sur Mesure</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23fdcb6e'/%3E%3Cstop offset='50%25' style='stop-color:%23e17055'/%3E%3Cstop offset='100%25' style='stop-color:%236c5ce7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='20' fill='%230a0a0f'/%3E%3Ctext x='50' y='72' text-anchor='middle' font-family='Impact,sans-serif' font-size='60' fill='url(%23g)' letter-spacing='2'%3EC%3C/text%3E%3C/svg%3E">
+
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Permanent+Marker&family=Bebas+Neue&display=swap" rel="stylesheet">
+
     <style>
         /* ============================================
            CSS VARIABLES & RESET
@@ -26,6 +29,8 @@
             --accent-glow: rgba(108, 92, 231, 0.3);
             --accent2: #00cec9;
             --accent2-glow: rgba(0, 206, 201, 0.3);
+            --accent3: #e17055;
+            --accent4: #fdcb6e;
             --success: #00b894;
             --warning: #fdcb6e;
             --danger: #e17055;
@@ -34,11 +39,7 @@
             --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         html {
             scroll-behavior: smooth;
@@ -61,7 +62,7 @@
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background-image: 
+            background-image:
                 linear-gradient(rgba(108,92,231,0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(108,92,231,0.03) 1px, transparent 1px);
             background-size: 60px 60px;
@@ -92,6 +93,15 @@
             animation-delay: -10s;
         }
 
+        .bg-orb-3 {
+            width: 400px; height: 400px;
+            background: var(--accent3);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: -5s;
+            opacity: 0.06;
+        }
+
         @keyframes orbFloat {
             0%, 100% { transform: translate(0, 0) scale(1); }
             33% { transform: translate(30px, -30px) scale(1.05); }
@@ -106,29 +116,40 @@
             top: 0; left: 0;
             width: 100%;
             z-index: 1000;
-            padding: 16px 40px;
+            padding: 10px 40px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             backdrop-filter: blur(20px) saturate(180%);
-            background: rgba(10, 10, 15, 0.7);
+            background: rgba(10, 10, 15, 0.75);
             border-bottom: 1px solid var(--border-glass);
             transition: var(--transition);
         }
 
         .navbar.scrolled {
-            padding: 10px 40px;
-            background: rgba(10, 10, 15, 0.9);
+            padding: 6px 40px;
+            background: rgba(10, 10, 15, 0.92);
         }
 
         .nav-logo {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--accent-light), var(--accent2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -0.5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .nav-logo:hover {
+            transform: scale(1.03);
+        }
+
+        .nav-logo svg {
+            height: 48px;
+            width: auto;
+        }
+
+        .navbar.scrolled .nav-logo svg {
+            height: 40px;
         }
 
         .nav-links {
@@ -145,7 +166,6 @@
             font-size: 0.9rem;
             font-weight: 500;
             transition: var(--transition);
-            position: relative;
         }
 
         .nav-links a:hover, .nav-links a.active {
@@ -168,6 +188,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            font-family: 'Inter', sans-serif;
         }
 
         .nav-cart:hover {
@@ -176,7 +197,7 @@
         }
 
         .cart-badge {
-            background: var(--accent);
+            background: var(--accent3);
             color: white;
             font-size: 0.7rem;
             padding: 2px 7px;
@@ -217,7 +238,20 @@
         }
 
         .hero-content {
-            max-width: 800px;
+            max-width: 850px;
+        }
+
+        .hero-logo {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-logo svg {
+            width: 380px;
+            max-width: 90vw;
+            height: auto;
+            filter: drop-shadow(0 0 40px rgba(108, 92, 231, 0.2));
         }
 
         .hero-badge {
@@ -229,14 +263,14 @@
             border: 1px solid var(--border-glass);
             border-radius: 100px;
             font-size: 0.8rem;
-            color: var(--accent-light);
+            color: var(--accent4);
             margin-bottom: 30px;
             backdrop-filter: blur(10px);
         }
 
         .hero-badge .dot {
             width: 6px; height: 6px;
-            background: var(--accent);
+            background: var(--accent3);
             border-radius: 50%;
             animation: pulse 2s ease-in-out infinite;
         }
@@ -248,7 +282,7 @@
 
         .hero h1 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-size: clamp(2.5rem, 6vw, 4.2rem);
             font-weight: 800;
             line-height: 1.1;
             margin-bottom: 24px;
@@ -256,7 +290,7 @@
         }
 
         .hero h1 .gradient-text {
-            background: linear-gradient(135deg, var(--accent-light), var(--accent2));
+            background: linear-gradient(135deg, var(--accent4), var(--accent3), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -278,7 +312,7 @@
 
         .btn-primary {
             padding: 14px 36px;
-            background: linear-gradient(135deg, var(--accent), #5a4bd1);
+            background: linear-gradient(135deg, var(--accent3), var(--accent));
             color: white;
             border: none;
             border-radius: 100px;
@@ -292,6 +326,7 @@
             gap: 8px;
             position: relative;
             overflow: hidden;
+            font-family: 'Inter', sans-serif;
         }
 
         .btn-primary::before {
@@ -303,13 +338,11 @@
             transition: 0.5s;
         }
 
-        .btn-primary:hover::before {
-            left: 100%;
-        }
+        .btn-primary:hover::before { left: 100%; }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 40px var(--accent-glow);
+            box-shadow: 0 10px 40px rgba(225, 112, 85, 0.3);
         }
 
         .btn-secondary {
@@ -324,6 +357,7 @@
             transition: var(--transition);
             text-decoration: none;
             backdrop-filter: blur(10px);
+            font-family: 'Inter', sans-serif;
         }
 
         .btn-secondary:hover {
@@ -331,7 +365,6 @@
             background: var(--bg-glass);
         }
 
-        /* Stats bar */
         .hero-stats {
             display: flex;
             justify-content: center;
@@ -345,7 +378,7 @@
             font-family: 'Space Grotesk', sans-serif;
             font-size: 2rem;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--text-primary), var(--accent-light));
+            background: linear-gradient(135deg, var(--accent4), var(--accent3));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -353,7 +386,6 @@
         .hero-stat p {
             font-size: 0.85rem;
             color: var(--text-muted);
-            margin: 0;
         }
 
         /* ============================================
@@ -377,7 +409,7 @@
             border: 1px solid var(--border-glass);
             border-radius: 100px;
             font-size: 0.8rem;
-            color: var(--accent-light);
+            color: var(--accent4);
             margin-bottom: 16px;
             font-weight: 500;
         }
@@ -394,6 +426,31 @@
             max-width: 500px;
             margin: 16px auto 0;
             font-size: 1rem;
+        }
+
+        .glow-line {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent4), var(--accent3), var(--accent));
+            border-radius: 10px;
+            margin: 16px auto 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glow-line::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%;
+            height: 100%;
+            background: rgba(255,255,255,0.5);
+            animation: glowSlide 2s ease-in-out infinite;
+        }
+
+        @keyframes glowSlide {
+            0% { left: -50%; }
+            100% { left: 150%; }
         }
 
         /* ============================================
@@ -423,32 +480,31 @@
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 2px;
-            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            background: linear-gradient(90deg, var(--accent4), var(--accent3), var(--accent));
             opacity: 0;
             transition: var(--transition);
         }
 
-        .step-card:hover::before {
-            opacity: 1;
-        }
+        .step-card:hover::before { opacity: 1; }
 
         .step-card:hover {
             transform: translateY(-5px);
-            border-color: rgba(108, 92, 231, 0.3);
+            border-color: rgba(225, 112, 85, 0.3);
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
 
         .step-number {
             width: 50px; height: 50px;
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            background: linear-gradient(135deg, var(--accent3), var(--accent));
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 1.2rem;
+            font-family: 'Bebas Neue', sans-serif;
+            font-weight: 400;
+            font-size: 1.4rem;
             margin: 0 auto 20px;
+            color: white;
         }
 
         .step-card h3 {
@@ -464,7 +520,7 @@
         }
 
         /* ============================================
-           GALLERY / COLLECTION
+           GALLERY
            ============================================ */
         .gallery-filters {
             display: flex;
@@ -484,11 +540,12 @@
             font-size: 0.85rem;
             font-weight: 500;
             transition: var(--transition);
+            font-family: 'Inter', sans-serif;
         }
 
         .filter-btn:hover, .filter-btn.active {
-            background: var(--accent);
-            border-color: var(--accent);
+            background: linear-gradient(135deg, var(--accent3), var(--accent));
+            border-color: var(--accent3);
             color: white;
         }
 
@@ -507,14 +564,12 @@
             overflow: hidden;
             transition: var(--transition);
             cursor: pointer;
-            position: relative;
-            group: true;
         }
 
         .artwork-card:hover {
             transform: translateY(-8px);
-            border-color: var(--accent);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px var(--accent-glow);
+            border-color: var(--accent3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(225,112,85,0.15);
         }
 
         .artwork-img {
@@ -524,9 +579,7 @@
             transition: var(--transition);
         }
 
-        .artwork-card:hover .artwork-img {
-            transform: scale(1.05);
-        }
+        .artwork-card:hover .artwork-img { transform: scale(1.05); }
 
         .artwork-img-wrapper {
             overflow: hidden;
@@ -545,14 +598,12 @@
             padding: 20px;
         }
 
-        .artwork-card:hover .artwork-overlay {
-            opacity: 1;
-        }
+        .artwork-card:hover .artwork-overlay { opacity: 1; }
 
         .artwork-quick-add {
             width: 100%;
             padding: 12px;
-            background: var(--accent);
+            background: linear-gradient(135deg, var(--accent3), var(--accent));
             color: white;
             border: none;
             border-radius: var(--radius-sm);
@@ -560,15 +611,12 @@
             cursor: pointer;
             font-size: 0.9rem;
             transition: var(--transition);
+            font-family: 'Inter', sans-serif;
         }
 
-        .artwork-quick-add:hover {
-            background: var(--accent-light);
-        }
+        .artwork-quick-add:hover { opacity: 0.9; transform: scale(1.02); }
 
-        .artwork-info {
-            padding: 20px;
-        }
+        .artwork-info { padding: 20px; }
 
         .artwork-info h3 {
             font-size: 1rem;
@@ -576,7 +624,7 @@
             margin-bottom: 8px;
         }
 
-        .artwork-info .artwork-meta {
+        .artwork-meta {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -593,7 +641,7 @@
             font-family: 'Space Grotesk', sans-serif;
             font-size: 1.1rem;
             font-weight: 700;
-            color: var(--accent-light);
+            color: var(--accent4);
         }
 
         .artwork-sizes {
@@ -613,9 +661,9 @@
         }
 
         .size-tag:hover, .size-tag.selected {
-            border-color: var(--accent);
-            color: var(--accent-light);
-            background: rgba(108, 92, 231, 0.1);
+            border-color: var(--accent3);
+            color: var(--accent4);
+            background: rgba(225, 112, 85, 0.1);
         }
 
         /* ============================================
@@ -630,19 +678,14 @@
             align-items: center;
         }
 
-        .about-visual {
-            position: relative;
-        }
-
         .about-visual-box {
             width: 100%;
             height: 500px;
-            background: linear-gradient(135deg, var(--bg-card), var(--accent) 50%, var(--accent2));
+            background: linear-gradient(135deg, var(--bg-card), var(--accent3) 50%, var(--accent));
             border-radius: var(--radius);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 6rem;
             position: relative;
             overflow: hidden;
         }
@@ -653,14 +696,14 @@
             inset: 2px;
             background: var(--bg-card);
             border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        .about-visual-box span {
+        .about-visual-box .inner-logo {
             position: relative;
             z-index: 2;
+            width: 70%;
+            height: auto;
+            opacity: 0.6;
         }
 
         .about-text h2 {
@@ -669,6 +712,18 @@
             font-weight: 700;
             margin-bottom: 20px;
             letter-spacing: -1px;
+        }
+
+        .about-text .tag {
+            display: inline-block;
+            padding: 6px 16px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            color: var(--accent4);
+            margin-bottom: 16px;
+            font-weight: 500;
         }
 
         .about-text p {
@@ -695,204 +750,12 @@
             border-radius: var(--radius-sm);
             font-size: 0.85rem;
             color: var(--text-secondary);
-        }
-
-        .about-feature .icon {
-            font-size: 1.2rem;
-        }
-
-        /* ============================================
-           CHECKOUT / ORDER PAGE
-           ============================================ */
-        .page { display: none; }
-        .page.active { display: block; }
-
-        .checkout-container {
-            max-width: 1100px;
-            margin: 120px auto 60px;
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 40px;
-            padding: 0 40px;
-        }
-
-        .checkout-panel {
-            background: var(--bg-glass);
-            border: 1px solid var(--border-glass);
-            border-radius: var(--radius);
-            padding: 40px;
-            backdrop-filter: blur(20px);
-        }
-
-        .checkout-panel h2 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 14px 18px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-glass);
-            border-radius: var(--radius-sm);
-            color: var(--text-primary);
-            font-size: 0.95rem;
-            font-family: 'Inter', sans-serif;
-            transition: var(--transition);
-            outline: none;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 20px var(--accent-glow);
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        /* Cart Summary */
-        .cart-items {
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        .cart-item {
-            display: flex;
-            gap: 16px;
-            padding: 16px 0;
-            border-bottom: 1px solid var(--border-glass);
-            align-items: center;
-        }
-
-        .cart-item-img {
-            width: 70px;
-            height: 70px;
-            border-radius: var(--radius-sm);
-            object-fit: cover;
-            background: var(--bg-card);
-        }
-
-        .cart-item-info {
-            flex: 1;
-        }
-
-        .cart-item-info h4 {
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .cart-item-info p {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .cart-item-price {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            color: var(--accent-light);
-        }
-
-        .cart-item-remove {
-            background: none;
-            border: none;
-            color: var(--danger);
-            cursor: pointer;
-            font-size: 1.1rem;
-            padding: 5px;
             transition: var(--transition);
         }
 
-        .cart-item-remove:hover {
-            transform: scale(1.2);
-        }
-
-        .cart-summary-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
-            font-size: 0.95rem;
-        }
-
-        .cart-summary-row.total {
-            border-top: 2px solid var(--border-glass);
-            margin-top: 8px;
-            padding-top: 16px;
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-
-        .cart-summary-row.total .amount {
-            color: var(--accent-light);
-            font-family: 'Space Grotesk', sans-serif;
-        }
-
-        .btn-checkout {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, var(--accent), #5a4bd1);
-            color: white;
-            border: none;
-            border-radius: var(--radius-sm);
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-            margin-top: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-checkout:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 40px var(--accent-glow);
-        }
-
-        .btn-checkout::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: 0.6s;
-        }
-
-        .btn-checkout:hover::before {
-            left: 100%;
-        }
-
-        .empty-cart {
-            text-align: center;
-            padding: 40px 0;
-            color: var(--text-muted);
-        }
-
-        .empty-cart .icon {
-            font-size: 3rem;
-            margin-bottom: 16px;
+        .about-feature:hover {
+            border-color: var(--accent3);
+            transform: translateX(4px);
         }
 
         /* ============================================
@@ -924,13 +787,13 @@
         }
 
         .contact-card:hover {
-            border-color: var(--accent);
+            border-color: var(--accent3);
             transform: translateX(5px);
         }
 
         .contact-card .card-icon {
             width: 50px; height: 50px;
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            background: linear-gradient(135deg, var(--accent3), var(--accent));
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -939,18 +802,9 @@
             flex-shrink: 0;
         }
 
-        .contact-card h4 {
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
+        .contact-card h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
+        .contact-card p { font-size: 0.85rem; color: var(--text-muted); }
 
-        .contact-card p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        /* Social links */
         .social-links {
             display: flex;
             gap: 12px;
@@ -972,32 +826,269 @@
         }
 
         .social-link:hover {
-            border-color: var(--accent);
-            color: var(--accent-light);
+            border-color: var(--accent3);
+            color: var(--accent4);
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px var(--accent-glow);
+            box-shadow: 0 10px 30px rgba(225,112,85,0.2);
+        }
+
+        /* ============================================
+           CHECKOUT
+           ============================================ */
+        .page { display: none; }
+        .page.active { display: block; }
+
+        .checkout-container {
+            max-width: 1100px;
+            margin: 100px auto 60px;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 40px;
+            padding: 0 40px;
+        }
+
+        .checkout-panel {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius);
+            padding: 40px;
+            backdrop-filter: blur(20px);
+        }
+
+        .checkout-panel h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group { margin-bottom: 20px; }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent3);
+            box-shadow: 0 0 20px rgba(225,112,85,0.15);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .cart-items {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border-glass);
+            align-items: center;
+        }
+
+        .cart-item-img {
+            width: 70px;
+            height: 70px;
+            border-radius: var(--radius-sm);
+            object-fit: cover;
+            background: var(--bg-card);
+        }
+
+        .cart-item-info { flex: 1; }
+        .cart-item-info h4 { font-size: 0.9rem; font-weight: 600; }
+        .cart-item-info p { font-size: 0.8rem; color: var(--text-muted); }
+
+        .cart-item-price {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            color: var(--accent4);
+        }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: var(--danger);
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding: 5px;
+            transition: var(--transition);
+        }
+
+        .cart-item-remove:hover { transform: scale(1.2); }
+
+        .cart-summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            font-size: 0.95rem;
+        }
+
+        .cart-summary-row.total {
+            border-top: 2px solid var(--border-glass);
+            margin-top: 8px;
+            padding-top: 16px;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .cart-summary-row.total .amount {
+            color: var(--accent4);
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .btn-checkout {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--accent3), var(--accent));
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-checkout:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(225,112,85,0.3);
+        }
+
+        .btn-checkout::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: 0.6s;
+        }
+
+        .btn-checkout:hover::before { left: 100%; }
+
+        .empty-cart {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-muted);
+        }
+
+        .empty-cart .icon { font-size: 3rem; margin-bottom: 16px; }
+
+        .qty-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        .qty-btn {
+            width: 28px; height: 28px;
+            border-radius: 8px;
+            border: 1px solid var(--border-glass);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .qty-btn:hover { border-color: var(--accent3); }
+
+        .qty-value {
+            font-weight: 600;
+            min-width: 20px;
+            text-align: center;
+            font-size: 0.85rem;
         }
 
         /* ============================================
            FOOTER
            ============================================ */
         .footer {
-            padding: 40px;
+            padding: 60px 40px 30px;
             border-top: 1px solid var(--border-glass);
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.85rem;
             position: relative;
             z-index: 1;
         }
 
-        .footer a {
-            color: var(--accent-light);
+        .footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-logo svg {
+            height: 40px;
+            width: auto;
+            opacity: 0.6;
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .footer-text a {
+            color: var(--accent4);
             text-decoration: none;
         }
 
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover { color: var(--accent4); }
+
         /* ============================================
-           TOAST NOTIFICATION
+           TOAST
            ============================================ */
         .toast {
             position: fixed;
@@ -1005,7 +1096,7 @@
             right: 30px;
             padding: 16px 28px;
             background: var(--bg-card);
-            border: 1px solid var(--accent);
+            border: 1px solid var(--accent3);
             border-radius: var(--radius-sm);
             color: var(--text-primary);
             font-size: 0.9rem;
@@ -1019,9 +1110,7 @@
             gap: 10px;
         }
 
-        .toast.show {
-            transform: translateX(0);
-        }
+        .toast.show { transform: translateX(0); }
 
         /* ============================================
            MODAL
@@ -1038,9 +1127,7 @@
             padding: 20px;
         }
 
-        .modal-overlay.show {
-            display: flex;
-        }
+        .modal-overlay.show { display: flex; }
 
         .modal {
             background: var(--bg-secondary);
@@ -1069,10 +1156,7 @@
             cursor: pointer;
         }
 
-        .modal .success-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-        }
+        .modal .success-icon { font-size: 4rem; margin-bottom: 20px; }
 
         .modal h3 {
             font-family: 'Space Grotesk', sans-serif;
@@ -1087,12 +1171,26 @@
         }
 
         /* ============================================
+           SCROLL REVEAL
+           ============================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============================================
            RESPONSIVE
            ============================================ */
         @media (max-width: 900px) {
-            .navbar { padding: 14px 20px; }
-            .nav-links { 
-                display: none; 
+            .navbar { padding: 10px 20px; }
+            .nav-links {
+                display: none;
                 position: absolute;
                 top: 100%; left: 0;
                 width: 100%;
@@ -1107,98 +1205,14 @@
             .section { padding: 60px 20px; }
             .hero { padding: 100px 20px 60px; }
             .hero-stats { gap: 30px; flex-wrap: wrap; }
+            .hero-logo svg { width: 280px; }
             .about-content { grid-template-columns: 1fr; gap: 40px; }
             .checkout-container { grid-template-columns: 1fr; padding: 0 20px; }
             .contact-grid { grid-template-columns: 1fr; }
             .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
             .form-row { grid-template-columns: 1fr; }
-        }
-
-        /* ============================================
-           ANIMATIONS ON SCROLL
-           ============================================ */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Glitch hover effect on logo */
-        .nav-logo:hover {
-            animation: glitch 0.3s ease;
-        }
-
-        @keyframes glitch {
-            0% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(2px, -2px); }
-            60% { transform: translate(-1px, -1px); }
-            80% { transform: translate(1px, 1px); }
-            100% { transform: translate(0); }
-        }
-
-        /* Glow line animation */
-        .glow-line {
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent), var(--accent2));
-            border-radius: 10px;
-            margin: 16px auto 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .glow-line::after {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 50%;
-            height: 100%;
-            background: rgba(255,255,255,0.5);
-            animation: glowSlide 2s ease-in-out infinite;
-        }
-
-        @keyframes glowSlide {
-            0% { left: -50%; }
-            100% { left: 150%; }
-        }
-
-        /* Quantity controls */
-        .qty-control {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 6px;
-        }
-
-        .qty-btn {
-            width: 28px; height: 28px;
-            border-radius: 8px;
-            border: 1px solid var(--border-glass);
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            transition: var(--transition);
-        }
-
-        .qty-btn:hover {
-            border-color: var(--accent);
-        }
-
-        .qty-value {
-            font-weight: 600;
-            min-width: 20px;
-            text-align: center;
-            font-size: 0.85rem;
+            .footer-content { flex-direction: column; text-align: center; }
+            .about-features { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -1208,10 +1222,104 @@
     <div class="bg-grid"></div>
     <div class="bg-orb bg-orb-1"></div>
     <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
 
-    <!-- NAVBAR -->
+    <!-- ====================================================
+         SVG LOGO DEFINITION (reused everywhere via <use>)
+         ==================================================== -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+        <defs>
+            <linearGradient id="stencilGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#fdcb6e"/>
+                <stop offset="50%" style="stop-color:#e17055"/>
+                <stop offset="100%" style="stop-color:#6c5ce7"/>
+            </linearGradient>
+            <filter id="stencilRough">
+                <feTurbulence type="turbulence" baseFrequency="0.04" numOctaves="5" result="noise"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="2"/>
+            </filter>
+            <clipPath id="stencilClip">
+                <text x="250" y="125" text-anchor="middle"
+                      font-family="'Bebas Neue', Impact, sans-serif"
+                      font-size="110" letter-spacing="8">CREYA</text>
+            </clipPath>
+        </defs>
+
+        <!-- FULL LOGO symbol -->
+        <symbol id="logo-full" viewBox="0 0 500 220">
+            <rect x="80" y="18" width="70" height="20" rx="1" fill="rgba(255,255,255,0.06)" transform="rotate(-5, 115, 28)"/>
+            <rect x="360" y="15" width="60" height="20" rx="1" fill="rgba(255,255,255,0.06)" transform="rotate(3, 390, 25)"/>
+            <rect x="50" y="40" width="400" height="140" rx="3"
+                  fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2" stroke-dasharray="6,3"/>
+            <ellipse cx="250" cy="100" rx="200" ry="80" fill="#6c5ce7" opacity="0.06"/>
+            <g clip-path="url(#stencilClip)">
+                <rect x="0" y="0" width="500" height="220" fill="url(#stencilGrad)"/>
+                <circle cx="120" cy="100" r="40" fill="white" opacity="0.07"/>
+                <circle cx="350" cy="90" r="35" fill="white" opacity="0.05"/>
+            </g>
+            <text x="250" y="125" text-anchor="middle"
+                  font-family="'Bebas Neue', Impact, sans-serif"
+                  font-size="110" fill="none"
+                  stroke="rgba(255,255,255,0.1)" stroke-width="0.5"
+                  letter-spacing="8">CREYA</text>
+            <rect x="300" y="155" width="120" height="35" rx="2" fill="rgba(0,0,0,0.4)"/>
+            <text x="360" y="178" text-anchor="middle"
+                  font-family="'Bebas Neue', Impact, sans-serif"
+                  font-size="24" fill="#fdcb6e" letter-spacing="5">by TAS</text>
+            <g transform="translate(80, 158)" opacity="0.5">
+                <text font-family="'Permanent Marker', cursive" font-size="16" fill="#e17055">★★★★★</text>
+            </g>
+            <!-- Crown -->
+            <g transform="translate(220, 20)" opacity="0.7">
+                <polyline points="0,25 5,5 12,18 20,0 28,18 35,5 40,25"
+                          fill="none" stroke="#fdcb6e" stroke-width="2.5" stroke-linejoin="round"/>
+                <circle cx="5" cy="3" r="2" fill="#fdcb6e"/>
+                <circle cx="20" cy="-2" r="2" fill="#fdcb6e"/>
+                <circle cx="35" cy="3" r="2" fill="#fdcb6e"/>
+            </g>
+            <!-- Drips -->
+            <rect x="115" y="125" width="3.5" height="35" rx="1.75" fill="#e17055" opacity="0.5"/>
+            <rect x="310" y="122" width="3" height="28" rx="1.5" fill="#6c5ce7" opacity="0.45"/>
+            <rect x="400" y="120" width="2.5" height="20" rx="1.25" fill="#00cec9" opacity="0.4"/>
+            <!-- Spray dots -->
+            <circle cx="55" cy="45" r="3" fill="#e17055" opacity="0.4"/>
+            <circle cx="72" cy="38" r="2" fill="#e17055" opacity="0.3"/>
+            <circle cx="440" cy="50" r="2.5" fill="#00cec9" opacity="0.35"/>
+            <circle cx="455" cy="42" r="1.5" fill="#00cec9" opacity="0.25"/>
+        </symbol>
+
+        <!-- COMPACT NAV LOGO symbol -->
+        <symbol id="logo-nav" viewBox="40 30 420 175">
+            <rect x="50" y="40" width="400" height="140" rx="3"
+                  fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2" stroke-dasharray="6,3"/>
+            <g clip-path="url(#stencilClip)">
+                <rect x="0" y="0" width="500" height="220" fill="url(#stencilGrad)"/>
+            </g>
+            <text x="250" y="125" text-anchor="middle"
+                  font-family="'Bebas Neue', Impact, sans-serif"
+                  font-size="110" fill="none"
+                  stroke="rgba(255,255,255,0.1)" stroke-width="0.5"
+                  letter-spacing="8">CREYA</text>
+            <rect x="300" y="155" width="120" height="35" rx="2" fill="rgba(0,0,0,0.4)"/>
+            <text x="360" y="178" text-anchor="middle"
+                  font-family="'Bebas Neue', Impact, sans-serif"
+                  font-size="24" fill="#fdcb6e" letter-spacing="5">by TAS</text>
+            <!-- Crown mini -->
+            <g transform="translate(225, 28)" opacity="0.7">
+                <polyline points="0,20 4,4 10,14 16,0 22,14 28,4 32,20"
+                          fill="none" stroke="#fdcb6e" stroke-width="2" stroke-linejoin="round"/>
+            </g>
+            <!-- Drips -->
+            <rect x="115" y="125" width="3" height="25" rx="1.5" fill="#e17055" opacity="0.4"/>
+            <rect x="310" y="122" width="2.5" height="18" rx="1.25" fill="#6c5ce7" opacity="0.35"/>
+        </symbol>
+    </svg>
+
+    <!-- ============== NAVBAR ============== -->
     <nav class="navbar" id="navbar">
-        <a href="#" class="nav-logo" onclick="showPage('home')">CREYA</a>
+        <a href="#" class="nav-logo" onclick="showPage('home')">
+            <svg><use href="#logo-nav"/></svg>
+        </a>
         <button class="hamburger" onclick="toggleMenu()">
             <span></span><span></span><span></span>
         </button>
@@ -1236,12 +1344,19 @@
                     <span class="dot"></span>
                     Collection 2025 disponible
                 </div>
+
+                <!-- BIG HERO LOGO -->
+                <div class="hero-logo">
+                    <svg><use href="#logo-full"/></svg>
+                </div>
+
                 <h1>
                     Des toiles <span class="gradient-text">sur mesure</span>,<br>
-                    pour des murs à votre style
+                    pour des murs à votre image
                 </h1>
                 <p>
-                    Découvrez notre collection de toiles et tableaux personnalisés, créés selon vos envies et adaptés à tous les espaces. Exprimez votre style unique.
+                    Découvrez notre collection de toiles et tableaux personnalisés,
+                    créés selon vos envies et adaptés à tous les espaces. Exprimez votre style unique.
                 </p>
                 <div class="hero-buttons">
                     <a href="#collection" class="btn-primary">
@@ -1308,7 +1423,6 @@
                 <div class="glow-line"></div>
                 <p>Des toiles uniques pour sublimer chaque intérieur.</p>
             </div>
-
             <div class="gallery-filters reveal">
                 <button class="filter-btn active" onclick="filterGallery('all', this)">Tous</button>
                 <button class="filter-btn" onclick="filterGallery('abstrait', this)">Abstrait</button>
@@ -1317,10 +1431,7 @@
                 <button class="filter-btn" onclick="filterGallery('moderne', this)">Moderne</button>
                 <button class="filter-btn" onclick="filterGallery('personnalise', this)">Personnalisé</button>
             </div>
-
-            <div class="gallery-grid" id="galleryGrid">
-                <!-- Cards are generated by JS -->
-            </div>
+            <div class="gallery-grid" id="galleryGrid"></div>
         </section>
 
         <!-- ABOUT -->
@@ -1328,32 +1439,32 @@
             <div class="about-content">
                 <div class="about-visual reveal">
                     <div class="about-visual-box">
-                        <span>🎨</span>
+                        <svg class="inner-logo"><use href="#logo-full"/></svg>
                     </div>
                 </div>
                 <div class="about-text reveal">
                     <span class="tag">✦ Notre histoire</span>
                     <h2>À propos de CREYA</h2>
                     <p>
-                        CREYA est née d'une passion pour l'art et la décoration personnalisée. 
+                        CREYA by TAS est née d'une passion pour l'art et la décoration personnalisée.
                         Nous croyons que chaque mur mérite une œuvre unique qui reflète la personnalité de son propriétaire.
                     </p>
                     <p>
-                        Nos toiles sont imprimées sur du coton premium de haute qualité, avec des couleurs éclatantes 
+                        Nos toiles sont imprimées sur du coton premium de haute qualité, avec des couleurs éclatantes
                         et une finition professionnelle qui dure dans le temps.
                     </p>
                     <div class="about-features">
                         <div class="about-feature">
-                            <span class="icon">✦</span> Qualité premium
+                            <span>✦</span> Qualité premium
                         </div>
                         <div class="about-feature">
-                            <span class="icon">🚚</span> Livraison Tunisie
+                            <span>🚚</span> Livraison Tunisie
                         </div>
                         <div class="about-feature">
-                            <span class="icon">🎯</span> 100% sur mesure
+                            <span>🎯</span> 100% sur mesure
                         </div>
                         <div class="about-feature">
-                            <span class="icon">💬</span> Support 24/7
+                            <span>💬</span> Support 24/7
                         </div>
                     </div>
                 </div>
@@ -1368,36 +1479,23 @@
                 <div class="glow-line"></div>
                 <p>Une question ? Un projet personnalisé ? N'hésitez pas.</p>
             </div>
-
             <div class="contact-grid">
                 <div class="contact-info-cards reveal">
                     <div class="contact-card">
                         <div class="card-icon">📍</div>
-                        <div>
-                            <h4>Adresse</h4>
-                            <p>Tunisie</p>
-                        </div>
+                        <div><h4>Adresse</h4><p>Tunisie</p></div>
                     </div>
                     <div class="contact-card">
                         <div class="card-icon">📱</div>
-                        <div>
-                            <h4>Téléphone</h4>
-                            <p>+216 XX XXX XXX</p>
-                        </div>
+                        <div><h4>Téléphone</h4><p>+216 XX XXX XXX</p></div>
                     </div>
                     <div class="contact-card">
                         <div class="card-icon">📧</div>
-                        <div>
-                            <h4>Email</h4>
-                            <p>contact@creya.tn</p>
-                        </div>
+                        <div><h4>Email</h4><p>contact@creya.tn</p></div>
                     </div>
                     <div class="contact-card">
                         <div class="card-icon">⏰</div>
-                        <div>
-                            <h4>Horaires</h4>
-                            <p>Lun - Sam : 9h - 18h</p>
-                        </div>
+                        <div><h4>Horaires</h4><p>Lun - Sam : 9h - 18h</p></div>
                     </div>
                     <div class="social-links">
                         <a href="#" class="social-link" title="Facebook">f</a>
@@ -1405,7 +1503,6 @@
                         <a href="#" class="social-link" title="TikTok">🎵</a>
                     </div>
                 </div>
-
                 <div class="checkout-panel reveal">
                     <h2>✉️ Envoyez un message</h2>
                     <div class="form-group">
@@ -1431,7 +1528,6 @@
     <!-- ============== CHECKOUT PAGE ============== -->
     <div class="page" id="page-checkout">
         <div class="checkout-container">
-            <!-- Order Form -->
             <div class="checkout-panel">
                 <h2>📦 Informations de livraison</h2>
                 <div class="form-row">
@@ -1482,16 +1578,13 @@
                     ✨ Confirmer la commande
                 </button>
             </div>
-
-            <!-- Cart Summary -->
             <div>
                 <div class="checkout-panel">
                     <h2>🛒 Récapitulatif</h2>
                     <div class="cart-items" id="cartItems">
                         <div class="empty-cart" id="emptyCart">
                             <div class="icon">🛒</div>
-                            <p>Votre panier est vide</p>
-                            <br>
+                            <p>Votre panier est vide</p><br>
                             <a href="#collection" class="btn-secondary" onclick="showPage('home')" style="font-size:0.85rem; padding:10px 24px;">
                                 Explorer la collection
                             </a>
@@ -1518,7 +1611,19 @@
 
     <!-- FOOTER -->
     <footer class="footer">
-        <p>© 2025 <a href="#">CREYA</a> — Toiles & Tableaux sur mesure en Tunisie. Tous droits réservés.</p>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <svg><use href="#logo-nav"/></svg>
+            </div>
+            <p class="footer-text">
+                © 2025 <a href="#">CREYA by TAS</a> — Toiles & Tableaux sur mesure en Tunisie
+            </p>
+            <div class="footer-links">
+                <a href="#collection" onclick="showPage('home')">Collection</a>
+                <a href="#apropos" onclick="showPage('home')">À propos</a>
+                <a href="#contact" onclick="showPage('home')">Contact</a>
+            </div>
+        </div>
     </footer>
 
     <!-- TOAST -->
@@ -1531,10 +1636,9 @@
             <div class="success-icon">🎉</div>
             <h3>Commande confirmée !</h3>
             <p>
-                Merci pour votre commande ! Nous vous contacterons très bientôt 
+                Merci pour votre commande ! Nous vous contacterons très bientôt
                 pour confirmer les détails. Préparez vos murs ! 🖼️
-            </p>
-            <br>
+            </p><br>
             <button class="btn-primary" onclick="closeModal(); showPage('home');">
                 Retour à l'accueil
             </button>
@@ -1545,7 +1649,7 @@
          JAVASCRIPT
          ============================================ -->
     <script>
-        // ---- DATA: Artworks catalog ----
+        // ---- DATA ----
         const artworks = [
             { id: 1, name: "Éclat Doré", category: "abstrait", price: 89, img: "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=600&h=700&fit=crop", sizes: ["30×40", "50×70", "60×90"] },
             { id: 2, name: "Vague Azur", category: "abstrait", price: 110, img: "https://images.unsplash.com/photo-1549490349-8643362247b5?w=600&h=700&fit=crop", sizes: ["30×40", "50×70", "60×90"] },
@@ -1561,15 +1665,13 @@
             { id: 12, name: "Neon Geometry", category: "moderne", price: 140, img: "https://images.unsplash.com/photo-1550859492-d5da9d8e45f3?w=600&h=700&fit=crop", sizes: ["50×70", "60×90", "80×120"] },
         ];
 
-        // ---- STATE ----
         let cart = [];
         let selectedSizes = {};
 
-        // ---- RENDER GALLERY ----
+        // ---- GALLERY ----
         function renderGallery(filter = 'all') {
             const grid = document.getElementById('galleryGrid');
             const filtered = filter === 'all' ? artworks : artworks.filter(a => a.category === filter);
-            
             grid.innerHTML = filtered.map(art => `
                 <div class="artwork-card reveal visible" data-category="${art.category}">
                     <div class="artwork-img-wrapper">
@@ -1588,7 +1690,7 @@
                         </div>
                         <div class="artwork-sizes">
                             ${art.sizes.map((s, i) => `
-                                <span class="size-tag ${i === 0 ? 'selected' : ''}" 
+                                <span class="size-tag ${i === 0 ? 'selected' : ''}"
                                       onclick="selectSize(${art.id}, '${s}', this)">
                                     ${s}
                                 </span>
@@ -1615,14 +1717,9 @@
         function addToCart(artId) {
             const art = artworks.find(a => a.id === artId);
             const size = selectedSizes[artId] || art.sizes[0];
-            
             const existing = cart.find(item => item.id === artId && item.size === size);
-            if (existing) {
-                existing.qty++;
-            } else {
-                cart.push({ ...art, size, qty: 1 });
-            }
-            
+            if (existing) { existing.qty++; }
+            else { cart.push({ ...art, size, qty: 1 }); }
             updateCartUI();
             showToast(`✅ "${art.name}" (${size}) ajouté au panier !`);
         }
@@ -1648,7 +1745,6 @@
             const container = document.getElementById('cartItems');
             const summary = document.getElementById('cartSummary');
             const empty = document.getElementById('emptyCart');
-
             if (cart.length === 0) {
                 empty.style.display = 'block';
                 summary.style.display = 'none';
@@ -1656,10 +1752,8 @@
                 container.appendChild(empty);
                 return;
             }
-
             empty.style.display = 'none';
             summary.style.display = 'block';
-
             container.innerHTML = cart.map((item, i) => `
                 <div class="cart-item">
                     <img class="cart-item-img" src="${item.img}" alt="${item.name}">
@@ -1676,7 +1770,6 @@
                     <button class="cart-item-remove" onclick="removeFromCart(${i})">✕</button>
                 </div>
             `).join('');
-
             const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
             document.getElementById('subtotal').textContent = subtotal + ' TND';
             document.getElementById('totalAmount').textContent = subtotal + ' TND';
@@ -1686,14 +1779,8 @@
         function showPage(page) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-' + page).classList.add('active');
-            
-            if (page === 'checkout') {
-                renderCheckoutCart();
-            }
-
+            if (page === 'checkout') renderCheckoutCart();
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            
-            // Close mobile menu
             document.getElementById('navLinks').classList.remove('open');
         }
 
@@ -1703,22 +1790,12 @@
 
         // ---- ORDER ----
         function placeOrder() {
-            if (cart.length === 0) {
-                showToast('⚠️ Votre panier est vide !');
-                return;
-            }
-            
-            const firstName = document.getElementById('firstName').value;
-            const phone = document.getElementById('phone').value;
-            const address = document.getElementById('address').value;
-            const city = document.getElementById('city').value;
-
-            if (!firstName || !phone || !address || !city) {
-                showToast('⚠️ Veuillez remplir tous les champs obligatoires.');
-                return;
-            }
-
-            // Show success modal
+            if (cart.length === 0) { showToast('⚠️ Votre panier est vide !'); return; }
+            const f = document.getElementById('firstName').value;
+            const p = document.getElementById('phone').value;
+            const a = document.getElementById('address').value;
+            const c = document.getElementById('city').value;
+            if (!f || !p || !a || !c) { showToast('⚠️ Veuillez remplir tous les champs obligatoires.'); return; }
             document.getElementById('successModal').classList.add('show');
             cart = [];
             updateCartUI();
@@ -1736,28 +1813,17 @@
             setTimeout(() => toast.classList.remove('show'), 3000);
         }
 
-        // ---- SCROLL EFFECTS ----
+        // ---- SCROLL ----
         window.addEventListener('scroll', () => {
-            // Navbar scroll effect
-            const navbar = document.getElementById('navbar');
-            navbar.classList.toggle('scrolled', window.scrollY > 50);
-
-            // Reveal on scroll
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
             document.querySelectorAll('.reveal').forEach(el => {
-                const rect = el.getBoundingClientRect();
-                if (rect.top < window.innerHeight - 80) {
-                    el.classList.add('visible');
-                }
+                if (el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('visible');
             });
         });
 
         // ---- INIT ----
         renderGallery();
-
-        // Initialize default sizes
-        artworks.forEach(art => {
-            selectedSizes[art.id] = art.sizes[0];
-        });
+        artworks.forEach(art => { selectedSizes[art.id] = art.sizes[0]; });
     </script>
 </body>
 </html>
