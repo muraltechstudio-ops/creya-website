@@ -8,13 +8,12 @@
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23fdcb6e'/%3E%3Cstop offset='50%25' style='stop-color:%23e17055'/%3E%3Cstop offset='100%25' style='stop-color:%236c5ce7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='20' fill='%230a0a0f'/%3E%3Ctext x='50' y='72' text-anchor='middle' font-family='Impact,sans-serif' font-size='60' fill='url(%23g)' letter-spacing='2'%3EC%3C/text%3E%3C/svg%3E">
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts - PRELOAD for SVG -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Permanent+Marker&family=Bebas+Neue&display=swap" rel="stylesheet">
 
     <style>
-        /* ============================================
-           CSS VARIABLES & RESET
-           ============================================ */
         :root {
             --bg-primary: #0a0a0f;
             --bg-secondary: #12121a;
@@ -28,11 +27,9 @@
             --accent-light: #a29bfe;
             --accent-glow: rgba(108, 92, 231, 0.3);
             --accent2: #00cec9;
-            --accent2-glow: rgba(0, 206, 201, 0.3);
             --accent3: #e17055;
             --accent4: #fdcb6e;
             --success: #00b894;
-            --warning: #fdcb6e;
             --danger: #e17055;
             --radius: 16px;
             --radius-sm: 10px;
@@ -55,119 +52,59 @@
             line-height: 1.6;
         }
 
-        /* ============================================
-           ANIMATED BACKGROUND
-           ============================================ */
+        /* ============ BG EFFECTS ============ */
         .bg-grid {
-            position: fixed;
-            top: 0; left: 0;
+            position: fixed; top: 0; left: 0;
             width: 100%; height: 100%;
             background-image:
                 linear-gradient(rgba(108,92,231,0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(108,92,231,0.03) 1px, transparent 1px);
             background-size: 60px 60px;
-            z-index: 0;
-            pointer-events: none;
+            z-index: 0; pointer-events: none;
         }
 
         .bg-orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(120px);
-            opacity: 0.15;
-            pointer-events: none;
-            z-index: 0;
+            position: fixed; border-radius: 50%; filter: blur(120px);
+            opacity: 0.15; pointer-events: none; z-index: 0;
             animation: orbFloat 20s ease-in-out infinite;
         }
-
-        .bg-orb-1 {
-            width: 600px; height: 600px;
-            background: var(--accent);
-            top: -200px; right: -200px;
-        }
-
-        .bg-orb-2 {
-            width: 500px; height: 500px;
-            background: var(--accent2);
-            bottom: -150px; left: -150px;
-            animation-delay: -10s;
-        }
-
-        .bg-orb-3 {
-            width: 400px; height: 400px;
-            background: var(--accent3);
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            animation-delay: -5s;
-            opacity: 0.06;
-        }
+        .bg-orb-1 { width: 600px; height: 600px; background: var(--accent); top: -200px; right: -200px; }
+        .bg-orb-2 { width: 500px; height: 500px; background: var(--accent2); bottom: -150px; left: -150px; animation-delay: -10s; }
+        .bg-orb-3 { width: 400px; height: 400px; background: var(--accent3); top: 50%; left: 50%; transform: translate(-50%,-50%); animation-delay: -5s; opacity: 0.06; }
 
         @keyframes orbFloat {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -30px) scale(1.05); }
-            66% { transform: translate(-20px, 20px) scale(0.95); }
+            0%, 100% { transform: translate(0,0) scale(1); }
+            33% { transform: translate(30px,-30px) scale(1.05); }
+            66% { transform: translate(-20px,20px) scale(0.95); }
         }
 
-        /* ============================================
-           NAVBAR
-           ============================================ */
+        /* ============ NAVBAR ============ */
         .navbar {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 10px 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            padding: 8px 40px;
+            display: flex; align-items: center; justify-content: space-between;
             backdrop-filter: blur(20px) saturate(180%);
-            background: rgba(10, 10, 15, 0.75);
+            background: rgba(10,10,15,0.75);
             border-bottom: 1px solid var(--border-glass);
             transition: var(--transition);
         }
-
-        .navbar.scrolled {
-            padding: 6px 40px;
-            background: rgba(10, 10, 15, 0.92);
-        }
+        .navbar.scrolled { padding: 5px 40px; background: rgba(10,10,15,0.92); }
 
         .nav-logo {
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            transition: var(--transition);
+            cursor: pointer; display: flex; align-items: center;
+            text-decoration: none; transition: var(--transition);
+            flex-shrink: 0;
         }
-
-        .nav-logo:hover {
-            transform: scale(1.03);
-        }
-
-        .nav-logo svg {
-            height: 48px;
-            width: auto;
-        }
-
-        .navbar.scrolled .nav-logo svg {
-            height: 40px;
-        }
+        .nav-logo:hover { transform: scale(1.03); filter: brightness(1.1); }
 
         .nav-links {
-            display: flex;
-            gap: 8px;
-            list-style: none;
+            display: flex; gap: 8px; list-style: none;
         }
-
         .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            padding: 8px 18px;
-            border-radius: 100px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: var(--transition);
+            color: var(--text-secondary); text-decoration: none;
+            padding: 8px 18px; border-radius: 100px;
+            font-size: 0.9rem; font-weight: 500; transition: var(--transition);
         }
-
         .nav-links a:hover, .nav-links a.active {
             color: var(--text-primary);
             background: var(--bg-glass);
@@ -175,106 +112,48 @@
         }
 
         .nav-cart {
-            position: relative;
-            background: var(--bg-card);
-            border: 1px solid var(--border-glass);
-            color: var(--text-primary);
-            padding: 10px 20px;
-            border-radius: 100px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-family: 'Inter', sans-serif;
+            background: var(--bg-card); border: 1px solid var(--border-glass);
+            color: var(--text-primary); padding: 10px 20px; border-radius: 100px;
+            cursor: pointer; font-size: 0.9rem; font-weight: 500;
+            transition: var(--transition); display: flex; align-items: center;
+            gap: 8px; font-family: 'Inter', sans-serif;
         }
-
-        .nav-cart:hover {
-            border-color: var(--accent);
-            box-shadow: 0 0 20px var(--accent-glow);
-        }
+        .nav-cart:hover { border-color: var(--accent3); box-shadow: 0 0 20px rgba(225,112,85,0.2); }
 
         .cart-badge {
-            background: var(--accent3);
-            color: white;
-            font-size: 0.7rem;
-            padding: 2px 7px;
-            border-radius: 100px;
-            font-weight: 700;
+            background: var(--accent3); color: white;
+            font-size: 0.7rem; padding: 2px 7px; border-radius: 100px; font-weight: 700;
         }
 
         .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 5px;
+            display: none; flex-direction: column; gap: 5px;
+            cursor: pointer; background: none; border: none; padding: 5px;
         }
+        .hamburger span { width: 25px; height: 2px; background: var(--text-primary); border-radius: 2px; transition: var(--transition); }
 
-        .hamburger span {
-            width: 25px;
-            height: 2px;
-            background: var(--text-primary);
-            border-radius: 2px;
-            transition: var(--transition);
-        }
-
-        /* ============================================
-           HERO SECTION
-           ============================================ */
+        /* ============ HERO ============ */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 120px 40px 80px;
-            position: relative;
-            z-index: 1;
+            min-height: 100vh; display: flex; align-items: center;
+            justify-content: center; text-align: center;
+            padding: 120px 40px 80px; position: relative; z-index: 1;
         }
-
-        .hero-content {
-            max-width: 850px;
-        }
+        .hero-content { max-width: 850px; }
 
         .hero-logo {
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .hero-logo svg {
-            width: 380px;
-            max-width: 90vw;
-            height: auto;
-            filter: drop-shadow(0 0 40px rgba(108, 92, 231, 0.2));
+            margin-bottom: 40px; display: flex; justify-content: center;
         }
 
         .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 20px;
-            background: var(--bg-glass);
-            border: 1px solid var(--border-glass);
-            border-radius: 100px;
-            font-size: 0.8rem;
-            color: var(--accent4);
-            margin-bottom: 30px;
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 8px 20px; background: var(--bg-glass);
+            border: 1px solid var(--border-glass); border-radius: 100px;
+            font-size: 0.8rem; color: var(--accent4); margin-bottom: 30px;
             backdrop-filter: blur(10px);
         }
-
         .hero-badge .dot {
-            width: 6px; height: 6px;
-            background: var(--accent3);
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
+            width: 6px; height: 6px; background: var(--accent3);
+            border-radius: 50%; animation: pulse 2s ease-in-out infinite;
         }
-
         @keyframes pulse {
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.5; transform: scale(1.5); }
@@ -283,921 +162,390 @@
         .hero h1 {
             font-family: 'Space Grotesk', sans-serif;
             font-size: clamp(2.5rem, 6vw, 4.2rem);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 24px;
-            letter-spacing: -2px;
+            font-weight: 800; line-height: 1.1;
+            margin-bottom: 24px; letter-spacing: -2px;
         }
-
         .hero h1 .gradient-text {
             background: linear-gradient(135deg, var(--accent4), var(--accent3), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            font-size: 1.15rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 40px;
-            line-height: 1.8;
+            font-size: 1.15rem; color: var(--text-secondary);
+            max-width: 600px; margin: 0 auto 40px; line-height: 1.8;
         }
 
-        .hero-buttons {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+        .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
         .btn-primary {
             padding: 14px 36px;
             background: linear-gradient(135deg, var(--accent3), var(--accent));
-            color: white;
-            border: none;
-            border-radius: 100px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            position: relative;
-            overflow: hidden;
-            font-family: 'Inter', sans-serif;
+            color: white; border: none; border-radius: 100px;
+            font-size: 0.95rem; font-weight: 600; cursor: pointer;
+            transition: var(--transition); text-decoration: none;
+            display: inline-flex; align-items: center; gap: 8px;
+            position: relative; overflow: hidden; font-family: 'Inter', sans-serif;
         }
-
         .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
+            content: ''; position: absolute; top: 0; left: -100%;
             width: 100%; height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
             transition: 0.5s;
         }
-
         .btn-primary:hover::before { left: 100%; }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 40px rgba(225, 112, 85, 0.3);
-        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(225,112,85,0.3); }
 
         .btn-secondary {
-            padding: 14px 36px;
-            background: transparent;
-            color: var(--text-primary);
-            border: 1px solid var(--border-glass);
-            border-radius: 100px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            backdrop-filter: blur(10px);
-            font-family: 'Inter', sans-serif;
+            padding: 14px 36px; background: transparent;
+            color: var(--text-primary); border: 1px solid var(--border-glass);
+            border-radius: 100px; font-size: 0.95rem; font-weight: 500;
+            cursor: pointer; transition: var(--transition); text-decoration: none;
+            backdrop-filter: blur(10px); font-family: 'Inter', sans-serif;
         }
-
-        .btn-secondary:hover {
-            border-color: var(--accent);
-            background: var(--bg-glass);
-        }
+        .btn-secondary:hover { border-color: var(--accent); background: var(--bg-glass); }
 
         .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 60px;
-            margin-top: 80px;
-            padding-top: 40px;
-            border-top: 1px solid var(--border-glass);
+            display: flex; justify-content: center; gap: 60px;
+            margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border-glass);
         }
-
         .hero-stat h3 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700;
             background: linear-gradient(135deg, var(--accent4), var(--accent3));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
+        .hero-stat p { font-size: 0.85rem; color: var(--text-muted); }
 
-        .hero-stat p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
+        /* ============ SECTIONS ============ */
+        .section { padding: 100px 40px; position: relative; z-index: 1; }
 
-        /* ============================================
-           SECTION COMMON
-           ============================================ */
-        .section {
-            padding: 100px 40px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
+        .section-header { text-align: center; margin-bottom: 60px; }
         .section-header .tag {
-            display: inline-block;
-            padding: 6px 16px;
-            background: var(--bg-glass);
-            border: 1px solid var(--border-glass);
-            border-radius: 100px;
-            font-size: 0.8rem;
-            color: var(--accent4);
-            margin-bottom: 16px;
-            font-weight: 500;
+            display: inline-block; padding: 6px 16px;
+            background: var(--bg-glass); border: 1px solid var(--border-glass);
+            border-radius: 100px; font-size: 0.8rem; color: var(--accent4);
+            margin-bottom: 16px; font-weight: 500;
         }
-
         .section-header h2 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 700;
-            letter-spacing: -1px;
+            font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -1px;
         }
-
-        .section-header p {
-            color: var(--text-secondary);
-            max-width: 500px;
-            margin: 16px auto 0;
-            font-size: 1rem;
-        }
+        .section-header p { color: var(--text-secondary); max-width: 500px; margin: 16px auto 0; }
 
         .glow-line {
-            width: 80px;
-            height: 3px;
+            width: 80px; height: 3px;
             background: linear-gradient(90deg, var(--accent4), var(--accent3), var(--accent));
-            border-radius: 10px;
-            margin: 16px auto 0;
-            position: relative;
-            overflow: hidden;
+            border-radius: 10px; margin: 16px auto 0;
+            position: relative; overflow: hidden;
         }
-
         .glow-line::after {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 50%;
-            height: 100%;
-            background: rgba(255,255,255,0.5);
+            content: ''; position: absolute; top: 0; left: -100%;
+            width: 50%; height: 100%; background: rgba(255,255,255,0.5);
             animation: glowSlide 2s ease-in-out infinite;
         }
+        @keyframes glowSlide { 0% { left: -50%; } 100% { left: 150%; } }
 
-        @keyframes glowSlide {
-            0% { left: -50%; }
-            100% { left: 150%; }
-        }
-
-        /* ============================================
-           HOW IT WORKS
-           ============================================ */
+        /* ============ STEPS ============ */
         .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 24px;
-            max-width: 1200px;
-            margin: 0 auto;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px; max-width: 1200px; margin: 0 auto;
         }
-
         .step-card {
-            background: var(--bg-glass);
-            border: 1px solid var(--border-glass);
-            border-radius: var(--radius);
-            padding: 40px 30px;
-            text-align: center;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
+            background: var(--bg-glass); border: 1px solid var(--border-glass);
+            border-radius: var(--radius); padding: 40px 30px;
+            text-align: center; transition: var(--transition);
+            position: relative; overflow: hidden;
         }
-
         .step-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
+            content: ''; position: absolute; top: 0; left: 0;
             width: 100%; height: 2px;
             background: linear-gradient(90deg, var(--accent4), var(--accent3), var(--accent));
-            opacity: 0;
-            transition: var(--transition);
+            opacity: 0; transition: var(--transition);
         }
-
         .step-card:hover::before { opacity: 1; }
-
         .step-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(225, 112, 85, 0.3);
+            transform: translateY(-5px); border-color: rgba(225,112,85,0.3);
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
-
         .step-number {
             width: 50px; height: 50px;
             background: linear-gradient(135deg, var(--accent3), var(--accent));
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Bebas Neue', sans-serif;
-            font-weight: 400;
-            font-size: 1.4rem;
-            margin: 0 auto 20px;
-            color: white;
+            border-radius: 14px; display: flex; align-items: center; justify-content: center;
+            font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem;
+            margin: 0 auto 20px; color: white;
         }
+        .step-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 12px; }
+        .step-card p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7; }
 
-        .step-card h3 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
-        .step-card p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.7;
-        }
-
-        /* ============================================
-           GALLERY
-           ============================================ */
-        .gallery-filters {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-
+        /* ============ GALLERY ============ */
+        .gallery-filters { display: flex; justify-content: center; gap: 8px; margin-bottom: 40px; flex-wrap: wrap; }
         .filter-btn {
-            padding: 8px 22px;
-            background: transparent;
-            border: 1px solid var(--border-glass);
-            color: var(--text-secondary);
-            border-radius: 100px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: var(--transition);
-            font-family: 'Inter', sans-serif;
+            padding: 8px 22px; background: transparent;
+            border: 1px solid var(--border-glass); color: var(--text-secondary);
+            border-radius: 100px; cursor: pointer; font-size: 0.85rem;
+            font-weight: 500; transition: var(--transition); font-family: 'Inter', sans-serif;
         }
-
         .filter-btn:hover, .filter-btn.active {
             background: linear-gradient(135deg, var(--accent3), var(--accent));
-            border-color: var(--accent3);
-            color: white;
+            border-color: var(--accent3); color: white;
         }
 
         .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 24px;
-            max-width: 1300px;
-            margin: 0 auto;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px; max-width: 1300px; margin: 0 auto;
         }
-
         .artwork-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-glass);
-            border-radius: var(--radius);
-            overflow: hidden;
-            transition: var(--transition);
-            cursor: pointer;
+            background: var(--bg-card); border: 1px solid var(--border-glass);
+            border-radius: var(--radius); overflow: hidden;
+            transition: var(--transition); cursor: pointer;
         }
-
         .artwork-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent3);
+            transform: translateY(-8px); border-color: var(--accent3);
             box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(225,112,85,0.15);
         }
-
-        .artwork-img {
-            width: 100%;
-            height: 320px;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-
+        .artwork-img { width: 100%; height: 320px; object-fit: cover; transition: var(--transition); }
         .artwork-card:hover .artwork-img { transform: scale(1.05); }
-
-        .artwork-img-wrapper {
-            overflow: hidden;
-            position: relative;
-        }
-
+        .artwork-img-wrapper { overflow: hidden; position: relative; }
         .artwork-overlay {
-            position: absolute;
-            bottom: 0; left: 0;
-            width: 100%; height: 100%;
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(to top, rgba(10,10,15,0.9), transparent 60%);
-            opacity: 0;
-            transition: var(--transition);
-            display: flex;
-            align-items: flex-end;
-            padding: 20px;
+            opacity: 0; transition: var(--transition);
+            display: flex; align-items: flex-end; padding: 20px;
         }
-
         .artwork-card:hover .artwork-overlay { opacity: 1; }
-
         .artwork-quick-add {
-            width: 100%;
-            padding: 12px;
+            width: 100%; padding: 12px;
             background: linear-gradient(135deg, var(--accent3), var(--accent));
-            color: white;
-            border: none;
-            border-radius: var(--radius-sm);
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: var(--transition);
-            font-family: 'Inter', sans-serif;
+            color: white; border: none; border-radius: var(--radius-sm);
+            font-weight: 600; cursor: pointer; font-size: 0.9rem;
+            transition: var(--transition); font-family: 'Inter', sans-serif;
         }
-
         .artwork-quick-add:hover { opacity: 0.9; transform: scale(1.02); }
-
         .artwork-info { padding: 20px; }
-
-        .artwork-info h3 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .artwork-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .artwork-category {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .artwork-price {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--accent4);
-        }
-
-        .artwork-sizes {
-            display: flex;
-            gap: 6px;
-            margin-top: 12px;
-        }
-
+        .artwork-info h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+        .artwork-meta { display: flex; justify-content: space-between; align-items: center; }
+        .artwork-category { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+        .artwork-price { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--accent4); }
+        .artwork-sizes { display: flex; gap: 6px; margin-top: 12px; }
         .size-tag {
-            padding: 4px 10px;
-            font-size: 0.7rem;
-            border: 1px solid var(--border-glass);
-            border-radius: 6px;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: var(--transition);
+            padding: 4px 10px; font-size: 0.7rem; border: 1px solid var(--border-glass);
+            border-radius: 6px; color: var(--text-muted); cursor: pointer; transition: var(--transition);
         }
-
         .size-tag:hover, .size-tag.selected {
-            border-color: var(--accent3);
-            color: var(--accent4);
-            background: rgba(225, 112, 85, 0.1);
+            border-color: var(--accent3); color: var(--accent4); background: rgba(225,112,85,0.1);
         }
 
-        /* ============================================
-           ABOUT
-           ============================================ */
+        /* ============ ABOUT ============ */
         .about-content {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
+            max-width: 1100px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
         }
-
         .about-visual-box {
-            width: 100%;
-            height: 500px;
+            width: 100%; height: 500px;
             background: linear-gradient(135deg, var(--bg-card), var(--accent3) 50%, var(--accent));
-            border-radius: var(--radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
+            border-radius: var(--radius); display: flex; align-items: center;
+            justify-content: center; position: relative; overflow: hidden;
         }
-
         .about-visual-box::after {
-            content: '';
-            position: absolute;
-            inset: 2px;
-            background: var(--bg-card);
-            border-radius: 14px;
+            content: ''; position: absolute; inset: 2px;
+            background: var(--bg-card); border-radius: 14px;
         }
-
-        .about-visual-box .inner-logo {
-            position: relative;
-            z-index: 2;
-            width: 70%;
-            height: auto;
-            opacity: 0.6;
-        }
-
+        .about-visual-box .inner-logo { position: relative; z-index: 2; }
         .about-text h2 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
+            font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem;
+            font-weight: 700; margin-bottom: 20px; letter-spacing: -1px;
         }
-
         .about-text .tag {
-            display: inline-block;
-            padding: 6px 16px;
-            background: var(--bg-glass);
-            border: 1px solid var(--border-glass);
-            border-radius: 100px;
-            font-size: 0.8rem;
-            color: var(--accent4);
-            margin-bottom: 16px;
-            font-weight: 500;
+            display: inline-block; padding: 6px 16px; background: var(--bg-glass);
+            border: 1px solid var(--border-glass); border-radius: 100px;
+            font-size: 0.8rem; color: var(--accent4); margin-bottom: 16px; font-weight: 500;
         }
-
-        .about-text p {
-            color: var(--text-secondary);
-            margin-bottom: 16px;
-            font-size: 1rem;
-            line-height: 1.8;
-        }
-
-        .about-features {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-top: 30px;
-        }
-
+        .about-text p { color: var(--text-secondary); margin-bottom: 16px; font-size: 1rem; line-height: 1.8; }
+        .about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 30px; }
         .about-feature {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 16px;
-            background: var(--bg-glass);
-            border: 1px solid var(--border-glass);
-            border-radius: var(--radius-sm);
-            font-size: 0.85rem;
-            color: var(--text-secondary);
+            display: flex; align-items: center; gap: 10px; padding: 12px 16px;
+            background: var(--bg-glass); border: 1px solid var(--border-glass);
+            border-radius: var(--radius-sm); font-size: 0.85rem; color: var(--text-secondary);
             transition: var(--transition);
         }
+        .about-feature:hover { border-color: var(--accent3); transform: translateX(4px); }
 
-        .about-feature:hover {
-            border-color: var(--accent3);
-            transform: translateX(4px);
-        }
-
-        /* ============================================
-           CONTACT
-           ============================================ */
+        /* ============ CONTACT ============ */
         .contact-grid {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            max-width: 1100px; margin: 0 auto;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
         }
-
-        .contact-info-cards {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
+        .contact-info-cards { display: flex; flex-direction: column; gap: 16px; }
         .contact-card {
-            background: var(--bg-glass);
-            border: 1px solid var(--border-glass);
-            border-radius: var(--radius);
-            padding: 24px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            transition: var(--transition);
+            background: var(--bg-glass); border: 1px solid var(--border-glass);
+            border-radius: var(--radius); padding: 24px;
+            display: flex; align-items: center; gap: 16px; transition: var(--transition);
         }
-
-        .contact-card:hover {
-            border-color: var(--accent3);
-            transform: translateX(5px);
-        }
-
+        .contact-card:hover { border-color: var(--accent3); transform: translateX(5px); }
         .contact-card .card-icon {
             width: 50px; height: 50px;
             background: linear-gradient(135deg, var(--accent3), var(--accent));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            flex-shrink: 0;
+            border-radius: 12px; display: flex; align-items: center;
+            justify-content: center; font-size: 1.3rem; flex-shrink: 0;
         }
-
         .contact-card h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
         .contact-card p { font-size: 0.85rem; color: var(--text-muted); }
-
-        .social-links {
-            display: flex;
-            gap: 12px;
-            margin-top: 20px;
-        }
-
+        .social-links { display: flex; gap: 12px; margin-top: 20px; }
         .social-link {
-            width: 48px; height: 48px;
-            background: var(--bg-glass);
-            border: 1px solid var(--border-glass);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 1.2rem;
+            width: 48px; height: 48px; background: var(--bg-glass);
+            border: 1px solid var(--border-glass); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text-secondary); text-decoration: none; font-size: 1.2rem;
             transition: var(--transition);
         }
-
         .social-link:hover {
-            border-color: var(--accent3);
-            color: var(--accent4);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(225,112,85,0.2);
+            border-color: var(--accent3); color: var(--accent4);
+            transform: translateY(-3px); box-shadow: 0 10px 30px rgba(225,112,85,0.2);
         }
 
-        /* ============================================
-           CHECKOUT
-           ============================================ */
+        /* ============ CHECKOUT ============ */
         .page { display: none; }
         .page.active { display: block; }
 
         .checkout-container {
-            max-width: 1100px;
-            margin: 100px auto 60px;
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 40px;
-            padding: 0 40px;
+            max-width: 1100px; margin: 100px auto 60px;
+            display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; padding: 0 40px;
         }
-
         .checkout-panel {
-            background: var(--bg-glass);
-            border: 1px solid var(--border-glass);
-            border-radius: var(--radius);
-            padding: 40px;
-            backdrop-filter: blur(20px);
+            background: var(--bg-glass); border: 1px solid var(--border-glass);
+            border-radius: var(--radius); padding: 40px; backdrop-filter: blur(20px);
         }
-
         .checkout-panel h2 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem;
+            font-weight: 700; margin-bottom: 30px; display: flex; align-items: center; gap: 10px;
         }
-
         .form-group { margin-bottom: 20px; }
-
-        .form-group label {
-            display: block;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-            font-weight: 500;
+        .form-group label { display: block; font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px; font-weight: 500; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 14px 18px; background: var(--bg-secondary);
+            border: 1px solid var(--border-glass); border-radius: var(--radius-sm);
+            color: var(--text-primary); font-size: 0.95rem; font-family: 'Inter', sans-serif;
+            transition: var(--transition); outline: none;
         }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 14px 18px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-glass);
-            border-radius: var(--radius-sm);
-            color: var(--text-primary);
-            font-size: 0.95rem;
-            font-family: 'Inter', sans-serif;
-            transition: var(--transition);
-            outline: none;
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--accent3); box-shadow: 0 0 20px rgba(225,112,85,0.15);
         }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            border-color: var(--accent3);
-            box-shadow: 0 0 20px rgba(225,112,85,0.15);
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        .cart-items {
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
+        .cart-items { max-height: 400px; overflow-y: auto; }
         .cart-item {
-            display: flex;
-            gap: 16px;
-            padding: 16px 0;
-            border-bottom: 1px solid var(--border-glass);
-            align-items: center;
+            display: flex; gap: 16px; padding: 16px 0;
+            border-bottom: 1px solid var(--border-glass); align-items: center;
         }
-
-        .cart-item-img {
-            width: 70px;
-            height: 70px;
-            border-radius: var(--radius-sm);
-            object-fit: cover;
-            background: var(--bg-card);
-        }
-
+        .cart-item-img { width: 70px; height: 70px; border-radius: var(--radius-sm); object-fit: cover; background: var(--bg-card); }
         .cart-item-info { flex: 1; }
         .cart-item-info h4 { font-size: 0.9rem; font-weight: 600; }
         .cart-item-info p { font-size: 0.8rem; color: var(--text-muted); }
-
-        .cart-item-price {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            color: var(--accent4);
-        }
-
-        .cart-item-remove {
-            background: none;
-            border: none;
-            color: var(--danger);
-            cursor: pointer;
-            font-size: 1.1rem;
-            padding: 5px;
-            transition: var(--transition);
-        }
-
+        .cart-item-price { font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: var(--accent4); }
+        .cart-item-remove { background: none; border: none; color: var(--danger); cursor: pointer; font-size: 1.1rem; padding: 5px; transition: var(--transition); }
         .cart-item-remove:hover { transform: scale(1.2); }
 
-        .cart-summary-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
-            font-size: 0.95rem;
-        }
-
+        .cart-summary-row { display: flex; justify-content: space-between; padding: 12px 0; font-size: 0.95rem; }
         .cart-summary-row.total {
-            border-top: 2px solid var(--border-glass);
-            margin-top: 8px;
-            padding-top: 16px;
-            font-weight: 700;
-            font-size: 1.2rem;
+            border-top: 2px solid var(--border-glass); margin-top: 8px;
+            padding-top: 16px; font-weight: 700; font-size: 1.2rem;
         }
-
-        .cart-summary-row.total .amount {
-            color: var(--accent4);
-            font-family: 'Space Grotesk', sans-serif;
-        }
+        .cart-summary-row.total .amount { color: var(--accent4); font-family: 'Space Grotesk', sans-serif; }
 
         .btn-checkout {
-            width: 100%;
-            padding: 16px;
+            width: 100%; padding: 16px;
             background: linear-gradient(135deg, var(--accent3), var(--accent));
-            color: white;
-            border: none;
-            border-radius: var(--radius-sm);
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-            margin-top: 20px;
-            position: relative;
-            overflow: hidden;
-            font-family: 'Inter', sans-serif;
+            color: white; border: none; border-radius: var(--radius-sm);
+            font-size: 1rem; font-weight: 700; cursor: pointer;
+            transition: var(--transition); margin-top: 20px;
+            position: relative; overflow: hidden; font-family: 'Inter', sans-serif;
         }
-
-        .btn-checkout:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 40px rgba(225,112,85,0.3);
-        }
-
+        .btn-checkout:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(225,112,85,0.3); }
         .btn-checkout::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
+            content: ''; position: absolute; top: 0; left: -100%;
             width: 100%; height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
             transition: 0.6s;
         }
-
         .btn-checkout:hover::before { left: 100%; }
 
-        .empty-cart {
-            text-align: center;
-            padding: 40px 0;
-            color: var(--text-muted);
-        }
-
+        .empty-cart { text-align: center; padding: 40px 0; color: var(--text-muted); }
         .empty-cart .icon { font-size: 3rem; margin-bottom: 16px; }
 
-        .qty-control {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 6px;
-        }
-
+        .qty-control { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
         .qty-btn {
-            width: 28px; height: 28px;
-            border-radius: 8px;
-            border: 1px solid var(--border-glass);
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            transition: var(--transition);
+            width: 28px; height: 28px; border-radius: 8px;
+            border: 1px solid var(--border-glass); background: var(--bg-secondary);
+            color: var(--text-primary); cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem; transition: var(--transition);
         }
-
         .qty-btn:hover { border-color: var(--accent3); }
+        .qty-value { font-weight: 600; min-width: 20px; text-align: center; font-size: 0.85rem; }
 
-        .qty-value {
-            font-weight: 600;
-            min-width: 20px;
-            text-align: center;
-            font-size: 0.85rem;
-        }
-
-        /* ============================================
-           FOOTER
-           ============================================ */
+        /* ============ FOOTER ============ */
         .footer {
-            padding: 60px 40px 30px;
-            border-top: 1px solid var(--border-glass);
-            position: relative;
-            z-index: 1;
+            padding: 60px 40px 30px; border-top: 1px solid var(--border-glass);
+            position: relative; z-index: 1;
         }
-
         .footer-content {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 20px;
+            max-width: 1100px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+            flex-wrap: wrap; gap: 20px;
         }
-
-        .footer-logo svg {
-            height: 40px;
-            width: auto;
-            opacity: 0.6;
-        }
-
-        .footer-text {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        .footer-text a {
-            color: var(--accent4);
-            text-decoration: none;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 20px;
-        }
-
-        .footer-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: var(--transition);
-        }
-
+        .footer-text { color: var(--text-muted); font-size: 0.85rem; }
+        .footer-text a { color: var(--accent4); text-decoration: none; }
+        .footer-links { display: flex; gap: 20px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: var(--transition); }
         .footer-links a:hover { color: var(--accent4); }
 
-        /* ============================================
-           TOAST
-           ============================================ */
+        /* ============ TOAST ============ */
         .toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            padding: 16px 28px;
-            background: var(--bg-card);
-            border: 1px solid var(--accent3);
-            border-radius: var(--radius-sm);
-            color: var(--text-primary);
-            font-size: 0.9rem;
-            font-weight: 500;
-            z-index: 9999;
-            transform: translateX(120%);
-            transition: var(--transition);
+            position: fixed; bottom: 30px; right: 30px; padding: 16px 28px;
+            background: var(--bg-card); border: 1px solid var(--accent3);
+            border-radius: var(--radius-sm); color: var(--text-primary);
+            font-size: 0.9rem; font-weight: 500; z-index: 9999;
+            transform: translateX(120%); transition: var(--transition);
             box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
-
         .toast.show { transform: translateX(0); }
 
-        /* ============================================
-           MODAL
-           ============================================ */
+        /* ============ MODAL ============ */
         .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(10px);
-            z-index: 2000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            position: fixed; inset: 0; background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px); z-index: 2000;
+            display: none; align-items: center; justify-content: center; padding: 20px;
         }
-
         .modal-overlay.show { display: flex; }
-
         .modal {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-glass);
-            border-radius: var(--radius);
-            max-width: 500px;
-            width: 100%;
-            padding: 40px;
-            text-align: center;
-            position: relative;
-            animation: modalIn 0.4s ease;
+            background: var(--bg-secondary); border: 1px solid var(--border-glass);
+            border-radius: var(--radius); max-width: 500px; width: 100%;
+            padding: 40px; text-align: center; animation: modalIn 0.4s ease;
         }
-
         @keyframes modalIn {
             from { opacity: 0; transform: scale(0.9) translateY(20px); }
             to { opacity: 1; transform: scale(1) translateY(0); }
         }
-
         .modal-close {
-            position: absolute;
-            top: 16px; right: 16px;
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 1.5rem;
-            cursor: pointer;
+            position: absolute; top: 16px; right: 16px;
+            background: none; border: none; color: var(--text-muted);
+            font-size: 1.5rem; cursor: pointer;
         }
-
         .modal .success-icon { font-size: 4rem; margin-bottom: 20px; }
+        .modal h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; margin-bottom: 12px; }
+        .modal p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; }
 
-        .modal h3 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.5rem;
-            margin-bottom: 12px;
-        }
+        /* ============ REVEAL ============ */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        .modal p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-
-        /* ============================================
-           SCROLL REVEAL
-           ============================================ */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ============================================
-           RESPONSIVE
-           ============================================ */
+        /* ============ RESPONSIVE ============ */
         @media (max-width: 900px) {
-            .navbar { padding: 10px 20px; }
+            .navbar { padding: 8px 16px; }
+            .nav-logo svg, .nav-logo img { height: 45px !important; }
             .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%; left: 0;
-                width: 100%;
-                background: rgba(10,10,15,0.95);
-                backdrop-filter: blur(20px);
-                flex-direction: column;
-                padding: 20px;
+                display: none; position: absolute; top: 100%; left: 0; width: 100%;
+                background: rgba(10,10,15,0.95); backdrop-filter: blur(20px);
+                flex-direction: column; padding: 20px;
                 border-bottom: 1px solid var(--border-glass);
             }
             .nav-links.open { display: flex; }
@@ -1205,7 +553,6 @@
             .section { padding: 60px 20px; }
             .hero { padding: 100px 20px 60px; }
             .hero-stats { gap: 30px; flex-wrap: wrap; }
-            .hero-logo svg { width: 280px; }
             .about-content { grid-template-columns: 1fr; gap: 40px; }
             .checkout-container { grid-template-columns: 1fr; padding: 0 20px; }
             .contact-grid { grid-template-columns: 1fr; }
@@ -1218,123 +565,69 @@
 </head>
 <body>
 
-    <!-- BG Effects -->
     <div class="bg-grid"></div>
     <div class="bg-orb bg-orb-1"></div>
     <div class="bg-orb bg-orb-2"></div>
     <div class="bg-orb bg-orb-3"></div>
 
-    <!-- ====================================================
-         SVG LOGO DEFINITION (reused everywhere via <use>)
-         ==================================================== -->
-    <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
-        <defs>
-            <linearGradient id="stencilGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" style="stop-color:#fdcb6e"/>
-                <stop offset="50%" style="stop-color:#e17055"/>
-                <stop offset="100%" style="stop-color:#6c5ce7"/>
-            </linearGradient>
-            <filter id="stencilRough">
-                <feTurbulence type="turbulence" baseFrequency="0.04" numOctaves="5" result="noise"/>
-                <feDisplacementMap in="SourceGraphic" in2="noise" scale="2"/>
-            </filter>
-            <clipPath id="stencilClip">
-                <text x="250" y="125" text-anchor="middle"
-                      font-family="'Bebas Neue', Impact, sans-serif"
-                      font-size="110" letter-spacing="8">CREYA</text>
-            </clipPath>
-        </defs>
-
-        <!-- FULL LOGO symbol -->
-        <symbol id="logo-full" viewBox="0 0 500 220">
-            <rect x="80" y="18" width="70" height="20" rx="1" fill="rgba(255,255,255,0.06)" transform="rotate(-5, 115, 28)"/>
-            <rect x="360" y="15" width="60" height="20" rx="1" fill="rgba(255,255,255,0.06)" transform="rotate(3, 390, 25)"/>
-            <rect x="50" y="40" width="400" height="140" rx="3"
-                  fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2" stroke-dasharray="6,3"/>
-            <ellipse cx="250" cy="100" rx="200" ry="80" fill="#6c5ce7" opacity="0.06"/>
-            <g clip-path="url(#stencilClip)">
-                <rect x="0" y="0" width="500" height="220" fill="url(#stencilGrad)"/>
-                <circle cx="120" cy="100" r="40" fill="white" opacity="0.07"/>
-                <circle cx="350" cy="90" r="35" fill="white" opacity="0.05"/>
-            </g>
-            <text x="250" y="125" text-anchor="middle"
-                  font-family="'Bebas Neue', Impact, sans-serif"
-                  font-size="110" fill="none"
-                  stroke="rgba(255,255,255,0.1)" stroke-width="0.5"
-                  letter-spacing="8">CREYA</text>
-            <rect x="300" y="155" width="120" height="35" rx="2" fill="rgba(0,0,0,0.4)"/>
-            <text x="360" y="178" text-anchor="middle"
-                  font-family="'Bebas Neue', Impact, sans-serif"
-                  font-size="24" fill="#fdcb6e" letter-spacing="5">by TAS</text>
-            <g transform="translate(80, 158)" opacity="0.5">
-                <text font-family="'Permanent Marker', cursive" font-size="16" fill="#e17055">★★★★★</text>
-            </g>
-            <!-- Crown -->
-            <g transform="translate(220, 20)" opacity="0.7">
-                <polyline points="0,25 5,5 12,18 20,0 28,18 35,5 40,25"
-                          fill="none" stroke="#fdcb6e" stroke-width="2.5" stroke-linejoin="round"/>
-                <circle cx="5" cy="3" r="2" fill="#fdcb6e"/>
-                <circle cx="20" cy="-2" r="2" fill="#fdcb6e"/>
-                <circle cx="35" cy="3" r="2" fill="#fdcb6e"/>
-            </g>
-            <!-- Drips -->
-            <rect x="115" y="125" width="3.5" height="35" rx="1.75" fill="#e17055" opacity="0.5"/>
-            <rect x="310" y="122" width="3" height="28" rx="1.5" fill="#6c5ce7" opacity="0.45"/>
-            <rect x="400" y="120" width="2.5" height="20" rx="1.25" fill="#00cec9" opacity="0.4"/>
-            <!-- Spray dots -->
-            <circle cx="55" cy="45" r="3" fill="#e17055" opacity="0.4"/>
-            <circle cx="72" cy="38" r="2" fill="#e17055" opacity="0.3"/>
-            <circle cx="440" cy="50" r="2.5" fill="#00cec9" opacity="0.35"/>
-            <circle cx="455" cy="42" r="1.5" fill="#00cec9" opacity="0.25"/>
-        </symbol>
-
-        <!-- COMPACT NAV LOGO symbol -->
-        <symbol id="logo-nav" viewBox="40 30 420 175">
-            <rect x="50" y="40" width="400" height="140" rx="3"
-                  fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2" stroke-dasharray="6,3"/>
-            <g clip-path="url(#stencilClip)">
-                <rect x="0" y="0" width="500" height="220" fill="url(#stencilGrad)"/>
-            </g>
-            <text x="250" y="125" text-anchor="middle"
-                  font-family="'Bebas Neue', Impact, sans-serif"
-                  font-size="110" fill="none"
-                  stroke="rgba(255,255,255,0.1)" stroke-width="0.5"
-                  letter-spacing="8">CREYA</text>
-            <rect x="300" y="155" width="120" height="35" rx="2" fill="rgba(0,0,0,0.4)"/>
-            <text x="360" y="178" text-anchor="middle"
-                  font-family="'Bebas Neue', Impact, sans-serif"
-                  font-size="24" fill="#fdcb6e" letter-spacing="5">by TAS</text>
-            <!-- Crown mini -->
-            <g transform="translate(225, 28)" opacity="0.7">
-                <polyline points="0,20 4,4 10,14 16,0 22,14 28,4 32,20"
-                          fill="none" stroke="#fdcb6e" stroke-width="2" stroke-linejoin="round"/>
-            </g>
-            <!-- Drips -->
-            <rect x="115" y="125" width="3" height="25" rx="1.5" fill="#e17055" opacity="0.4"/>
-            <rect x="310" y="122" width="2.5" height="18" rx="1.25" fill="#6c5ce7" opacity="0.35"/>
-        </symbol>
-    </svg>
-
-    <!-- ============== NAVBAR ============== -->
+    <!-- ==========================================
+         NAVBAR - LOGO GRAND & VISIBLE
+         ========================================== -->
     <nav class="navbar" id="navbar">
         <a href="#" class="nav-logo" onclick="showPage('home')">
-            <svg><use href="#logo-nav"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="30 30 440 170" width="220" height="65">
+                <defs>
+                    <linearGradient id="navGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#fdcb6e"/>
+                        <stop offset="50%" style="stop-color:#e17055"/>
+                        <stop offset="100%" style="stop-color:#6c5ce7"/>
+                    </linearGradient>
+                </defs>
+                <!-- Dashed border -->
+                <rect x="50" y="40" width="400" height="140" rx="3"
+                      fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" stroke-dasharray="6,3"/>
+                <!-- Crown -->
+                <g transform="translate(225, 28)" opacity="0.8">
+                    <polyline points="0,18 4,4 10,13 16,0 22,13 28,4 32,18"
+                              fill="none" stroke="#fdcb6e" stroke-width="2" stroke-linejoin="round"/>
+                </g>
+                <!-- CREYA main text -->
+                <text x="250" y="125" text-anchor="middle"
+                      font-family="'Bebas Neue', Impact, 'Arial Black', sans-serif"
+                      font-size="100" fill="url(#navGrad)" letter-spacing="10"
+                      font-weight="400">CREYA</text>
+                <!-- Drips -->
+                <rect x="120" y="128" width="3" height="22" rx="1.5" fill="#e17055" opacity="0.5"/>
+                <rect x="320" y="126" width="2.5" height="16" rx="1.25" fill="#6c5ce7" opacity="0.4"/>
+                <!-- by TAS box -->
+                <rect x="310" y="150" width="100" height="30" rx="2" fill="rgba(0,0,0,0.5)"/>
+                <text x="360" y="170" text-anchor="middle"
+                      font-family="'Bebas Neue', Impact, sans-serif"
+                      font-size="20" fill="#fdcb6e" letter-spacing="4">by TAS</text>
+                <!-- Stars -->
+                <text x="90" y="172" font-family="'Permanent Marker', cursive" font-size="13" fill="#e17055" opacity="0.5">★★★★★</text>
+            </svg>
         </a>
+
         <button class="hamburger" onclick="toggleMenu()">
             <span></span><span></span><span></span>
         </button>
+
         <ul class="nav-links" id="navLinks">
             <li><a href="#" class="active" onclick="showPage('home')">Accueil</a></li>
             <li><a href="#collection" onclick="showPage('home')">Collection</a></li>
             <li><a href="#apropos" onclick="showPage('home')">À propos</a></li>
             <li><a href="#contact" onclick="showPage('home')">Contact</a></li>
         </ul>
+
         <button class="nav-cart" onclick="showPage('checkout')">
             🛒 Panier <span class="cart-badge" id="cartCount">0</span>
         </button>
     </nav>
 
-    <!-- ============== HOME PAGE ============== -->
+    <!-- ==========================================
+         HOME PAGE
+         ========================================== -->
     <div class="page active" id="page-home">
 
         <!-- HERO -->
@@ -1345,9 +638,78 @@
                     Collection 2025 disponible
                 </div>
 
-                <!-- BIG HERO LOGO -->
+                <!-- ===== GRAND LOGO HERO ===== -->
                 <div class="hero-logo">
-                    <svg><use href="#logo-full"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 220" width="480" height="210">
+                        <defs>
+                            <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#fdcb6e"/>
+                                <stop offset="50%" style="stop-color:#e17055"/>
+                                <stop offset="100%" style="stop-color:#6c5ce7"/>
+                            </linearGradient>
+                            <filter id="heroGlow">
+                                <feGaussianBlur stdDeviation="3" result="blur"/>
+                                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                            </filter>
+                        </defs>
+
+                        <!-- Tape marks -->
+                        <rect x="80" y="18" width="70" height="18" rx="1" fill="rgba(255,255,255,0.05)" transform="rotate(-5, 115, 27)"/>
+                        <rect x="360" y="15" width="60" height="18" rx="1" fill="rgba(255,255,255,0.05)" transform="rotate(3, 390, 24)"/>
+
+                        <!-- Stencil dashed border -->
+                        <rect x="50" y="40" width="400" height="140" rx="3"
+                              fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2" stroke-dasharray="6,3"/>
+
+                        <!-- Spray BG glow -->
+                        <ellipse cx="250" cy="105" rx="180" ry="60" fill="#6c5ce7" opacity="0.05"/>
+
+                        <!-- Crown -->
+                        <g transform="translate(215, 15)" opacity="0.8" filter="url(#heroGlow)">
+                            <polyline points="0,25 5,5 12,18 20,0 28,18 35,5 40,25"
+                                      fill="none" stroke="#fdcb6e" stroke-width="2.5" stroke-linejoin="round"/>
+                            <circle cx="5" cy="3" r="2" fill="#fdcb6e"/>
+                            <circle cx="20" cy="-2" r="2" fill="#fdcb6e"/>
+                            <circle cx="35" cy="3" r="2" fill="#fdcb6e"/>
+                        </g>
+
+                        <!-- CREYA - MAIN TEXT -->
+                        <!-- Shadow -->
+                        <text x="254" y="128" text-anchor="middle"
+                              font-family="'Bebas Neue', Impact, 'Arial Black', sans-serif"
+                              font-size="110" fill="rgba(0,0,0,0.4)" letter-spacing="10">CREYA</text>
+                        <!-- Main -->
+                        <text x="250" y="125" text-anchor="middle"
+                              font-family="'Bebas Neue', Impact, 'Arial Black', sans-serif"
+                              font-size="110" fill="url(#heroGrad)" letter-spacing="10"
+                              filter="url(#heroGlow)">CREYA</text>
+                        <!-- White highlight -->
+                        <text x="248" y="122" text-anchor="middle"
+                              font-family="'Bebas Neue', Impact, 'Arial Black', sans-serif"
+                              font-size="110" fill="white" opacity="0.06" letter-spacing="10">CREYA</text>
+
+                        <!-- Drips -->
+                        <rect x="115" y="128" width="3.5" height="35" rx="1.75" fill="#e17055" opacity="0.5"/>
+                        <rect x="310" y="125" width="3" height="28" rx="1.5" fill="#6c5ce7" opacity="0.45"/>
+                        <rect x="400" y="123" width="2.5" height="20" rx="1.25" fill="#00cec9" opacity="0.4"/>
+
+                        <!-- by TAS box -->
+                        <rect x="300" y="155" width="120" height="35" rx="2" fill="rgba(0,0,0,0.5)"/>
+                        <text x="360" y="178" text-anchor="middle"
+                              font-family="'Bebas Neue', Impact, sans-serif"
+                              font-size="24" fill="#fdcb6e" letter-spacing="5">by TAS</text>
+
+                        <!-- Stars -->
+                        <text x="82" y="175" font-family="'Permanent Marker', cursive" font-size="16" fill="#e17055" opacity="0.5">★★★★★</text>
+
+                        <!-- Spray dots -->
+                        <circle cx="55" cy="45" r="3" fill="#e17055" opacity="0.4"/>
+                        <circle cx="72" cy="38" r="2" fill="#e17055" opacity="0.3"/>
+                        <circle cx="48" cy="55" r="1.5" fill="#6c5ce7" opacity="0.3"/>
+                        <circle cx="440" cy="50" r="2.5" fill="#00cec9" opacity="0.35"/>
+                        <circle cx="455" cy="42" r="1.5" fill="#00cec9" opacity="0.25"/>
+                        <circle cx="430" cy="60" r="2" fill="#a29bfe" opacity="0.2"/>
+                    </svg>
                 </div>
 
                 <h1>
@@ -1356,29 +718,16 @@
                 </h1>
                 <p>
                     Découvrez notre collection de toiles et tableaux personnalisés,
-                    créés selon vos envies et adaptés à tous les espaces. Exprimez votre style unique.
+                    créés selon vos envies et adaptés à tous les espaces.
                 </p>
                 <div class="hero-buttons">
-                    <a href="#collection" class="btn-primary">
-                        Explorer la collection →
-                    </a>
-                    <a href="#comment" class="btn-secondary">
-                        Comment ça marche ?
-                    </a>
+                    <a href="#collection" class="btn-primary">Explorer la collection →</a>
+                    <a href="#comment" class="btn-secondary">Comment ça marche ?</a>
                 </div>
                 <div class="hero-stats">
-                    <div class="hero-stat">
-                        <h3>1.1k+</h3>
-                        <p>Avis clients</p>
-                    </div>
-                    <div class="hero-stat">
-                        <h3>500+</h3>
-                        <p>Toiles livrées</p>
-                    </div>
-                    <div class="hero-stat">
-                        <h3>100%</h3>
-                        <p>Sur mesure</p>
-                    </div>
+                    <div class="hero-stat"><h3>1.1k+</h3><p>Avis clients</p></div>
+                    <div class="hero-stat"><h3>500+</h3><p>Toiles livrées</p></div>
+                    <div class="hero-stat"><h3>100%</h3><p>Sur mesure</p></div>
                 </div>
             </div>
         </section>
@@ -1400,12 +749,12 @@
                 <div class="step-card reveal">
                     <div class="step-number">2</div>
                     <h3>Sélectionnez la taille</h3>
-                    <p>Choisissez les dimensions adaptées à votre espace : 30×40, 50×70, 60×90 ou format personnalisé.</p>
+                    <p>Choisissez les dimensions adaptées à votre espace : 30×40, 50×70, 60×90 ou personnalisé.</p>
                 </div>
                 <div class="step-card reveal">
                     <div class="step-number">3</div>
                     <h3>Passez commande</h3>
-                    <p>Ajoutez au panier, remplissez vos informations et validez. Livraison rapide partout en Tunisie.</p>
+                    <p>Ajoutez au panier, remplissez vos infos et validez. Livraison rapide partout en Tunisie.</p>
                 </div>
                 <div class="step-card reveal">
                     <div class="step-number">4</div>
@@ -1439,33 +788,37 @@
             <div class="about-content">
                 <div class="about-visual reveal">
                     <div class="about-visual-box">
-                        <svg class="inner-logo"><use href="#logo-full"/></svg>
+                        <!-- Logo inside about box -->
+                        <svg class="inner-logo" xmlns="http://www.w3.org/2000/svg" viewBox="30 20 440 190" width="320" height="180" style="position:relative;z-index:2;opacity:0.7">
+                            <defs>
+                                <linearGradient id="aboutGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#fdcb6e"/>
+                                    <stop offset="50%" style="stop-color:#e17055"/>
+                                    <stop offset="100%" style="stop-color:#6c5ce7"/>
+                                </linearGradient>
+                            </defs>
+                            <rect x="50" y="40" width="400" height="140" rx="3" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" stroke-dasharray="6,3"/>
+                            <g transform="translate(225, 28)" opacity="0.7">
+                                <polyline points="0,18 4,4 10,13 16,0 22,13 28,4 32,18" fill="none" stroke="#fdcb6e" stroke-width="2" stroke-linejoin="round"/>
+                            </g>
+                            <text x="250" y="125" text-anchor="middle" font-family="'Bebas Neue', Impact, 'Arial Black', sans-serif" font-size="100" fill="url(#aboutGrad)" letter-spacing="10">CREYA</text>
+                            <rect x="310" y="150" width="100" height="30" rx="2" fill="rgba(0,0,0,0.4)"/>
+                            <text x="360" y="170" text-anchor="middle" font-family="'Bebas Neue', Impact, sans-serif" font-size="20" fill="#fdcb6e" letter-spacing="4">by TAS</text>
+                            <rect x="115" y="128" width="3" height="25" rx="1.5" fill="#e17055" opacity="0.4"/>
+                            <rect x="310" y="125" width="2.5" height="18" rx="1.25" fill="#6c5ce7" opacity="0.35"/>
+                        </svg>
                     </div>
                 </div>
                 <div class="about-text reveal">
                     <span class="tag">✦ Notre histoire</span>
                     <h2>À propos de CREYA</h2>
-                    <p>
-                        CREYA by TAS est née d'une passion pour l'art et la décoration personnalisée.
-                        Nous croyons que chaque mur mérite une œuvre unique qui reflète la personnalité de son propriétaire.
-                    </p>
-                    <p>
-                        Nos toiles sont imprimées sur du coton premium de haute qualité, avec des couleurs éclatantes
-                        et une finition professionnelle qui dure dans le temps.
-                    </p>
+                    <p>CREYA by TAS est née d'une passion pour l'art et la décoration personnalisée. Nous croyons que chaque mur mérite une œuvre unique qui reflète la personnalité de son propriétaire.</p>
+                    <p>Nos toiles sont imprimées sur du coton premium de haute qualité, avec des couleurs éclatantes et une finition professionnelle qui dure dans le temps.</p>
                     <div class="about-features">
-                        <div class="about-feature">
-                            <span>✦</span> Qualité premium
-                        </div>
-                        <div class="about-feature">
-                            <span>🚚</span> Livraison Tunisie
-                        </div>
-                        <div class="about-feature">
-                            <span>🎯</span> 100% sur mesure
-                        </div>
-                        <div class="about-feature">
-                            <span>💬</span> Support 24/7
-                        </div>
+                        <div class="about-feature"><span>✦</span> Qualité premium</div>
+                        <div class="about-feature"><span>🚚</span> Livraison Tunisie</div>
+                        <div class="about-feature"><span>🎯</span> 100% sur mesure</div>
+                        <div class="about-feature"><span>💬</span> Support 24/7</div>
                     </div>
                 </div>
             </div>
@@ -1481,91 +834,46 @@
             </div>
             <div class="contact-grid">
                 <div class="contact-info-cards reveal">
-                    <div class="contact-card">
-                        <div class="card-icon">📍</div>
-                        <div><h4>Adresse</h4><p>Tunisie</p></div>
-                    </div>
-                    <div class="contact-card">
-                        <div class="card-icon">📱</div>
-                        <div><h4>Téléphone</h4><p>+216 XX XXX XXX</p></div>
-                    </div>
-                    <div class="contact-card">
-                        <div class="card-icon">📧</div>
-                        <div><h4>Email</h4><p>contact@creya.tn</p></div>
-                    </div>
-                    <div class="contact-card">
-                        <div class="card-icon">⏰</div>
-                        <div><h4>Horaires</h4><p>Lun - Sam : 9h - 18h</p></div>
-                    </div>
+                    <div class="contact-card"><div class="card-icon">📍</div><div><h4>Adresse</h4><p>Tunisie</p></div></div>
+                    <div class="contact-card"><div class="card-icon">📱</div><div><h4>Téléphone</h4><p>+216 XX XXX XXX</p></div></div>
+                    <div class="contact-card"><div class="card-icon">📧</div><div><h4>Email</h4><p>contact@creya.tn</p></div></div>
+                    <div class="contact-card"><div class="card-icon">⏰</div><div><h4>Horaires</h4><p>Lun - Sam : 9h - 18h</p></div></div>
                     <div class="social-links">
-                        <a href="#" class="social-link" title="Facebook">f</a>
-                        <a href="#" class="social-link" title="Instagram">📷</a>
-                        <a href="#" class="social-link" title="TikTok">🎵</a>
+                        <a href="#" class="social-link">f</a>
+                        <a href="#" class="social-link">📷</a>
+                        <a href="#" class="social-link">🎵</a>
                     </div>
                 </div>
                 <div class="checkout-panel reveal">
                     <h2>✉️ Envoyez un message</h2>
-                    <div class="form-group">
-                        <label>Nom complet</label>
-                        <input type="text" placeholder="Votre nom">
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" placeholder="votre@email.com">
-                    </div>
-                    <div class="form-group">
-                        <label>Message</label>
-                        <textarea rows="4" placeholder="Décrivez votre projet ou posez votre question..."></textarea>
-                    </div>
-                    <button class="btn-primary" style="width:100%" onclick="showToast('✅ Message envoyé avec succès !')">
-                        Envoyer →
-                    </button>
+                    <div class="form-group"><label>Nom complet</label><input type="text" placeholder="Votre nom"></div>
+                    <div class="form-group"><label>Email</label><input type="email" placeholder="votre@email.com"></div>
+                    <div class="form-group"><label>Message</label><textarea rows="4" placeholder="Décrivez votre projet..."></textarea></div>
+                    <button class="btn-primary" style="width:100%" onclick="showToast('✅ Message envoyé avec succès !')">Envoyer →</button>
                 </div>
             </div>
         </section>
     </div>
 
-    <!-- ============== CHECKOUT PAGE ============== -->
+    <!-- ==========================================
+         CHECKOUT PAGE
+         ========================================== -->
     <div class="page" id="page-checkout">
         <div class="checkout-container">
             <div class="checkout-panel">
                 <h2>📦 Informations de livraison</h2>
                 <div class="form-row">
-                    <div class="form-group">
-                        <label>Prénom *</label>
-                        <input type="text" placeholder="Votre prénom" id="firstName">
-                    </div>
-                    <div class="form-group">
-                        <label>Nom *</label>
-                        <input type="text" placeholder="Votre nom" id="lastName">
-                    </div>
+                    <div class="form-group"><label>Prénom *</label><input type="text" placeholder="Votre prénom" id="firstName"></div>
+                    <div class="form-group"><label>Nom *</label><input type="text" placeholder="Votre nom" id="lastName"></div>
                 </div>
-                <div class="form-group">
-                    <label>Téléphone *</label>
-                    <input type="tel" placeholder="+216 XX XXX XXX" id="phone">
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" placeholder="votre@email.com" id="email">
-                </div>
-                <div class="form-group">
-                    <label>Adresse de livraison *</label>
-                    <input type="text" placeholder="Rue, numéro..." id="address">
-                </div>
+                <div class="form-group"><label>Téléphone *</label><input type="tel" placeholder="+216 XX XXX XXX" id="phone"></div>
+                <div class="form-group"><label>Email</label><input type="email" placeholder="votre@email.com" id="email"></div>
+                <div class="form-group"><label>Adresse de livraison *</label><input type="text" placeholder="Rue, numéro..." id="address"></div>
                 <div class="form-row">
-                    <div class="form-group">
-                        <label>Ville *</label>
-                        <input type="text" placeholder="Ex: Tunis" id="city">
-                    </div>
-                    <div class="form-group">
-                        <label>Code postal</label>
-                        <input type="text" placeholder="1000" id="zip">
-                    </div>
+                    <div class="form-group"><label>Ville *</label><input type="text" placeholder="Ex: Tunis" id="city"></div>
+                    <div class="form-group"><label>Code postal</label><input type="text" placeholder="1000" id="zip"></div>
                 </div>
-                <div class="form-group">
-                    <label>Note / Instructions</label>
-                    <textarea rows="3" placeholder="Instructions spéciales pour la livraison..." id="notes"></textarea>
-                </div>
+                <div class="form-group"><label>Note / Instructions</label><textarea rows="3" placeholder="Instructions spéciales..." id="notes"></textarea></div>
                 <div class="form-group">
                     <label>Mode de paiement</label>
                     <select id="payment">
@@ -1574,9 +882,7 @@
                         <option>📱 D17 / Flouci</option>
                     </select>
                 </div>
-                <button class="btn-checkout" onclick="placeOrder()">
-                    ✨ Confirmer la commande
-                </button>
+                <button class="btn-checkout" onclick="placeOrder()">✨ Confirmer la commande</button>
             </div>
             <div>
                 <div class="checkout-panel">
@@ -1585,24 +891,13 @@
                         <div class="empty-cart" id="emptyCart">
                             <div class="icon">🛒</div>
                             <p>Votre panier est vide</p><br>
-                            <a href="#collection" class="btn-secondary" onclick="showPage('home')" style="font-size:0.85rem; padding:10px 24px;">
-                                Explorer la collection
-                            </a>
+                            <a href="#collection" class="btn-secondary" onclick="showPage('home')" style="font-size:0.85rem;padding:10px 24px;">Explorer la collection</a>
                         </div>
                     </div>
                     <div id="cartSummary" style="display:none">
-                        <div class="cart-summary-row">
-                            <span>Sous-total</span>
-                            <span id="subtotal">0 TND</span>
-                        </div>
-                        <div class="cart-summary-row">
-                            <span>Livraison</span>
-                            <span style="color: var(--success)">Gratuite 🎉</span>
-                        </div>
-                        <div class="cart-summary-row total">
-                            <span>Total</span>
-                            <span class="amount" id="totalAmount">0 TND</span>
-                        </div>
+                        <div class="cart-summary-row"><span>Sous-total</span><span id="subtotal">0 TND</span></div>
+                        <div class="cart-summary-row"><span>Livraison</span><span style="color:var(--success)">Gratuite 🎉</span></div>
+                        <div class="cart-summary-row total"><span>Total</span><span class="amount" id="totalAmount">0 TND</span></div>
                     </div>
                 </div>
             </div>
@@ -1612,12 +907,14 @@
     <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-content">
-            <div class="footer-logo">
-                <svg><use href="#logo-nav"/></svg>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="80 55 340 120" width="160" height="50" style="opacity:0.5">
+                    <defs><linearGradient id="footGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#fdcb6e"/><stop offset="50%" style="stop-color:#e17055"/><stop offset="100%" style="stop-color:#6c5ce7"/></linearGradient></defs>
+                    <text x="250" y="125" text-anchor="middle" font-family="'Bebas Neue', Impact, 'Arial Black', sans-serif" font-size="80" fill="url(#footGrad)" letter-spacing="8">CREYA</text>
+                    <text x="360" y="165" text-anchor="middle" font-family="'Bebas Neue', Impact, sans-serif" font-size="18" fill="#fdcb6e" letter-spacing="4" opacity="0.7">by TAS</text>
+                </svg>
             </div>
-            <p class="footer-text">
-                © 2025 <a href="#">CREYA by TAS</a> — Toiles & Tableaux sur mesure en Tunisie
-            </p>
+            <p class="footer-text">© 2025 <a href="#">CREYA by TAS</a> — Toiles & Tableaux sur mesure en Tunisie</p>
             <div class="footer-links">
                 <a href="#collection" onclick="showPage('home')">Collection</a>
                 <a href="#apropos" onclick="showPage('home')">À propos</a>
@@ -1635,51 +932,40 @@
             <button class="modal-close" onclick="closeModal()">✕</button>
             <div class="success-icon">🎉</div>
             <h3>Commande confirmée !</h3>
-            <p>
-                Merci pour votre commande ! Nous vous contacterons très bientôt
-                pour confirmer les détails. Préparez vos murs ! 🖼️
-            </p><br>
-            <button class="btn-primary" onclick="closeModal(); showPage('home');">
-                Retour à l'accueil
-            </button>
+            <p>Merci pour votre commande ! Nous vous contacterons très bientôt pour confirmer les détails. 🖼️</p><br>
+            <button class="btn-primary" onclick="closeModal(); showPage('home');">Retour à l'accueil</button>
         </div>
     </div>
 
-    <!-- ============================================
-         JAVASCRIPT
-         ============================================ -->
+    <!-- ============ JAVASCRIPT ============ -->
     <script>
-        // ---- DATA ----
         const artworks = [
-            { id: 1, name: "Éclat Doré", category: "abstrait", price: 89, img: "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=600&h=700&fit=crop", sizes: ["30×40", "50×70", "60×90"] },
-            { id: 2, name: "Vague Azur", category: "abstrait", price: 110, img: "https://images.unsplash.com/photo-1549490349-8643362247b5?w=600&h=700&fit=crop", sizes: ["30×40", "50×70", "60×90"] },
-            { id: 3, name: "Feuille d'Or", category: "nature", price: 95, img: "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=600&h=700&fit=crop", sizes: ["30×40", "50×70", "60×90"] },
-            { id: 4, name: "Calligraphie Noor", category: "calligraphie", price: 120, img: "https://images.unsplash.com/photo-1609599006353-e629aaabfeae?w=600&h=700&fit=crop", sizes: ["40×60", "50×70", "70×100"] },
-            { id: 5, name: "Horizon Noir", category: "moderne", price: 105, img: "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=600&h=700&fit=crop", sizes: ["30×40", "50×70", "60×90"] },
-            { id: 6, name: "Fleur Éternelle", category: "nature", price: 85, img: "https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=600&h=700&fit=crop", sizes: ["30×40", "50×70"] },
-            { id: 7, name: "Basmala Élégante", category: "calligraphie", price: 130, img: "https://images.unsplash.com/photo-1580136579312-94651dfd596d?w=600&h=700&fit=crop", sizes: ["40×60", "50×70", "70×100"] },
-            { id: 8, name: "Structure Urbaine", category: "moderne", price: 115, img: "https://images.unsplash.com/photo-1459908676235-d5f02a50184b?w=600&h=700&fit=crop", sizes: ["30×40", "50×70", "60×90"] },
-            { id: 9, name: "Votre Design", category: "personnalise", price: 99, img: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&h=700&fit=crop", sizes: ["30×40", "50×70", "60×90", "Custom"] },
-            { id: 10, name: "Cosmos Abstract", category: "abstrait", price: 125, img: "https://images.unsplash.com/photo-1507908708918-778587c9e563?w=600&h=700&fit=crop", sizes: ["50×70", "60×90"] },
-            { id: 11, name: "Zen Garden", category: "nature", price: 90, img: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=600&h=700&fit=crop", sizes: ["30×40", "50×70", "60×90"] },
-            { id: 12, name: "Neon Geometry", category: "moderne", price: 140, img: "https://images.unsplash.com/photo-1550859492-d5da9d8e45f3?w=600&h=700&fit=crop", sizes: ["50×70", "60×90", "80×120"] },
+            { id:1, name:"Éclat Doré", category:"abstrait", price:89, img:"https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=600&h=700&fit=crop", sizes:["30×40","50×70","60×90"] },
+            { id:2, name:"Vague Azur", category:"abstrait", price:110, img:"https://images.unsplash.com/photo-1549490349-8643362247b5?w=600&h=700&fit=crop", sizes:["30×40","50×70","60×90"] },
+            { id:3, name:"Feuille d'Or", category:"nature", price:95, img:"https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=600&h=700&fit=crop", sizes:["30×40","50×70","60×90"] },
+            { id:4, name:"Calligraphie Noor", category:"calligraphie", price:120, img:"https://images.unsplash.com/photo-1609599006353-e629aaabfeae?w=600&h=700&fit=crop", sizes:["40×60","50×70","70×100"] },
+            { id:5, name:"Horizon Noir", category:"moderne", price:105, img:"https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=600&h=700&fit=crop", sizes:["30×40","50×70","60×90"] },
+            { id:6, name:"Fleur Éternelle", category:"nature", price:85, img:"https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=600&h=700&fit=crop", sizes:["30×40","50×70"] },
+            { id:7, name:"Basmala Élégante", category:"calligraphie", price:130, img:"https://images.unsplash.com/photo-1580136579312-94651dfd596d?w=600&h=700&fit=crop", sizes:["40×60","50×70","70×100"] },
+            { id:8, name:"Structure Urbaine", category:"moderne", price:115, img:"https://images.unsplash.com/photo-1459908676235-d5f02a50184b?w=600&h=700&fit=crop", sizes:["30×40","50×70","60×90"] },
+            { id:9, name:"Votre Design", category:"personnalise", price:99, img:"https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&h=700&fit=crop", sizes:["30×40","50×70","60×90","Custom"] },
+            { id:10, name:"Cosmos Abstract", category:"abstrait", price:125, img:"https://images.unsplash.com/photo-1507908708918-778587c9e563?w=600&h=700&fit=crop", sizes:["50×70","60×90"] },
+            { id:11, name:"Zen Garden", category:"nature", price:90, img:"https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=600&h=700&fit=crop", sizes:["30×40","50×70","60×90"] },
+            { id:12, name:"Neon Geometry", category:"moderne", price:140, img:"https://images.unsplash.com/photo-1550859492-d5da9d8e45f3?w=600&h=700&fit=crop", sizes:["50×70","60×90","80×120"] },
         ];
 
         let cart = [];
         let selectedSizes = {};
 
-        // ---- GALLERY ----
         function renderGallery(filter = 'all') {
             const grid = document.getElementById('galleryGrid');
             const filtered = filter === 'all' ? artworks : artworks.filter(a => a.category === filter);
             grid.innerHTML = filtered.map(art => `
-                <div class="artwork-card reveal visible" data-category="${art.category}">
+                <div class="artwork-card reveal visible">
                     <div class="artwork-img-wrapper">
                         <img class="artwork-img" src="${art.img}" alt="${art.name}" loading="lazy">
                         <div class="artwork-overlay">
-                            <button class="artwork-quick-add" onclick="addToCart(${art.id})">
-                                + Ajouter au panier
-                            </button>
+                            <button class="artwork-quick-add" onclick="addToCart(${art.id})">+ Ajouter au panier</button>
                         </div>
                     </div>
                     <div class="artwork-info">
@@ -1689,56 +975,45 @@
                             <span class="artwork-price">${art.price} TND</span>
                         </div>
                         <div class="artwork-sizes">
-                            ${art.sizes.map((s, i) => `
-                                <span class="size-tag ${i === 0 ? 'selected' : ''}"
-                                      onclick="selectSize(${art.id}, '${s}', this)">
-                                    ${s}
-                                </span>
-                            `).join('')}
+                            ${art.sizes.map((s,i) => `<span class="size-tag ${i===0?'selected':''}" onclick="selectSize(${art.id},'${s}',this)">${s}</span>`).join('')}
                         </div>
                     </div>
                 </div>
             `).join('');
         }
 
-        function filterGallery(category, btn) {
+        function filterGallery(cat, btn) {
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            renderGallery(category);
+            renderGallery(cat);
         }
 
-        function selectSize(artId, size, el) {
-            selectedSizes[artId] = size;
+        function selectSize(id, size, el) {
+            selectedSizes[id] = size;
             el.parentElement.querySelectorAll('.size-tag').forEach(s => s.classList.remove('selected'));
             el.classList.add('selected');
         }
 
-        // ---- CART ----
-        function addToCart(artId) {
-            const art = artworks.find(a => a.id === artId);
-            const size = selectedSizes[artId] || art.sizes[0];
-            const existing = cart.find(item => item.id === artId && item.size === size);
-            if (existing) { existing.qty++; }
-            else { cart.push({ ...art, size, qty: 1 }); }
+        function addToCart(id) {
+            const art = artworks.find(a => a.id === id);
+            const size = selectedSizes[id] || art.sizes[0];
+            const existing = cart.find(item => item.id === id && item.size === size);
+            if (existing) existing.qty++;
+            else cart.push({ ...art, size, qty: 1 });
             updateCartUI();
             showToast(`✅ "${art.name}" (${size}) ajouté au panier !`);
         }
 
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCartUI();
-            renderCheckoutCart();
-        }
+        function removeFromCart(i) { cart.splice(i, 1); updateCartUI(); renderCheckoutCart(); }
 
-        function changeQty(index, delta) {
-            cart[index].qty += delta;
-            if (cart[index].qty < 1) cart[index].qty = 1;
-            updateCartUI();
-            renderCheckoutCart();
+        function changeQty(i, d) {
+            cart[i].qty += d;
+            if (cart[i].qty < 1) cart[i].qty = 1;
+            updateCartUI(); renderCheckoutCart();
         }
 
         function updateCartUI() {
-            document.getElementById('cartCount').textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cartCount').textContent = cart.reduce((s, i) => s + i.qty, 0);
         }
 
         function renderCheckoutCart() {
@@ -1746,36 +1021,30 @@
             const summary = document.getElementById('cartSummary');
             const empty = document.getElementById('emptyCart');
             if (cart.length === 0) {
-                empty.style.display = 'block';
-                summary.style.display = 'none';
-                container.innerHTML = '';
-                container.appendChild(empty);
-                return;
+                empty.style.display = 'block'; summary.style.display = 'none';
+                container.innerHTML = ''; container.appendChild(empty); return;
             }
-            empty.style.display = 'none';
-            summary.style.display = 'block';
+            empty.style.display = 'none'; summary.style.display = 'block';
             container.innerHTML = cart.map((item, i) => `
                 <div class="cart-item">
                     <img class="cart-item-img" src="${item.img}" alt="${item.name}">
                     <div class="cart-item-info">
-                        <h4>${item.name}</h4>
-                        <p>Taille: ${item.size}</p>
+                        <h4>${item.name}</h4><p>Taille: ${item.size}</p>
                         <div class="qty-control">
-                            <button class="qty-btn" onclick="changeQty(${i}, -1)">−</button>
+                            <button class="qty-btn" onclick="changeQty(${i},-1)">−</button>
                             <span class="qty-value">${item.qty}</span>
-                            <button class="qty-btn" onclick="changeQty(${i}, 1)">+</button>
+                            <button class="qty-btn" onclick="changeQty(${i},1)">+</button>
                         </div>
                     </div>
                     <span class="cart-item-price">${item.price * item.qty} TND</span>
                     <button class="cart-item-remove" onclick="removeFromCart(${i})">✕</button>
                 </div>
             `).join('');
-            const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-            document.getElementById('subtotal').textContent = subtotal + ' TND';
-            document.getElementById('totalAmount').textContent = subtotal + ' TND';
+            const sub = cart.reduce((s, i) => s + i.price * i.qty, 0);
+            document.getElementById('subtotal').textContent = sub + ' TND';
+            document.getElementById('totalAmount').textContent = sub + ' TND';
         }
 
-        // ---- NAVIGATION ----
         function showPage(page) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.getElementById('page-' + page).classList.add('active');
@@ -1784,36 +1053,27 @@
             document.getElementById('navLinks').classList.remove('open');
         }
 
-        function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('open');
-        }
+        function toggleMenu() { document.getElementById('navLinks').classList.toggle('open'); }
 
-        // ---- ORDER ----
         function placeOrder() {
             if (cart.length === 0) { showToast('⚠️ Votre panier est vide !'); return; }
             const f = document.getElementById('firstName').value;
             const p = document.getElementById('phone').value;
             const a = document.getElementById('address').value;
             const c = document.getElementById('city').value;
-            if (!f || !p || !a || !c) { showToast('⚠️ Veuillez remplir tous les champs obligatoires.'); return; }
+            if (!f || !p || !a || !c) { showToast('⚠️ Remplissez tous les champs obligatoires.'); return; }
             document.getElementById('successModal').classList.add('show');
-            cart = [];
-            updateCartUI();
+            cart = []; updateCartUI();
         }
 
-        function closeModal() {
-            document.getElementById('successModal').classList.remove('show');
+        function closeModal() { document.getElementById('successModal').classList.remove('show'); }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.innerHTML = msg; t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 3000);
         }
 
-        // ---- TOAST ----
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            toast.innerHTML = message;
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 3000);
-        }
-
-        // ---- SCROLL ----
         window.addEventListener('scroll', () => {
             document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
             document.querySelectorAll('.reveal').forEach(el => {
@@ -1821,7 +1081,6 @@
             });
         });
 
-        // ---- INIT ----
         renderGallery();
         artworks.forEach(art => { selectedSizes[art.id] = art.sizes[0]; });
     </script>
