@@ -802,6 +802,35 @@
         .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
+        .whatsapp-float {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #25D366, #1ebe5d);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.6rem;
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.35);
+            z-index: 3000;
+            transition: var(--transition);
+        }
+
+        .whatsapp-float:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 18px 40px rgba(37, 211, 102, 0.45);
+        }
+
+        html[dir="rtl"] .whatsapp-float {
+            right: auto;
+            left: 24px;
+        }
+
         @media (max-width: 900px) {
             .navbar { padding: 6px 16px; }
             .nav-logo svg { width: 180px !important; height: auto !important; }
@@ -872,6 +901,7 @@
         <ul class="nav-links" id="navLinks">
             <li><a href="#" class="active" onclick="showPage('home')" data-i18n="nav_home">Accueil</a></li>
             <li><a href="#collection" onclick="showPage('home')" data-i18n="nav_collection">Collection</a></li>
+            <li><a href="toiles-vierges.html" data-i18n="nav_blank_canvas">Toiles Vierges</a></li>
             <li><a href="#apropos" onclick="showPage('home')" data-i18n="nav_about">À propos</a></li>
             <li><a href="#faq" onclick="showPage('home')" data-i18n="nav_faq">FAQ</a></li>
             <li><a href="#contact" onclick="showPage('home')" data-i18n="nav_contact">Contact</a></li>
@@ -1061,15 +1091,9 @@
                 <div class="about-text reveal">
                     <span class="tag" data-i18n="about_tag">✦ Notre histoire</span>
                     <h2 data-i18n="about_title">À propos de CREYA</h2>
-                    <p data-i18n="about_p1">
-                        Chez CREYA, nous croyons que chaque mur mérite une œuvre d'art qui lui ressemble. Fondé en Tunisie avec la passion de l'art et du design, CREYA est né d'une idée simple : rendre l'art accessible à tous, en proposant des toiles sur mesure de qualité premium à des prix justes.
-                    </p>
-                    <p data-i18n="about_p2">
-                        Que vous soyez un particulier souhaitant décorer votre salon, un professionnel aménageant un espace de travail, ou à la recherche du cadeau parfait, nous vous accompagnons dans la création d'œuvres uniques. Chaque toile est imprimée en haute définition sur canvas premium, montée sur châssis en bois, et livrée avec soin partout en Tunisie.
-                    </p>
-                    <p data-i18n="about_p3">
-                        Notre équipe est à votre écoute pour tout projet personnalisé. Envoyez-nous votre photo, votre idée ou votre design, et nous le transformons en tableau d'exception.
-                    </p>
+                    <p data-i18n="about_p1">Chez CREYA, nous croyons que chaque mur mérite une œuvre d'art qui lui ressemble. Fondé en Tunisie avec la passion de l'art et du design, CREYA est né d'une idée simple : rendre l'art accessible à tous, en proposant des toiles sur mesure de qualité premium à des prix justes.</p>
+                    <p data-i18n="about_p2">Que vous soyez un particulier souhaitant décorer votre salon, un professionnel aménageant un espace de travail, ou à la recherche du cadeau parfait, nous vous accompagnons dans la création d'œuvres uniques. Chaque toile est imprimée en haute définition sur canvas premium, montée sur châssis en bois, et livrée avec soin partout en Tunisie.</p>
+                    <p data-i18n="about_p3">Notre équipe est à votre écoute pour tout projet personnalisé. Envoyez-nous votre photo, votre idée ou votre design, et nous le transformons en tableau d'exception.</p>
                     <div class="about-features">
                         <div class="about-feature"><span>✦</span> <span data-i18n="about_f1">Qualité premium HD</span></div>
                         <div class="about-feature"><span>🚚</span> <span data-i18n="about_f2">Livraison gratuite Tunisie</span></div>
@@ -1085,13 +1109,10 @@
         <section class="cta-section">
             <div class="cta-box reveal">
                 <h2 data-i18n-html="cta_title">Vous avez un projet <span class="gradient-text">sur mesure</span> ?</h2>
-                <p data-i18n="cta_text">
-                    Envoyez-nous votre photo, votre idée ou votre design et nous créerons
-                    une toile unique rien que pour vous. Devis gratuit et sans engagement.
-                </p>
+                <p data-i18n="cta_text">Envoyez-nous votre photo, votre idée ou votre design et nous créerons une toile unique rien que pour vous. Devis gratuit et sans engagement.</p>
                 <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
                     <a href="#contact" class="btn-primary" data-i18n="cta_btn_1">Demander un devis gratuit →</a>
-                    <a href="https://wa.me/21621594522" target="_blank" class="btn-secondary" data-i18n="cta_btn_2">💬 WhatsApp</a>
+                    <a href="https://wa.me/21693871033" target="_blank" class="btn-secondary" data-i18n="cta_btn_2">💬 WhatsApp</a>
                 </div>
             </div>
         </section>
@@ -1145,21 +1166,21 @@
             <div class="contact-grid">
                 <div class="contact-info-cards reveal">
                     <div class="contact-card"><div class="card-icon">📍</div><div><h4 data-i18n="contact_address_title">Adresse</h4><p data-i18n="contact_address_text">Tunis, Tunisie</p></div></div>
-                    <div class="contact-card"><div class="card-icon">📱</div><div><h4 data-i18n="contact_phone_title">Téléphone / WhatsApp</h4><p>+216 21 594 522</p></div></div>
+                    <div class="contact-card"><div class="card-icon">📱</div><div><h4 data-i18n="contact_phone_title">Téléphone / WhatsApp</h4><p>+216 93 871 033</p></div></div>
                     <div class="contact-card"><div class="card-icon">📧</div><div><h4 data-i18n="contact_email_title">Email</h4><p>Contact@creya.tn</p></div></div>
                     <div class="contact-card"><div class="card-icon">⏰</div><div><h4 data-i18n="contact_hours_title">Horaires</h4><p data-i18n="contact_hours_text">Lun - Sam : 9h - 18h</p></div></div>
                     <div class="social-links">
                         <a href="https://www.facebook.com/profile.php?id=61581723062565" target="_blank" class="social-link" title="Facebook">f</a>
                         <a href="https://www.instagram.com/creya.tn" target="_blank" class="social-link" title="Instagram">📷</a>
-                        <a href="https://wa.me/21621594522" target="_blank" class="social-link" title="WhatsApp">💬</a>
+                        <a href="https://wa.me/21693871033" target="_blank" class="social-link" title="WhatsApp">💬</a>
                     </div>
                 </div>
                 <div class="checkout-panel reveal">
                     <h2 data-i18n="contact_form_title">✉️ Envoyez un message</h2>
-                    <div class="form-group"><label data-i18n="form_name">Nom complet</label><input type="text" data-i18n-placeholder="form_name_ph" placeholder="Votre nom"></div>
-                    <div class="form-group"><label data-i18n="form_email">Email</label><input type="email" data-i18n-placeholder="form_email_ph" placeholder="votre@email.com"></div>
+                    <div class="form-group"><label data-i18n="form_name">Nom complet</label><input type="text" id="contactName" data-i18n-placeholder="form_name_ph" placeholder="Votre nom"></div>
+                    <div class="form-group"><label data-i18n="form_email">Email</label><input type="email" id="contactEmail" data-i18n-placeholder="form_email_ph" placeholder="votre@email.com"></div>
                     <div class="form-group"><label data-i18n="form_subject">Sujet</label>
-                        <select>
+                        <select id="contactSubject">
                             <option data-i18n="subject_1">Question générale</option>
                             <option data-i18n="subject_2">Commande personnalisée</option>
                             <option data-i18n="subject_3">Suivi de commande</option>
@@ -1167,8 +1188,8 @@
                             <option data-i18n="subject_5">Autre</option>
                         </select>
                     </div>
-                    <div class="form-group"><label data-i18n="form_message">Message</label><textarea rows="4" data-i18n-placeholder="form_message_ph" placeholder="Décrivez votre projet ou posez votre question..."></textarea></div>
-                    <button class="btn-primary" style="width:100%" onclick="showToast(t('toast_message_sent'))" data-i18n="form_send">Envoyer →</button>
+                    <div class="form-group"><label data-i18n="form_message">Message</label><textarea rows="4" id="contactMessage" data-i18n-placeholder="form_message_ph" placeholder="Décrivez votre projet ou posez votre question..."></textarea></div>
+                    <button class="btn-primary" style="width:100%" onclick="sendContactEmail()" data-i18n="form_send">Envoyer →</button>
                 </div>
             </div>
         </section>
@@ -1239,6 +1260,7 @@
             <p class="footer-text" data-i18n="footer_text">© 2025 CREYA by Tass — Toiles & Tableaux sur mesure · Tunis, Tunisie</p>
             <div class="footer-links">
                 <a href="#collection" onclick="showPage('home')" data-i18n="nav_collection">Collection</a>
+                <a href="toiles-vierges.html" data-i18n="nav_blank_canvas">Toiles Vierges</a>
                 <a href="#apropos" onclick="showPage('home')" data-i18n="nav_about">À propos</a>
                 <a href="#faq" onclick="showPage('home')" data-i18n="nav_faq">FAQ</a>
                 <a href="#contact" onclick="showPage('home')" data-i18n="nav_contact">Contact</a>
@@ -1253,16 +1275,19 @@
             <button class="modal-close" onclick="closeModal()">✕</button>
             <div class="success-icon">🎉</div>
             <h3 data-i18n="modal_title">Commande confirmée !</h3>
-            <p data-i18n="modal_text">Merci pour votre commande ! Nous vous contacterons au +216 21 594 522 pour confirmer les détails. Préparez vos murs ! 🖼️</p><br>
+            <p data-i18n="modal_text">Merci pour votre commande ! Nous vous contacterons au +216 93 871 033 pour confirmer les détails. Préparez vos murs ! 🖼️</p><br>
             <button class="btn-primary" onclick="closeModal(); showPage('home');" data-i18n="modal_btn">Retour à l'accueil</button>
         </div>
     </div>
+
+    <a href="https://wa.me/21693871033" target="_blank" class="whatsapp-float" title="WhatsApp">💬</a>
 
     <script>
         const translations = {
             fr: {
                 nav_home: "Accueil",
                 nav_collection: "Collection",
+                nav_blank_canvas: "Toiles Vierges",
                 nav_about: "À propos",
                 nav_faq: "FAQ",
                 nav_contact: "Contact",
@@ -1391,18 +1416,20 @@
                 total_label: "Total",
                 footer_text: "© 2025 CREYA by Tass — Toiles & Tableaux sur mesure · Tunis, Tunisie",
                 modal_title: "Commande confirmée !",
-                modal_text: "Merci pour votre commande ! Nous vous contacterons au +216 21 594 522 pour confirmer les détails. Préparez vos murs ! 🖼️",
+                modal_text: "Merci pour votre commande ! Nous vous contacterons au +216 93 871 033 pour confirmer les détails. Préparez vos murs ! 🖼️",
                 modal_btn: "Retour à l'accueil",
-                toast_message_sent: "✅ Message envoyé avec succès ! Nous vous répondrons sous 24h.",
+                toast_message_sent: "✅ Message prêt à être envoyé par email.",
                 toast_cart_empty: "⚠️ Votre panier est vide !",
                 toast_required: "⚠️ Remplissez tous les champs obligatoires.",
                 toast_added: "ajouté au panier !",
                 cart_size: "Taille",
-                shipping_city_example: "Ex: Tunis"
+                mail_subject_prefix: "Message site CREYA - ",
+                mail_no_subject: "Contact site"
             },
             ar: {
                 nav_home: "الرئيسية",
                 nav_collection: "المجموعة",
+                nav_blank_canvas: "الكانفاس الفارغ",
                 nav_about: "من نحن",
                 nav_faq: "الأسئلة الشائعة",
                 nav_contact: "اتصل بنا",
@@ -1447,11 +1474,11 @@
                 reviews_title: "ماذا يقول عملاؤنا",
                 reviews_text: "أكثر من 500 لوحة تم تسليمها وعملاء راضون في مختلف أنحاء تونس. اكتشف تجاربهم معنا.",
                 review1_text: `"طلبت لوحة خط عربي لغرفة الجلوس وكانت النتيجة رائعة جدًا! جودة الطباعة ممتازة والألوان جميلة جدًا. كما أن التوصيل كان سريعًا. أنصح بهم بشدة."`,
-                review1_meta: "تونس — Calligraphie Noor",
+                review1_meta: "تونس — خط نور",
                 review2_text: `"هذه ثاني مرة أطلب من CREYA وأنا راضٍ جدًا. أرسلت لهم صورتي الخاصة وحولوها إلى لوحة مميزة. خدمة العملاء سريعة ومتعاونة جدًا."`,
                 review2_meta: "سوسة — تصميم مخصص",
                 review3_text: `"هدية مثالية لأختي! أحبت اللوحة التجريدية كثيرًا. التغليف كان أنيقًا، التوصيل مجاني، والنتيجة فعلًا فاخرة. عمل رائع من فريق CREYA!"`,
-                review3_meta: "صفاقس — Éclat Doré",
+                review3_meta: "صفاقس — بريق ذهبي",
                 about_tag: "✦ قصتنا",
                 about_title: "من نحن في CREYA",
                 about_p1: "في CREYA نؤمن أن كل جدار يستحق عملاً فنياً يعكس شخصية صاحبه. انطلقت علامتنا في تونس من شغف حقيقي بالفن والتصميم، بفكرة بسيطة: جعل الفن في متناول الجميع من خلال لوحات مخصصة بجودة ممتازة وأسعار مدروسة.",
@@ -1531,14 +1558,15 @@
                 total_label: "الإجمالي",
                 footer_text: "© 2025 CREYA by Tass — لوحات وكانفاس حسب الطلب · تونس، تونس",
                 modal_title: "تم تأكيد الطلب!",
-                modal_text: "شكرًا لطلبك! سنتصل بك على الرقم +216 21 594 522 لتأكيد التفاصيل. حضّر جدرانك لاستقبال الفن! 🖼️",
+                modal_text: "شكرًا لطلبك! سنتصل بك على الرقم +216 93 871 033 لتأكيد التفاصيل. حضّر جدرانك لاستقبال الفن! 🖼️",
                 modal_btn: "العودة إلى الرئيسية",
-                toast_message_sent: "✅ تم إرسال رسالتك بنجاح! سنرد عليك خلال 24 ساعة.",
+                toast_message_sent: "✅ الرسالة جاهزة للإرسال عبر البريد الإلكتروني.",
                 toast_cart_empty: "⚠️ سلتك فارغة!",
                 toast_required: "⚠️ يرجى ملء جميع الحقول الإلزامية.",
                 toast_added: "تمت إضافته إلى السلة!",
                 cart_size: "المقاس",
-                shipping_city_example: "مثال: تونس"
+                mail_subject_prefix: "رسالة من موقع CREYA - ",
+                mail_no_subject: "تواصل من الموقع"
             }
         };
 
@@ -1718,8 +1746,7 @@
             `).join('');
 
             document.querySelectorAll('.filter-btn').forEach(btn => {
-                const txt = btn.getAttribute('data-i18n');
-                if(txt) btn.dataset.filter = btn.getAttribute('onclick').match(/'([^']+)'/)[1];
+                btn.dataset.filter = btn.getAttribute('onclick').match(/'([^']+)'/)[1];
             });
         }
 
@@ -1837,6 +1864,31 @@
             tEl.innerHTML = msg;
             tEl.classList.add('show');
             setTimeout(() => tEl.classList.remove('show'), 3000);
+        }
+
+        function sendContactEmail() {
+            const name = document.getElementById('contactName').value.trim();
+            const email = document.getElementById('contactEmail').value.trim();
+            const subject = document.getElementById('contactSubject').value.trim();
+            const message = document.getElementById('contactMessage').value.trim();
+
+            if (!name || !email || !message) {
+                showToast(t('toast_required'));
+                return;
+            }
+
+            const finalSubject = encodeURIComponent(`${t('mail_subject_prefix')}${subject || t('mail_no_subject')}`);
+            const finalBody = encodeURIComponent(
+`${currentLang === 'ar' ? 'الاسم' : 'Nom'} : ${name}
+${currentLang === 'ar' ? 'البريد الإلكتروني' : 'Email'} : ${email}
+${currentLang === 'ar' ? 'الموضوع' : 'Sujet'} : ${subject}
+
+${currentLang === 'ar' ? 'الرسالة' : 'Message'} :
+${message}`
+            );
+
+            window.location.href = `mailto:Contact@creya.tn?subject=${finalSubject}&body=${finalBody}`;
+            showToast(t('toast_message_sent'));
         }
 
         window.addEventListener('scroll', () => {
