@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CREYA by TAS — Toiles & Tableaux Sur Mesure</title>
+    <title>CREYA by Tass — Toiles & Tableaux Sur Mesure</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23fdcb6e'/%3E%3Cstop offset='50%25' style='stop-color:%23e17055'/%3E%3Cstop offset='100%25' style='stop-color:%236c5ce7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='20' fill='%230a0a0f'/%3E%3Ctext x='50' y='72' text-anchor='middle' font-family='Impact,sans-serif' font-size='60' fill='url(%23g)' letter-spacing='2'%3EC%3C/text%3E%3C/svg%3E">
 
-    <!-- Google Fonts - PRELOAD for SVG -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Permanent+Marker&family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -54,15 +54,12 @@
 
         /* ============ BG EFFECTS ============ */
         .bg-grid {
-            position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image:
                 linear-gradient(rgba(108,92,231,0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(108,92,231,0.03) 1px, transparent 1px);
-            background-size: 60px 60px;
-            z-index: 0; pointer-events: none;
+            background-size: 60px 60px; z-index: 0; pointer-events: none;
         }
-
         .bg-orb {
             position: fixed; border-radius: 50%; filter: blur(120px);
             opacity: 0.15; pointer-events: none; z-index: 0;
@@ -81,33 +78,29 @@
         /* ============ NAVBAR ============ */
         .navbar {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-            padding: 8px 40px;
+            padding: 6px 40px;
             display: flex; align-items: center; justify-content: space-between;
             backdrop-filter: blur(20px) saturate(180%);
             background: rgba(10,10,15,0.75);
             border-bottom: 1px solid var(--border-glass);
             transition: var(--transition);
         }
-        .navbar.scrolled { padding: 5px 40px; background: rgba(10,10,15,0.92); }
+        .navbar.scrolled { padding: 4px 40px; background: rgba(10,10,15,0.92); }
 
         .nav-logo {
             cursor: pointer; display: flex; align-items: center;
-            text-decoration: none; transition: var(--transition);
-            flex-shrink: 0;
+            text-decoration: none; transition: var(--transition); flex-shrink: 0;
         }
-        .nav-logo:hover { transform: scale(1.03); filter: brightness(1.1); }
+        .nav-logo:hover { transform: scale(1.04); filter: brightness(1.1); }
 
-        .nav-links {
-            display: flex; gap: 8px; list-style: none;
-        }
+        .nav-links { display: flex; gap: 8px; list-style: none; }
         .nav-links a {
             color: var(--text-secondary); text-decoration: none;
             padding: 8px 18px; border-radius: 100px;
             font-size: 0.9rem; font-weight: 500; transition: var(--transition);
         }
         .nav-links a:hover, .nav-links a.active {
-            color: var(--text-primary);
-            background: var(--bg-glass);
+            color: var(--text-primary); background: var(--bg-glass);
             border: 1px solid var(--border-glass);
         }
 
@@ -119,7 +112,6 @@
             gap: 8px; font-family: 'Inter', sans-serif;
         }
         .nav-cart:hover { border-color: var(--accent3); box-shadow: 0 0 20px rgba(225,112,85,0.2); }
-
         .cart-badge {
             background: var(--accent3); color: white;
             font-size: 0.7rem; padding: 2px 7px; border-radius: 100px; font-weight: 700;
@@ -135,13 +127,9 @@
         .hero {
             min-height: 100vh; display: flex; align-items: center;
             justify-content: center; text-align: center;
-            padding: 120px 40px 80px; position: relative; z-index: 1;
+            padding: 140px 40px 80px; position: relative; z-index: 1;
         }
         .hero-content { max-width: 850px; }
-
-        .hero-logo {
-            margin-bottom: 40px; display: flex; justify-content: center;
-        }
 
         .hero-badge {
             display: inline-flex; align-items: center; gap: 8px;
@@ -161,7 +149,7 @@
 
         .hero h1 {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 4.2rem);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
             font-weight: 800; line-height: 1.1;
             margin-bottom: 24px; letter-spacing: -2px;
         }
@@ -169,12 +157,10 @@
             background: linear-gradient(135deg, var(--accent4), var(--accent3), var(--accent));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-
         .hero p {
             font-size: 1.15rem; color: var(--text-secondary);
             max-width: 600px; margin: 0 auto 40px; line-height: 1.8;
         }
-
         .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
         .btn-primary {
@@ -217,7 +203,6 @@
 
         /* ============ SECTIONS ============ */
         .section { padding: 100px 40px; position: relative; z-index: 1; }
-
         .section-header { text-align: center; margin-bottom: 60px; }
         .section-header .tag {
             display: inline-block; padding: 6px 16px;
@@ -288,7 +273,6 @@
             background: linear-gradient(135deg, var(--accent3), var(--accent));
             border-color: var(--accent3); color: white;
         }
-
         .gallery-grid {
             display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 24px; max-width: 1300px; margin: 0 auto;
@@ -349,7 +333,16 @@
             content: ''; position: absolute; inset: 2px;
             background: var(--bg-card); border-radius: 14px;
         }
-        .about-visual-box .inner-logo { position: relative; z-index: 2; }
+        .about-visual-inner {
+            position: relative; z-index: 2; text-align: center; padding: 30px;
+        }
+        .about-visual-inner .big-emoji {
+            font-size: 5rem; margin-bottom: 16px; display: block;
+        }
+        .about-visual-inner .tagline {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.3rem; color: var(--accent4); opacity: 0.7;
+        }
         .about-text h2 {
             font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem;
             font-weight: 700; margin-bottom: 20px; letter-spacing: -1px;
@@ -405,7 +398,6 @@
         /* ============ CHECKOUT ============ */
         .page { display: none; }
         .page.active { display: block; }
-
         .checkout-container {
             max-width: 1100px; margin: 100px auto 60px;
             display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; padding: 0 40px;
@@ -430,7 +422,6 @@
             border-color: var(--accent3); box-shadow: 0 0 20px rgba(225,112,85,0.15);
         }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
         .cart-items { max-height: 400px; overflow-y: auto; }
         .cart-item {
             display: flex; gap: 16px; padding: 16px 0;
@@ -443,14 +434,12 @@
         .cart-item-price { font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: var(--accent4); }
         .cart-item-remove { background: none; border: none; color: var(--danger); cursor: pointer; font-size: 1.1rem; padding: 5px; transition: var(--transition); }
         .cart-item-remove:hover { transform: scale(1.2); }
-
         .cart-summary-row { display: flex; justify-content: space-between; padding: 12px 0; font-size: 0.95rem; }
         .cart-summary-row.total {
             border-top: 2px solid var(--border-glass); margin-top: 8px;
             padding-top: 16px; font-weight: 700; font-size: 1.2rem;
         }
         .cart-summary-row.total .amount { color: var(--accent4); font-family: 'Space Grotesk', sans-serif; }
-
         .btn-checkout {
             width: 100%; padding: 16px;
             background: linear-gradient(135deg, var(--accent3), var(--accent));
@@ -467,10 +456,8 @@
             transition: 0.6s;
         }
         .btn-checkout:hover::before { left: 100%; }
-
         .empty-cart { text-align: center; padding: 40px 0; color: var(--text-muted); }
         .empty-cart .icon { font-size: 3rem; margin-bottom: 16px; }
-
         .qty-control { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
         .qty-btn {
             width: 28px; height: 28px; border-radius: 8px;
@@ -519,7 +506,7 @@
         .modal {
             background: var(--bg-secondary); border: 1px solid var(--border-glass);
             border-radius: var(--radius); max-width: 500px; width: 100%;
-            padding: 40px; text-align: center; animation: modalIn 0.4s ease;
+            padding: 40px; text-align: center; position: relative; animation: modalIn 0.4s ease;
         }
         @keyframes modalIn {
             from { opacity: 0; transform: scale(0.9) translateY(20px); }
@@ -540,8 +527,8 @@
 
         /* ============ RESPONSIVE ============ */
         @media (max-width: 900px) {
-            .navbar { padding: 8px 16px; }
-            .nav-logo svg, .nav-logo img { height: 45px !important; }
+            .navbar { padding: 6px 16px; }
+            .nav-logo svg { width: 200px !important; height: auto !important; }
             .nav-links {
                 display: none; position: absolute; top: 100%; left: 0; width: 100%;
                 background: rgba(10,10,15,0.95); backdrop-filter: blur(20px);
@@ -551,7 +538,7 @@
             .nav-links.open { display: flex; }
             .hamburger { display: flex; }
             .section { padding: 60px 20px; }
-            .hero { padding: 100px 20px 60px; }
+            .hero { padding: 120px 20px 60px; }
             .hero-stats { gap: 30px; flex-wrap: wrap; }
             .about-content { grid-template-columns: 1fr; gap: 40px; }
             .checkout-container { grid-template-columns: 1fr; padding: 0 20px; }
@@ -571,41 +558,36 @@
     <div class="bg-orb bg-orb-3"></div>
 
     <!-- ==========================================
-         NAVBAR - LOGO GRAND & VISIBLE
+         NAVBAR — Logo 4 Bold Impact (GRANDE TAILLE)
          ========================================== -->
     <nav class="navbar" id="navbar">
         <a href="#" class="nav-logo" onclick="showPage('home')">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="30 30 440 170" width="220" height="65">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="60 50 400 135" width="260" height="75">
                 <defs>
-                    <linearGradient id="navGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <linearGradient id="ng4" x1="0%" y1="0%" x2="100%" y2="100%">
                         <stop offset="0%" style="stop-color:#fdcb6e"/>
-                        <stop offset="50%" style="stop-color:#e17055"/>
-                        <stop offset="100%" style="stop-color:#6c5ce7"/>
+                        <stop offset="100%" style="stop-color:#e17055"/>
                     </linearGradient>
+                    <linearGradient id="ng4b" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:#6c5ce7"/>
+                        <stop offset="100%" style="stop-color:#a29bfe"/>
+                    </linearGradient>
+                    <filter id="ng4glow"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
                 </defs>
-                <!-- Dashed border -->
-                <rect x="50" y="40" width="400" height="140" rx="3"
-                      fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1.5" stroke-dasharray="6,3"/>
-                <!-- Crown -->
-                <g transform="translate(225, 28)" opacity="0.8">
-                    <polyline points="0,18 4,4 10,13 16,0 22,13 28,4 32,18"
-                              fill="none" stroke="#fdcb6e" stroke-width="2" stroke-linejoin="round"/>
-                </g>
-                <!-- CREYA main text -->
-                <text x="250" y="125" text-anchor="middle"
-                      font-family="'Bebas Neue', Impact, 'Arial Black', sans-serif"
-                      font-size="100" fill="url(#navGrad)" letter-spacing="10"
-                      font-weight="400">CREYA</text>
-                <!-- Drips -->
-                <rect x="120" y="128" width="3" height="22" rx="1.5" fill="#e17055" opacity="0.5"/>
-                <rect x="320" y="126" width="2.5" height="16" rx="1.25" fill="#6c5ce7" opacity="0.4"/>
-                <!-- by TAS box -->
-                <rect x="310" y="150" width="100" height="30" rx="2" fill="rgba(0,0,0,0.5)"/>
-                <text x="360" y="170" text-anchor="middle"
-                      font-family="'Bebas Neue', Impact, sans-serif"
-                      font-size="20" fill="#fdcb6e" letter-spacing="4">by TAS</text>
-                <!-- Stars -->
-                <text x="90" y="172" font-family="'Permanent Marker', cursive" font-size="13" fill="#e17055" opacity="0.5">★★★★★</text>
+                <!-- BG accent bar -->
+                <rect x="70" y="88" width="380" height="45" rx="4" fill="url(#ng4b)" opacity="0.08"/>
+                <!-- Subtitle bg -->
+                <text x="260" y="78" text-anchor="middle" font-family="'Bebas Neue',Impact,'Arial Black',sans-serif" font-size="28" fill="rgba(255,255,255,0.06)" letter-spacing="14">TOILES SUR MESURE</text>
+                <!-- CREYA main -->
+                <text x="260" y="133" text-anchor="middle" font-family="'Bebas Neue',Impact,'Arial Black',sans-serif" font-size="95" fill="url(#ng4)" letter-spacing="12" filter="url(#ng4glow)">CREYA</text>
+                <!-- Outline -->
+                <text x="260" y="133" text-anchor="middle" font-family="'Bebas Neue',Impact,'Arial Black',sans-serif" font-size="95" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.8" letter-spacing="12">CREYA</text>
+                <!-- Lines + by Tass -->
+                <line x1="120" y1="152" x2="250" y2="152" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+                <text x="325" y="158" text-anchor="middle" font-family="'Permanent Marker',cursive" font-size="22" fill="#ffffff" opacity="0.8" letter-spacing="1">by Tass</text>
+                <line x1="390" y1="152" x2="440" y2="152" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+                <!-- Brush stroke -->
+                <rect x="130" y="170" width="260" height="3" rx="1.5" fill="url(#ng4)" opacity="0.15"/>
             </svg>
         </a>
 
@@ -630,95 +612,20 @@
          ========================================== -->
     <div class="page active" id="page-home">
 
-        <!-- HERO -->
+        <!-- HERO (PAS DE LOGO ICI) -->
         <section class="hero">
             <div class="hero-content">
                 <div class="hero-badge">
                     <span class="dot"></span>
                     Collection 2025 disponible
                 </div>
-
-                <!-- ===== GRAND LOGO HERO ===== -->
-                <div class="hero-logo">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 220" width="480" height="210">
-                        <defs>
-                            <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" style="stop-color:#fdcb6e"/>
-                                <stop offset="50%" style="stop-color:#e17055"/>
-                                <stop offset="100%" style="stop-color:#6c5ce7"/>
-                            </linearGradient>
-                            <filter id="heroGlow">
-                                <feGaussianBlur stdDeviation="3" result="blur"/>
-                                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                            </filter>
-                        </defs>
-
-                        <!-- Tape marks -->
-                        <rect x="80" y="18" width="70" height="18" rx="1" fill="rgba(255,255,255,0.05)" transform="rotate(-5, 115, 27)"/>
-                        <rect x="360" y="15" width="60" height="18" rx="1" fill="rgba(255,255,255,0.05)" transform="rotate(3, 390, 24)"/>
-
-                        <!-- Stencil dashed border -->
-                        <rect x="50" y="40" width="400" height="140" rx="3"
-                              fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2" stroke-dasharray="6,3"/>
-
-                        <!-- Spray BG glow -->
-                        <ellipse cx="250" cy="105" rx="180" ry="60" fill="#6c5ce7" opacity="0.05"/>
-
-                        <!-- Crown -->
-                        <g transform="translate(215, 15)" opacity="0.8" filter="url(#heroGlow)">
-                            <polyline points="0,25 5,5 12,18 20,0 28,18 35,5 40,25"
-                                      fill="none" stroke="#fdcb6e" stroke-width="2.5" stroke-linejoin="round"/>
-                            <circle cx="5" cy="3" r="2" fill="#fdcb6e"/>
-                            <circle cx="20" cy="-2" r="2" fill="#fdcb6e"/>
-                            <circle cx="35" cy="3" r="2" fill="#fdcb6e"/>
-                        </g>
-
-                        <!-- CREYA - MAIN TEXT -->
-                        <!-- Shadow -->
-                        <text x="254" y="128" text-anchor="middle"
-                              font-family="'Bebas Neue', Impact, 'Arial Black', sans-serif"
-                              font-size="110" fill="rgba(0,0,0,0.4)" letter-spacing="10">CREYA</text>
-                        <!-- Main -->
-                        <text x="250" y="125" text-anchor="middle"
-                              font-family="'Bebas Neue', Impact, 'Arial Black', sans-serif"
-                              font-size="110" fill="url(#heroGrad)" letter-spacing="10"
-                              filter="url(#heroGlow)">CREYA</text>
-                        <!-- White highlight -->
-                        <text x="248" y="122" text-anchor="middle"
-                              font-family="'Bebas Neue', Impact, 'Arial Black', sans-serif"
-                              font-size="110" fill="white" opacity="0.06" letter-spacing="10">CREYA</text>
-
-                        <!-- Drips -->
-                        <rect x="115" y="128" width="3.5" height="35" rx="1.75" fill="#e17055" opacity="0.5"/>
-                        <rect x="310" y="125" width="3" height="28" rx="1.5" fill="#6c5ce7" opacity="0.45"/>
-                        <rect x="400" y="123" width="2.5" height="20" rx="1.25" fill="#00cec9" opacity="0.4"/>
-
-                        <!-- by TAS box -->
-                        <rect x="300" y="155" width="120" height="35" rx="2" fill="rgba(0,0,0,0.5)"/>
-                        <text x="360" y="178" text-anchor="middle"
-                              font-family="'Bebas Neue', Impact, sans-serif"
-                              font-size="24" fill="#fdcb6e" letter-spacing="5">by TAS</text>
-
-                        <!-- Stars -->
-                        <text x="82" y="175" font-family="'Permanent Marker', cursive" font-size="16" fill="#e17055" opacity="0.5">★★★★★</text>
-
-                        <!-- Spray dots -->
-                        <circle cx="55" cy="45" r="3" fill="#e17055" opacity="0.4"/>
-                        <circle cx="72" cy="38" r="2" fill="#e17055" opacity="0.3"/>
-                        <circle cx="48" cy="55" r="1.5" fill="#6c5ce7" opacity="0.3"/>
-                        <circle cx="440" cy="50" r="2.5" fill="#00cec9" opacity="0.35"/>
-                        <circle cx="455" cy="42" r="1.5" fill="#00cec9" opacity="0.25"/>
-                        <circle cx="430" cy="60" r="2" fill="#a29bfe" opacity="0.2"/>
-                    </svg>
-                </div>
-
                 <h1>
                     Des toiles <span class="gradient-text">sur mesure</span>,<br>
                     pour des murs à votre image
                 </h1>
                 <p>
                     Découvrez notre collection de toiles et tableaux personnalisés,
-                    créés selon vos envies et adaptés à tous les espaces.
+                    créés selon vos envies et adaptés à tous les espaces. Exprimez votre style unique.
                 </p>
                 <div class="hero-buttons">
                     <a href="#collection" class="btn-primary">Explorer la collection →</a>
@@ -788,32 +695,24 @@
             <div class="about-content">
                 <div class="about-visual reveal">
                     <div class="about-visual-box">
-                        <!-- Logo inside about box -->
-                        <svg class="inner-logo" xmlns="http://www.w3.org/2000/svg" viewBox="30 20 440 190" width="320" height="180" style="position:relative;z-index:2;opacity:0.7">
-                            <defs>
-                                <linearGradient id="aboutGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" style="stop-color:#fdcb6e"/>
-                                    <stop offset="50%" style="stop-color:#e17055"/>
-                                    <stop offset="100%" style="stop-color:#6c5ce7"/>
-                                </linearGradient>
-                            </defs>
-                            <rect x="50" y="40" width="400" height="140" rx="3" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" stroke-dasharray="6,3"/>
-                            <g transform="translate(225, 28)" opacity="0.7">
-                                <polyline points="0,18 4,4 10,13 16,0 22,13 28,4 32,18" fill="none" stroke="#fdcb6e" stroke-width="2" stroke-linejoin="round"/>
-                            </g>
-                            <text x="250" y="125" text-anchor="middle" font-family="'Bebas Neue', Impact, 'Arial Black', sans-serif" font-size="100" fill="url(#aboutGrad)" letter-spacing="10">CREYA</text>
-                            <rect x="310" y="150" width="100" height="30" rx="2" fill="rgba(0,0,0,0.4)"/>
-                            <text x="360" y="170" text-anchor="middle" font-family="'Bebas Neue', Impact, sans-serif" font-size="20" fill="#fdcb6e" letter-spacing="4">by TAS</text>
-                            <rect x="115" y="128" width="3" height="25" rx="1.5" fill="#e17055" opacity="0.4"/>
-                            <rect x="310" y="125" width="2.5" height="18" rx="1.25" fill="#6c5ce7" opacity="0.35"/>
-                        </svg>
+                        <div class="about-visual-inner">
+                            <span class="big-emoji">🎨</span>
+                            <span class="tagline">L'art à votre image</span>
+                        </div>
                     </div>
                 </div>
                 <div class="about-text reveal">
                     <span class="tag">✦ Notre histoire</span>
                     <h2>À propos de CREYA</h2>
-                    <p>CREYA by TAS est née d'une passion pour l'art et la décoration personnalisée. Nous croyons que chaque mur mérite une œuvre unique qui reflète la personnalité de son propriétaire.</p>
-                    <p>Nos toiles sont imprimées sur du coton premium de haute qualité, avec des couleurs éclatantes et une finition professionnelle qui dure dans le temps.</p>
+                    <p>
+                        Chez CREYA, nous croyons que chaque mur mérite une œuvre d'art qui lui ressemble. 
+                        Spécialistes de la création de toiles et tableaux sur mesure, nous mettons notre expertise 
+                        et notre passion pour l'art au service de vos projets.
+                    </p>
+                    <p>
+                        Que vous soyez un particulier ou un professionnel, nous vous accompagnons dans la création 
+                        d'œuvres uniques, personnalisées et de qualité, qui sublimeront vos espaces.
+                    </p>
                     <div class="about-features">
                         <div class="about-feature"><span>✦</span> Qualité premium</div>
                         <div class="about-feature"><span>🚚</span> Livraison Tunisie</div>
@@ -834,10 +733,22 @@
             </div>
             <div class="contact-grid">
                 <div class="contact-info-cards reveal">
-                    <div class="contact-card"><div class="card-icon">📍</div><div><h4>Adresse</h4><p>Tunisie</p></div></div>
-                    <div class="contact-card"><div class="card-icon">📱</div><div><h4>Téléphone</h4><p>+216 XX XXX XXX</p></div></div>
-                    <div class="contact-card"><div class="card-icon">📧</div><div><h4>Email</h4><p>contact@creya.tn</p></div></div>
-                    <div class="contact-card"><div class="card-icon">⏰</div><div><h4>Horaires</h4><p>Lun - Sam : 9h - 18h</p></div></div>
+                    <div class="contact-card">
+                        <div class="card-icon">📍</div>
+                        <div><h4>Adresse</h4><p>Tunis, Tunisie</p></div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="card-icon">📱</div>
+                        <div><h4>Téléphone</h4><p>+216 21 594 522</p></div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="card-icon">📧</div>
+                        <div><h4>Email</h4><p>Contact@creya.tn</p></div>
+                    </div>
+                    <div class="contact-card">
+                        <div class="card-icon">⏰</div>
+                        <div><h4>Horaires</h4><p>Lun - Sam : 9h - 18h</p></div>
+                    </div>
                     <div class="social-links">
                         <a href="#" class="social-link">f</a>
                         <a href="#" class="social-link">📷</a>
@@ -904,17 +815,26 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
+    <!-- ==========================================
+         FOOTER — Logo 4 Bold Impact
+         ========================================== -->
     <footer class="footer">
         <div class="footer-content">
             <div>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="80 55 340 120" width="160" height="50" style="opacity:0.5">
-                    <defs><linearGradient id="footGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#fdcb6e"/><stop offset="50%" style="stop-color:#e17055"/><stop offset="100%" style="stop-color:#6c5ce7"/></linearGradient></defs>
-                    <text x="250" y="125" text-anchor="middle" font-family="'Bebas Neue', Impact, 'Arial Black', sans-serif" font-size="80" fill="url(#footGrad)" letter-spacing="8">CREYA</text>
-                    <text x="360" y="165" text-anchor="middle" font-family="'Bebas Neue', Impact, sans-serif" font-size="18" fill="#fdcb6e" letter-spacing="4" opacity="0.7">by TAS</text>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="80 70 360 105" width="200" height="55" style="opacity:0.5">
+                    <defs>
+                        <linearGradient id="fg4" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#fdcb6e"/>
+                            <stop offset="100%" style="stop-color:#e17055"/>
+                        </linearGradient>
+                    </defs>
+                    <text x="260" y="133" text-anchor="middle" font-family="'Bebas Neue',Impact,'Arial Black',sans-serif" font-size="80" fill="url(#fg4)" letter-spacing="10">CREYA</text>
+                    <line x1="140" y1="150" x2="250" y2="150" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                    <text x="320" y="155" text-anchor="middle" font-family="'Permanent Marker',cursive" font-size="18" fill="#ffffff" opacity="0.6" letter-spacing="1">by Tass</text>
+                    <line x1="375" y1="150" x2="430" y2="150" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
                 </svg>
             </div>
-            <p class="footer-text">© 2025 <a href="#">CREYA by TAS</a> — Toiles & Tableaux sur mesure en Tunisie</p>
+            <p class="footer-text">© 2025 <a href="#">CREYA by Tass</a> — Toiles & Tableaux sur mesure · Tunis, Tunisie</p>
             <div class="footer-links">
                 <a href="#collection" onclick="showPage('home')">Collection</a>
                 <a href="#apropos" onclick="showPage('home')">À propos</a>
@@ -932,7 +852,7 @@
             <button class="modal-close" onclick="closeModal()">✕</button>
             <div class="success-icon">🎉</div>
             <h3>Commande confirmée !</h3>
-            <p>Merci pour votre commande ! Nous vous contacterons très bientôt pour confirmer les détails. 🖼️</p><br>
+            <p>Merci pour votre commande ! Nous vous contacterons au <strong>+216 21 594 522</strong> pour confirmer les détails. Préparez vos murs ! 🖼️</p><br>
             <button class="btn-primary" onclick="closeModal(); showPage('home');">Retour à l'accueil</button>
         </div>
     </div>
