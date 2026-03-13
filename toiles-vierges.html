@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toiles Vierges — CREYA by Tass</title>
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23fdcb6e'/%3E%3Cstop offset='50%25' style='stop-color:%23e17055'/%3E%3Cstop offset='100%25' style='stop-color:%236c5ce7'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='20' fill='%230a0a0f'/%3E%3Ctext x='50' y='72' text-anchor='middle' font-family='Impact,sans-serif' font-size='60' fill='url(%23g)' letter-spacing='2'%3EC%3C/text%3E%3C/svg%3E">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Permanent+Marker&family=Bebas+Neue&family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a2e;
+            --bg-glass: rgba(255, 255, 255, 0.03);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --text-primary: #f0f0f5;
+            --text-secondary: #b8b8cc;
+            --text-muted: #9393a8;
+            --accent: #6c5ce7;
+            --accent2: #00cec9;
+            --accent3: #e17055;
+            --accent4: #fdcb6e;
+            --success: #00b894;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        html[lang="ar"] body {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .bg-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.14;
+            pointer-events: none;
+            z-index: 0;
+            animation: orbFloat 20s ease-in-out infinite;
+        }
+        .bg-orb-1 { width: 600px; height: 600px; background: var(--accent); top: -200px; right: -200px; }
+        .bg-orb-2 { width: 500px; height: 500px; background: var(--accent2); bottom: -150px; left: -150px; animation-delay: -10s; }
+        .bg-orb-3 { width: 400px; height: 400px; background: var(--accent3); top: 45%; left: 50%; transform: translate(-50%,-50%); animation-delay: -5s; opacity: 0.06; }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0,0) scale(1); }
+            33% { transform: translate(30px,-30px) scale(1.05); }
+            66% { transform: translate(-20px,20px) scale(0.95); }
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            z-index: 1000;
+            padding: 10px 40px;
+            display: flex; align-items: center; justify-content: space-between;
+            backdrop-filter: blur(20px) saturate(180%);
+            background: rgba(10,10,15,0.78);
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .nav-logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .lang-switcher {
+            display: flex;
+            align-items: center;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 100px;
+            padding: 4px;
+        }
+
+        .lang-btn {
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            padding: 8px 14px;
+            border-radius: 100px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, var(--accent3), var(--accent));
+            color: white;
+        }
+
+        .btn-back {
+            padding: 12px 20px;
+            border-radius: 100px;
+            text-decoration: none;
+            color: var(--text-primary);
+            border: 1px solid var(--border-glass);
+            background: var(--bg-glass);
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .btn-back:hover {
+            border-color: var(--accent3);
+            background: rgba(255,255,255,0.04);
+        }
+
+        .hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 140px 20px 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content { max-width: 850px; }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 100px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            color: var(--accent4);
+            font-size: 0.85rem;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.4rem, 6vw, 4.4rem);
+            line-height: 1.1;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
+
+        html[lang="ar"] .hero h1,
+        html[lang="ar"] .section-header h2,
+        html[lang="ar"] .cta-box h2 {
+            font-family: 'Cairo', sans-serif;
+            letter-spacing: 0;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--accent4), var(--accent3), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 1.08rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.85;
+        }
+
+        .section {
+            padding: 40px 20px 100px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header .tag {
+            display: inline-block;
+            padding: 6px 16px;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            color: var(--accent4);
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        .section-header h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin: 16px auto 0;
+        }
+
+        .glow-line {
+            width: 80px; height: 3px;
+            background: linear-gradient(90deg, var(--accent4), var(--accent3), var(--accent));
+            border-radius: 10px; margin: 16px auto 0;
+        }
+
+        .pricing-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+        }
+
+        .price-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            text-align: center;
+            transition: var(--transition);
+            backdrop-filter: blur(14px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .price-card::before {
+            content: '';
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent4), var(--accent3), var(--accent));
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .price-card:hover::before { opacity: 1; }
+
+        .price-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(225,112,85,0.35);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+        }
+
+        .canvas-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 18px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(225,112,85,0.2), rgba(108,92,231,0.25));
+            border: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+        }
+
+        .price-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .price-card p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            margin-bottom: 14px;
+        }
+
+        .price {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent4);
+            margin-bottom: 16px;
+        }
+
+        .card-actions {
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn-order {
+            padding: 10px 18px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--accent3), var(--accent));
+            color: white;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-order:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(225,112,85,0.25);
+        }
+
+        .info-box {
+            max-width: 1100px;
+            margin: 60px auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .info-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius);
+            padding: 24px;
+            transition: var(--transition);
+        }
+
+        .info-card:hover {
+            border-color: rgba(225,112,85,0.3);
+            transform: translateY(-4px);
+        }
+
+        .info-card h4 {
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .info-card p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            line-height: 1.8;
+        }
+
+        .cta-box {
+            max-width: 900px;
+            margin: 80px auto 0;
+            background: linear-gradient(135deg, rgba(225,112,85,0.1), rgba(108,92,231,0.1));
+            border: 1px solid rgba(225,112,85,0.2);
+            border-radius: var(--radius);
+            padding: 50px 30px;
+            text-align: center;
+        }
+
+        .cta-box h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            margin-bottom: 16px;
+        }
+
+        .cta-box p {
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin: 0 auto 24px;
+        }
+
+        .cta-actions {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            padding: 14px 28px;
+            background: linear-gradient(135deg, var(--accent3), var(--accent));
+            color: white;
+            border: none;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(225,112,85,0.3);
+        }
+
+        .btn-secondary {
+            padding: 14px 28px;
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-glass);
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            background: var(--bg-glass);
+        }
+
+        .footer {
+            padding: 40px 20px 30px;
+            border-top: 1px solid var(--border-glass);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #25D366, #1ebe5d);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.6rem;
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.35);
+            z-index: 3000;
+            transition: var(--transition);
+        }
+
+        .whatsapp-float:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 18px 40px rgba(37, 211, 102, 0.45);
+        }
+
+        html[dir="rtl"] .whatsapp-float {
+            right: auto;
+            left: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .navbar {
+                padding: 10px 16px;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .nav-logo svg {
+                width: 180px !important;
+                height: auto !important;
+            }
+
+            .hero {
+                padding: 180px 20px 60px;
+            }
+
+            .nav-actions {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+
+    <nav class="navbar">
+        <a href="index.html" class="nav-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="60 50 400 135" width="220" height="65">
+                <defs>
+                    <linearGradient id="ng4" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#fdcb6e"/>
+                        <stop offset="100%" style="stop-color:#e17055"/>
+                    </linearGradient>
+                </defs>
+                <text x="260" y="133" text-anchor="middle" font-family="'Bebas Neue',Impact,'Arial Black',sans-serif" font-size="95" fill="url(#ng4)" letter-spacing="12">CREYA</text>
+                <line x1="120" y1="152" x2="250" y2="152" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+                <text x="325" y="158" text-anchor="middle" font-family="'Permanent Marker',cursive" font-size="22" fill="#ffffff" opacity="0.8" letter-spacing="1">by Tass</text>
+                <line x1="390" y1="152" x2="440" y2="152" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+            </svg>
+        </a>
+
+        <div class="nav-actions">
+            <div class="lang-switcher">
+                <button class="lang-btn active" onclick="setLanguage('fr')" id="btn-fr">FR</button>
+                <button class="lang-btn" onclick="setLanguage('ar')" id="btn-ar">العربية</button>
+            </div>
+            <a href="index.html" class="btn-back" id="backBtn">← Retour au site</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge" id="heroBadge">🖼️ Formats disponibles</div>
+            <h1 id="heroTitle">Nos <span class="gradient-text">Toiles Vierges</span></h1>
+            <p id="heroText">
+                Découvrez tous nos formats de toiles vierges disponibles avec leurs tarifs.
+                Idéal pour les artistes, créateurs, décorateurs et projets personnalisés.
+                Qualité soignée, châssis propre, formats variés pour répondre à tous les besoins.
+            </p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-header">
+            <span class="tag" id="sectionTag">📏 Tarifs & dimensions</span>
+            <h2 id="sectionTitle">Catalogue des formats</h2>
+            <div class="glow-line"></div>
+            <p id="sectionText">
+                Tous les prix sont indiqués en dinars tunisiens. Pour les grands formats ou demandes spéciales,
+                vous pouvez également nous contacter directement.
+            </p>
+        </div>
+
+        <div class="pricing-grid" id="pricingGrid"></div>
+
+        <div class="info-box">
+            <div class="info-card">
+                <h4 id="info1Title">✅ Qualité de fabrication</h4>
+                <p id="info1Text">Nos toiles vierges sont préparées avec soin pour garantir une surface propre, tendue et prête à l’usage pour peinture, impression ou décoration.</p>
+            </div>
+            <div class="info-card">
+                <h4 id="info2Title">📦 Formats variés</h4>
+                <p id="info2Text">Du petit format compact au très grand format mural, vous trouverez facilement la dimension adaptée à votre projet créatif ou décoratif.</p>
+            </div>
+            <div class="info-card">
+                <h4 id="info3Title">💬 Demande spéciale</h4>
+                <p id="info3Text">Vous cherchez un autre format ou une quantité spécifique ? Contactez-nous directement pour obtenir un devis personnalisé.</p>
+            </div>
+        </div>
+
+        <div class="cta-box">
+            <h2 id="ctaTitle">Besoin d’un format <span class="gradient-text">spécifique</span> ?</h2>
+            <p id="ctaText">
+                Si vous souhaitez une toile vierge sur mesure ou commander plusieurs pièces,
+                nous pouvons vous proposer une offre adaptée à votre besoin.
+            </p>
+            <div class="cta-actions">
+                <a href="https://wa.me/21621594522" target="_blank" class="btn-primary" id="ctaBtn1">💬 Commander sur WhatsApp</a>
+                <a href="index.html#contact" class="btn-secondary" id="ctaBtn2">Nous contacter</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer" id="footerText">
+        © 2025 CREYA by Tass — Toiles Vierges · Tunis, Tunisie
+    </footer>
+
+    <a href="https://wa.me/21621594522" target="_blank" class="whatsapp-float" title="WhatsApp">💬</a>
+
+    <script>
+        const canvasFormats = [
+            { size: "10/10", price: "4.500 DT" },
+            { size: "10/20", price: "5.000 DT" },
+            { size: "20/20", price: "5.500 DT" },
+            { size: "20/30", price: "6.000 DT" },
+            { size: "30/30", price: "6.500 DT" },
+            { size: "30/40", price: "10.000 DT" },
+            { size: "40/40", price: "15.000 DT" },
+            { size: "40/50", price: "15.500 DT" },
+            { size: "50/50", price: "18.000 DT" },
+            { size: "30/60", price: "16.000 DT" },
+            { size: "50/60", price: "21.000 DT" },
+            { size: "40/80", price: "22.000 DT" },
+            { size: "40/60", price: "17.000 DT" },
+            { size: "50/70", price: "22.500 DT" },
+            { size: "60/60", price: "23.000 DT" },
+            { size: "70/70", price: "24.000 DT" },
+            { size: "60/80", price: "32.000 DT" },
+            { size: "50/80", price: "27.000 DT" },
+            { size: "110/1M", price: "65.000 DT" },
+            { size: "90/1M", price: "55.000 DT" },
+            { size: "80/1M", price: "50.000 DT" },
+            { size: "1M/1M", price: "60.000 DT" },
+            { size: "60/1M", price: "37.000 DT" },
+            { size: "70/1M", price: "45.000 DT" },
+            { size: "70/90", price: "45.000 DT" }
+        ];
+
+        const translations = {
+            fr: {
+                title: "Toiles Vierges — CREYA by Tass",
+                back: "← Retour au site",
+                heroBadge: "🖼️ Formats disponibles",
+                heroTitle: `Nos <span class="gradient-text">Toiles Vierges</span>`,
+                heroText: "Découvrez tous nos formats de toiles vierges disponibles avec leurs tarifs. Idéal pour les artistes, créateurs, décorateurs et projets personnalisés. Qualité soignée, châssis propre, formats variés pour répondre à tous les besoins.",
+                sectionTag: "📏 Tarifs & dimensions",
+                sectionTitle: "Catalogue des formats",
+                sectionText: "Tous les prix sont indiqués en dinars tunisiens. Pour les grands formats ou demandes spéciales, vous pouvez également nous contacter directement.",
+                cardDesc: "Toile vierge prête à l’usage",
+                orderBtn: "Commander",
+                info1Title: "✅ Qualité de fabrication",
+                info1Text: "Nos toiles vierges sont préparées avec soin pour garantir une surface propre, tendue et prête à l’usage pour peinture, impression ou décoration.",
+                info2Title: "📦 Formats variés",
+                info2Text: "Du petit format compact au très grand format mural, vous trouverez facilement la dimension adaptée à votre projet créatif ou décoratif.",
+                info3Title: "💬 Demande spéciale",
+                info3Text: "Vous cherchez un autre format ou une quantité spécifique ? Contactez-nous directement pour obtenir un devis personnalisé.",
+                ctaTitle: `Besoin d’un format <span class="gradient-text">spécifique</span> ?`,
+                ctaText: "Si vous souhaitez une toile vierge sur mesure ou commander plusieurs pièces, nous pouvons vous proposer une offre adaptée à votre besoin.",
+                ctaBtn1: "💬 Commander sur WhatsApp",
+                ctaBtn2: "Nous contacter",
+                footer: "© 2025 CREYA by Tass — Toiles Vierges · Tunis, Tunisie",
+                whatsappMessage: "Bonjour, je souhaite commander une toile vierge de taille "
+            },
+            ar: {
+                title: "الكانفاس الفارغ — CREYA by Tass",
+                back: "العودة إلى الموقع →",
+                heroBadge: "🖼️ المقاسات المتوفرة",
+                heroTitle: `لوحات <span class="gradient-text">كانفاس فارغة</span>`,
+                heroText: "اكتشف جميع مقاسات الكانفاس الفارغ المتوفرة لدينا مع الأسعار. مثالي للفنانين والمبدعين والمشاريع الفنية والتزيينية. جودة ممتازة، تشطيب نظيف، ومقاسات متنوعة تناسب كل الاحتياجات.",
+                sectionTag: "📏 الأسعار والمقاسات",
+                sectionTitle: "دليل المقاسات",
+                sectionText: "جميع الأسعار بالدينار التونسي. بالنسبة للمقاسات الكبيرة أو الطلبات الخاصة، يمكنكم التواصل معنا مباشرة.",
+                cardDesc: "كانفاس فارغ جاهز للاستعمال",
+                orderBtn: "اطلب الآن",
+                info1Title: "✅ جودة التصنيع",
+                info1Text: "يتم تجهيز الكانفاس الفارغ بعناية ليكون مشدودًا ونظيفًا وجاهزًا للاستعمال في الرسم أو الطباعة أو الزخرفة.",
+                info2Title: "📦 مقاسات متنوعة",
+                info2Text: "من المقاسات الصغيرة إلى المقاسات الجدارية الكبيرة، ستجد المقاس المناسب لمشروعك الفني أو الديكوري.",
+                info3Title: "💬 طلب خاص",
+                info3Text: "هل تبحث عن مقاس آخر أو كمية محددة؟ تواصل معنا مباشرة للحصول على عرض سعر مخصص.",
+                ctaTitle: `هل تحتاج إلى مقاس <span class="gradient-text">مخصص</span>؟`,
+                ctaText: "إذا كنت ترغب في كانفاس فارغ حسب الطلب أو في طلب عدة قطع، يمكننا أن نقدم لك عرضًا مناسبًا لاحتياجك.",
+                ctaBtn1: "💬 اطلب عبر واتساب",
+                ctaBtn2: "اتصل بنا",
+                footer: "© 2025 CREYA by Tass — كانفاس فارغ · تونس، تونس",
+                whatsappMessage: "مرحبًا، أريد طلب كانفاس فارغ بمقاس "
+            }
+        };
+
+        let currentLang = 'fr';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+            document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
+            document.getElementById('btn-ar').classList.toggle('active', lang === 'ar');
+
+            const tr = translations[lang];
+            document.title = tr.title;
+            document.getElementById('backBtn').textContent = tr.back;
+            document.getElementById('heroBadge').textContent = tr.heroBadge;
+            document.getElementById('heroTitle').innerHTML = tr.heroTitle;
+            document.getElementById('heroText').textContent = tr.heroText;
+            document.getElementById('sectionTag').textContent = tr.sectionTag;
+            document.getElementById('sectionTitle').textContent = tr.sectionTitle;
+            document.getElementById('sectionText').textContent = tr.sectionText;
+            document.getElementById('info1Title').textContent = tr.info1Title;
+            document.getElementById('info1Text').textContent = tr.info1Text;
+            document.getElementById('info2Title').textContent = tr.info2Title;
+            document.getElementById('info2Text').textContent = tr.info2Text;
+            document.getElementById('info3Title').textContent = tr.info3Title;
+            document.getElementById('info3Text').textContent = tr.info3Text;
+            document.getElementById('ctaTitle').innerHTML = tr.ctaTitle;
+            document.getElementById('ctaText').textContent = tr.ctaText;
+            document.getElementById('ctaBtn1').textContent = tr.ctaBtn1;
+            document.getElementById('ctaBtn2').textContent = tr.ctaBtn2;
+            document.getElementById('footerText').textContent = tr.footer;
+
+            renderCards();
+        }
+
+        function renderCards() {
+            const grid = document.getElementById('pricingGrid');
+            const tr = translations[currentLang];
+
+            grid.innerHTML = canvasFormats.map(item => {
+                const message = encodeURIComponent(tr.whatsappMessage + item.size);
+                return `
+                    <div class="price-card">
+                        <div class="canvas-icon">🖼️</div>
+                        <h3>${currentLang === 'ar' ? 'مقاس ' + item.size : 'Taille ' + item.size}</h3>
+                        <p>${tr.cardDesc}</p>
+                        <div class="price">${item.price}</div>
+                        <div class="card-actions">
+                            <a class="btn-order" href="https://wa.me/21621594522?text=${message}" target="_blank">
+                                ${currentLang === 'ar' ? '💬 ' + tr.orderBtn : '💬 ' + tr.orderBtn}
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        renderCards();
+        setLanguage('fr');
+    </script>
+</body>
+</html>
