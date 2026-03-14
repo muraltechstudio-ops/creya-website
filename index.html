@@ -1283,6 +1283,25 @@
     <a href="https://wa.me/21693871033" target="_blank" class="whatsapp-float" title="WhatsApp">💬</a>
 
     <script>
+        const sizePriceMap = {
+            "10×10": 0, "10×20": 5, "20×20": 8,
+            "20×30": 10, "30×30": 12, "30×40": 0,
+            "40×40": 18, "40×50": 20, "50×50": 24,
+            "30×60": 16, "50×60": 28, "40×80": 30,
+            "40×60": 18, "50×70": 22, "60×60": 26,
+            "70×70": 30, "60×80": 38, "50×80": 32,
+            "110×1M": 70, "90×1M": 58, "80×1M": 52,
+            "1M×1M": 65, "60×1M": 42, "70×1M": 48,
+            "70×90": 45,
+            "30×40": 0,
+            "50×70": 22,
+            "60×90": 35,
+            "40×60": 18,
+            "70×100": 42,
+            "80×120": 60,
+            "Custom": 30
+        };
+
         const translations = {
             fr: {
                 nav_home: "Accueil",
@@ -1576,6 +1595,10 @@
             return translations[currentLang][key] || key;
         }
 
+        function getPriceForSize(basePrice, size) {
+            return basePrice + (sizePriceMap[size] || 0);
+        }
+
         function setLanguage(lang) {
             currentLang = lang;
             document.documentElement.lang = lang;
@@ -1659,7 +1682,7 @@
                 category:"nature",
                 categoryLabel:{fr:"nature", ar:"طبيعة"},
                 price:85,
-                img:"https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=600&h=700&fit=crop",
+                img:"https://images.unsplash.com/photo-1468327768560-75b778cbb551?w=600&h=700&fit=crop",
                 sizes:["30×40","50×70"]
             },
             {
@@ -1724,26 +1747,32 @@
         function renderGallery(filter = 'all') {
             const grid = document.getElementById('galleryGrid');
             const filtered = filter === 'all' ? artworks : artworks.filter(a => a.category === filter);
-            grid.innerHTML = filtered.map(art => `
-                <div class="artwork-card reveal visible">
-                    <div class="artwork-img-wrapper">
-                        <img class="artwork-img" src="${art.img}" alt="${art.name[currentLang]}" loading="lazy">
-                        <div class="artwork-overlay">
-                            <button class="artwork-quick-add" onclick="addToCart(${art.id})">${currentLang === 'ar' ? '+ أضف إلى السلة' : '+ Ajouter au panier'}</button>
+
+            grid.innerHTML = filtered.map(art => {
+                const selectedSize = selectedSizes[art.id] || art.sizes[0];
+                const currentPrice = getPriceForSize(art.price, selectedSize);
+
+                return `
+                    <div class="artwork-card reveal visible">
+                        <div class="artwork-img-wrapper">
+                            <img class="artwork-img" src="${art.img}" alt="${art.name[currentLang]}" loading="lazy">
+                            <div class="artwork-overlay">
+                                <button class="artwork-quick-add" onclick="addToCart(${art.id})">${currentLang === 'ar' ? '+ أضف إلى السلة' : '+ Ajouter au panier'}</button>
+                            </div>
+                        </div>
+                        <div class="artwork-info">
+                            <h3>${art.name[currentLang]}</h3>
+                            <div class="artwork-meta">
+                                <span class="artwork-category">${art.categoryLabel[currentLang]}</span>
+                                <span class="artwork-price" id="price-${art.id}">${currentPrice} TND</span>
+                            </div>
+                            <div class="artwork-sizes">
+                                ${art.sizes.map((s,i) => `<span class="size-tag ${selectedSize===s?'selected':''}" onclick="selectSize(${art.id},'${s}',this)">${s}</span>`).join('')}
+                            </div>
                         </div>
                     </div>
-                    <div class="artwork-info">
-                        <h3>${art.name[currentLang]}</h3>
-                        <div class="artwork-meta">
-                            <span class="artwork-category">${art.categoryLabel[currentLang]}</span>
-                            <span class="artwork-price">${art.price} TND</span>
-                        </div>
-                        <div class="artwork-sizes">
-                            ${art.sizes.map((s,i) => `<span class="size-tag ${i===0?'selected':''}" onclick="selectSize(${art.id},'${s}',this)">${s}</span>`).join('')}
-                        </div>
-                    </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
 
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.dataset.filter = btn.getAttribute('onclick').match(/'([^']+)'/)[1];
@@ -1760,14 +1789,27 @@
             selectedSizes[id] = size;
             el.parentElement.querySelectorAll('.size-tag').forEach(s => s.classList.remove('selected'));
             el.classList.add('selected');
+
+            const art = artworks.find(a => a.id === id);
+            const newPrice = getPriceForSize(art.price, size);
+            const priceEl = document.getElementById(`price-${id}`);
+            if (priceEl) priceEl.textContent = `${newPrice} TND`;
         }
 
         function addToCart(id) {
             const art = artworks.find(a => a.id === id);
             const size = selectedSizes[id] || art.sizes[0];
+            const finalPrice = getPriceForSize(art.price, size);
+
             const existing = cart.find(item => item.id === id && item.size === size);
             if (existing) existing.qty++;
-            else cart.push({ ...art, size, qty: 1 });
+            else cart.push({
+                ...art,
+                size,
+                finalPrice,
+                qty: 1
+            });
+
             updateCartUI();
             showToast(`✅ "${art.name[currentLang]}" (${size}) ${t('toast_added')}`);
         }
@@ -1793,6 +1835,7 @@
             const container = document.getElementById('cartItems');
             const summary = document.getElementById('cartSummary');
             const empty = document.getElementById('emptyCart');
+
             if (cart.length === 0) {
                 empty.style.display = 'block';
                 summary.style.display = 'none';
@@ -1800,8 +1843,10 @@
                 container.appendChild(empty);
                 return;
             }
+
             empty.style.display = 'none';
             summary.style.display = 'block';
+
             container.innerHTML = cart.map((item, i) => `
                 <div class="cart-item">
                     <img class="cart-item-img" src="${item.img}" alt="${item.name[currentLang]}">
@@ -1814,11 +1859,12 @@
                             <button class="qty-btn" onclick="changeQty(${i},1)">+</button>
                         </div>
                     </div>
-                    <span class="cart-item-price">${item.price * item.qty} TND</span>
+                    <span class="cart-item-price">${item.finalPrice * item.qty} TND</span>
                     <button class="cart-item-remove" onclick="removeFromCart(${i})">✕</button>
                 </div>
             `).join('');
-            const sub = cart.reduce((s, i) => s + i.price * i.qty, 0);
+
+            const sub = cart.reduce((s, i) => s + i.finalPrice * i.qty, 0);
             document.getElementById('subtotal').textContent = sub + ' TND';
             document.getElementById('totalAmount').textContent = sub + ' TND';
         }
@@ -1900,8 +1946,8 @@ ${message}`
             });
         });
 
-        renderGallery();
         artworks.forEach(art => { selectedSizes[art.id] = art.sizes[0]; });
+        renderGallery();
         setLanguage('fr');
     </script>
 </body>
