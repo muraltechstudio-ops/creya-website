@@ -94,8 +94,7 @@
             content: "";
             position: absolute;
             inset: 0;
-            background:
-                radial-gradient(circle at 50% 50%, rgba(255,255,255,0.025), transparent 38%);
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.025), transparent 38%);
             z-index: 0;
             pointer-events: none;
         }
@@ -1888,11 +1887,64 @@
 
         function placeOrder() {
             if (cart.length === 0) { showToast(t('toast_cart_empty')); return; }
-            const f = document.getElementById('firstName').value;
-            const p = document.getElementById('phone').value;
-            const a = document.getElementById('address').value;
-            const c = document.getElementById('city').value;
-            if (!f || !p || !a || !c) { showToast(t('toast_required')); return; }
+
+            const f = document.getElementById('firstName').value.trim();
+            const l = document.getElementById('lastName').value.trim();
+            const p = document.getElementById('phone').value.trim();
+            const e = document.getElementById('email').value.trim();
+            const a = document.getElementById('address').value.trim();
+            const c = document.getElementById('city').value.trim();
+            const z = document.getElementById('zip').value.trim();
+            const n = document.getElementById('notes').value.trim();
+            const pay = document.getElementById('payment').value;
+
+            if (!f || !p || !a || !c) {
+                showToast(t('toast_required'));
+                return;
+            }
+
+            const orderLines = cart.map(item =>
+                `- ${item.name[currentLang]} | ${t('cart_size')}: ${item.size} | Qté: ${item.qty} | ${item.finalPrice * item.qty} TND`
+            ).join('\n');
+
+            const total = cart.reduce((s, i) => s + i.finalPrice * i.qty, 0);
+
+            const subject = encodeURIComponent(currentLang === 'ar' ? 'طلب جديد من موقع CREYA' : 'Nouvelle commande site CREYA');
+            const body = encodeURIComponent(
+`${currentLang === 'ar' ? 'الاسم' : 'Prénom'}: ${f}
+${currentLang === 'ar' ? 'اللقب' : 'Nom'}: ${l}
+${currentLang === 'ar' ? 'الهاتف' : 'Téléphone'}: ${p}
+Email: ${e}
+${currentLang === 'ar' ? 'العنوان' : 'Adresse'}: ${a}
+${currentLang === 'ar' ? 'المدينة' : 'Ville'}: ${c}
+${currentLang === 'ar' ? 'الرمز البريدي' : 'Code postal'}: ${z}
+${currentLang === 'ar' ? 'طريقة الدفع' : 'Mode de paiement'}: ${pay}
+${currentLang === 'ar' ? 'ملاحظات' : 'Notes'}: ${n || '-'}
+
+${currentLang === 'ar' ? 'محتوى الطلب' : 'Contenu de la commande'}:
+${orderLines}
+
+${currentLang === 'ar' ? 'الإجمالي' : 'Total'}: ${total} TND`
+            );
+
+            const whatsappText = encodeURIComponent(
+`${currentLang === 'ar' ? 'طلب جديد من موقع CREYA' : 'Nouvelle commande CREYA'}
+
+${currentLang === 'ar' ? 'الاسم' : 'Prénom'}: ${f}
+${currentLang === 'ar' ? 'اللقب' : 'Nom'}: ${l}
+${currentLang === 'ar' ? 'الهاتف' : 'Téléphone'}: ${p}
+${currentLang === 'ar' ? 'العنوان' : 'Adresse'}: ${a}
+${currentLang === 'ar' ? 'المدينة' : 'Ville'}: ${c}
+${currentLang === 'ar' ? 'طريقة الدفع' : 'Paiement'}: ${pay}
+
+${orderLines}
+
+${currentLang === 'ar' ? 'الإجمالي' : 'Total'}: ${total} TND`
+            );
+
+            window.open(`mailto:Contact@creya.tn?subject=${subject}&body=${body}`, '_blank');
+            window.open(`https://wa.me/21693871033?text=${whatsappText}`, '_blank');
+
             document.getElementById('successModal').classList.add('show');
             cart = [];
             updateCartUI();
