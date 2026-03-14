@@ -25,7 +25,6 @@
             --accent2: #00cec9;
             --accent3: #e17055;
             --accent4: #fdcb6e;
-            --success: #00b894;
             --radius: 16px;
             --radius-sm: 10px;
             --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -316,7 +315,11 @@
             transition: var(--transition);
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
         }
 
         .btn-order:hover {
@@ -623,7 +626,9 @@
                 ctaText: "Si vous souhaitez une toile vierge sur mesure ou commander plusieurs pièces, nous pouvons vous proposer une offre adaptée à votre besoin.",
                 ctaBtn1: "Nous contacter",
                 ctaBtn2: "Retour au site",
-                footer: "© 2026 CREYA by Tass — Toiles Vierges · Tunis, Tunisie"
+                footer: "© 2026 CREYA by Tass — Toiles Vierges · Tunis, Tunisie",
+                blankCanvasName: "Toile Vierge",
+                blankCanvasToast: "Toile vierge ajoutée au panier"
             },
             ar: {
                 title: "الكانفاس الفارغ — CREYA by Tass",
@@ -646,7 +651,9 @@
                 ctaText: "إذا كنت ترغب في كانفاس فارغ حسب الطلب أو في طلب عدة قطع، يمكننا أن نقدم لك عرضًا مناسبًا لاحتياجك.",
                 ctaBtn1: "اتصل بنا",
                 ctaBtn2: "العودة إلى الموقع",
-                footer: "© 2026 CREYA by Tass — كانفاس فارغ · تونس، تونس"
+                footer: "© 2026 CREYA by Tass — كانفاس فارغ · تونس، تونس",
+                blankCanvasName: "كانفاس فارغ",
+                blankCanvasToast: "تمت إضافة الكانفاس الفارغ إلى السلة"
             }
         };
 
@@ -706,6 +713,26 @@
             renderCards();
         }
 
+        function orderBlankCanvas(size, price) {
+            const numericPrice = parseFloat(price.replace(' DT', '').replace(',', '.'));
+
+            const blankCanvasItem = {
+                id: 'blank-' + size,
+                name: {
+                    fr: `${translations.fr.blankCanvasName} ${size}`,
+                    ar: `${translations.ar.blankCanvasName} ${size}`
+                },
+                size: size,
+                finalPrice: numericPrice,
+                qty: 1,
+                img: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&h=700&fit=crop',
+                isBlankCanvas: true
+            };
+
+            localStorage.setItem('blankCanvasOrder', JSON.stringify(blankCanvasItem));
+            window.location.href = 'index.html?checkout=1';
+        }
+
         function renderCards() {
             const grid = document.getElementById('pricingGrid');
             const tr = translations[currentLang];
@@ -717,9 +744,9 @@
                     <p>${tr.cardDesc}</p>
                     <div class="price">${item.price}</div>
                     <div class="card-actions">
-                        <a class="btn-order" href="index.html#page-checkout">
+                        <button class="btn-order" onclick="orderBlankCanvas('${item.size}','${item.price}')">
                             🛒 ${tr.orderBtn}
-                        </a>
+                        </button>
                     </div>
                 </div>
             `).join('');
