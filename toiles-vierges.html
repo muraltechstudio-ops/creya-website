@@ -32,7 +32,6 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         html { scroll-behavior: smooth; }
 
         body {
@@ -267,16 +266,18 @@
         }
 
         .canvas-icon {
-            width: 64px;
-            height: 64px;
+            width: 86px;
+            height: 86px;
             margin: 0 auto 18px;
-            border-radius: 16px;
-            background: linear-gradient(135deg, rgba(225,112,85,0.2), rgba(108,92,231,0.25));
-            border: 1px solid rgba(255,255,255,0.08);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.6rem;
+        }
+
+        .canvas-icon svg {
+            width: 86px;
+            height: 86px;
+            display: block;
         }
 
         .price-card h3 {
@@ -559,17 +560,17 @@
                 nous pouvons vous proposer une offre adaptée à votre besoin.
             </p>
             <div class="cta-actions">
-                <a href="https://wa.me/21621594522" target="_blank" class="btn-primary" id="ctaBtn1">💬 Commander sur WhatsApp</a>
-                <a href="index.html#contact" class="btn-secondary" id="ctaBtn2">Nous contacter</a>
+                <a href="index.html#contact" class="btn-primary" id="ctaBtn1">Nous contacter</a>
+                <a href="index.html" class="btn-secondary" id="ctaBtn2">Retour au site</a>
             </div>
         </div>
     </section>
 
     <footer class="footer" id="footerText">
-        © 2025 CREYA by Tass — Toiles Vierges · Tunis, Tunisie
+        © 2026 CREYA by Tass — Toiles Vierges · Tunis, Tunisie
     </footer>
 
-    <a href="https://wa.me/21621594522" target="_blank" class="whatsapp-float" title="WhatsApp">💬</a>
+    <a href="https://wa.me/21693871033" target="_blank" class="whatsapp-float" title="WhatsApp">💬</a>
 
     <script>
         const canvasFormats = [
@@ -620,10 +621,9 @@
                 info3Text: "Vous cherchez un autre format ou une quantité spécifique ? Contactez-nous directement pour obtenir un devis personnalisé.",
                 ctaTitle: `Besoin d’un format <span class="gradient-text">spécifique</span> ?`,
                 ctaText: "Si vous souhaitez une toile vierge sur mesure ou commander plusieurs pièces, nous pouvons vous proposer une offre adaptée à votre besoin.",
-                ctaBtn1: "💬 Commander sur WhatsApp",
-                ctaBtn2: "Nous contacter",
-                footer: "© 2025 CREYA by Tass — Toiles Vierges · Tunis, Tunisie",
-                whatsappMessage: "Bonjour, je souhaite commander une toile vierge de taille "
+                ctaBtn1: "Nous contacter",
+                ctaBtn2: "Retour au site",
+                footer: "© 2026 CREYA by Tass — Toiles Vierges · Tunis, Tunisie"
             },
             ar: {
                 title: "الكانفاس الفارغ — CREYA by Tass",
@@ -644,14 +644,35 @@
                 info3Text: "هل تبحث عن مقاس آخر أو كمية محددة؟ تواصل معنا مباشرة للحصول على عرض سعر مخصص.",
                 ctaTitle: `هل تحتاج إلى مقاس <span class="gradient-text">مخصص</span>؟`,
                 ctaText: "إذا كنت ترغب في كانفاس فارغ حسب الطلب أو في طلب عدة قطع، يمكننا أن نقدم لك عرضًا مناسبًا لاحتياجك.",
-                ctaBtn1: "💬 اطلب عبر واتساب",
-                ctaBtn2: "اتصل بنا",
-                footer: "© 2025 CREYA by Tass — كانفاس فارغ · تونس، تونس",
-                whatsappMessage: "مرحبًا، أريد طلب كانفاس فارغ بمقاس "
+                ctaBtn1: "اتصل بنا",
+                ctaBtn2: "العودة إلى الموقع",
+                footer: "© 2026 CREYA by Tass — كانفاس فارغ · تونس، تونس"
             }
         };
 
         let currentLang = 'fr';
+
+        function canvasSvg() {
+            return `
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <defs>
+                        <linearGradient id="frameGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#fdcb6e"/>
+                            <stop offset="100%" stop-color="#e17055"/>
+                        </linearGradient>
+                        <linearGradient id="canvasGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#f7f4ee"/>
+                            <stop offset="100%" stop-color="#ebe5d8"/>
+                        </linearGradient>
+                    </defs>
+                    <rect x="18" y="18" width="64" height="64" rx="10" fill="url(#frameGrad)" opacity="0.95"/>
+                    <rect x="24" y="24" width="52" height="52" rx="6" fill="url(#canvasGrad)"/>
+                    <rect x="29" y="29" width="42" height="42" rx="4" fill="none" stroke="rgba(0,0,0,0.12)" stroke-width="1.2"/>
+                    <line x1="24" y1="24" x2="76" y2="76" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+                    <line x1="76" y1="24" x2="24" y2="76" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>
+                </svg>
+            `;
+        }
 
         function setLanguage(lang) {
             currentLang = lang;
@@ -689,22 +710,19 @@
             const grid = document.getElementById('pricingGrid');
             const tr = translations[currentLang];
 
-            grid.innerHTML = canvasFormats.map(item => {
-                const message = encodeURIComponent(tr.whatsappMessage + item.size);
-                return `
-                    <div class="price-card">
-                        <div class="canvas-icon">🖼️</div>
-                        <h3>${currentLang === 'ar' ? 'مقاس ' + item.size : 'Taille ' + item.size}</h3>
-                        <p>${tr.cardDesc}</p>
-                        <div class="price">${item.price}</div>
-                        <div class="card-actions">
-                            <a class="btn-order" href="https://wa.me/21621594522?text=${message}" target="_blank">
-                                ${currentLang === 'ar' ? '💬 ' + tr.orderBtn : '💬 ' + tr.orderBtn}
-                            </a>
-                        </div>
+            grid.innerHTML = canvasFormats.map(item => `
+                <div class="price-card">
+                    <div class="canvas-icon">${canvasSvg()}</div>
+                    <h3>${currentLang === 'ar' ? 'مقاس ' + item.size : 'Taille ' + item.size}</h3>
+                    <p>${tr.cardDesc}</p>
+                    <div class="price">${item.price}</div>
+                    <div class="card-actions">
+                        <a class="btn-order" href="index.html#page-checkout">
+                            🛒 ${tr.orderBtn}
+                        </a>
                     </div>
-                `;
-            }).join('');
+                </div>
+            `).join('');
         }
 
         renderCards();
